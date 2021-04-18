@@ -6,16 +6,13 @@
         <p>{{ cont }}</p>
         <router-link to="/about" class="btn">Conócenos!</router-link>
       </div>
-      
 
       <a
         class="map"
         href="https://www.google.com/maps/place/GAAP+I.A.P/@20.6480779,-100.3937311,15z/data=!4m5!3m4!1s0x0:0x4d39c77b4d14e302!8m2!3d20.6480779!4d-100.3937311"
       ></a>
-      
     </div>
   </div>
-  
 </template>
 
 <script lang="ts">
@@ -41,14 +38,13 @@ export default defineComponent({
   display: flex;
   flex-direction: column;
   align-items: center;
-  
+  z-index: -1;
 
   h1 {
     margin-top: 100px;
     font-family: "Signika", sans-serif;
     color: black;
     font-size: 50px;
-    
   }
 
   .container {
@@ -77,7 +73,7 @@ export default defineComponent({
     }
     .text {
       width: 40%;
-      font-size: 25px;
+      font-size: 1.5rem;
       height: 100%;
       font-family: "Open Sans", sans-serif;
       font-weight: 600;
@@ -89,78 +85,76 @@ export default defineComponent({
         margin-block-end: 1em;
       }
 
-      a.btn{
+      a.btn {
         text-align: center;
         padding-top: 10px;
         padding-bottom: 10px;
-        width: 220px!important;
+        width: 220px !important;
         color: black;
         text-decoration: none;
         font-size: 35px;
         font-family: "Signika", sans-serif;
         font-weight: 700;
-        background-color: #FCDB88;
+        background-color: #fcdb88;
         border-radius: 10px;
         border-width: 4px;
         border-style: solid;
         border-color: black;
       }
     }
-       
   }
 }
 
 @media screen and (max-width: 900px) {
   .hello {
-  h1 {
-    margin-top: 50px;
-    font-size: 40px;
-  }
-
-  .container {
-    display: flex;
-    flex-direction: column;
-    height: 1100px;
-    margin-top: 0px;
-    padding-top: 0px;
-    width: 90%;
-    align-items: center;
-
-    a.map {
-      width: 100%;
-      height: 50%;
-      margin-left: 0px;
-      border-radius: 0%;
+    h1 {
+      margin-top: 50px;
+      font-size: 40px;
     }
 
-   .text {
-      width: 95%;
-      height: 50%;
-      font-size: 19px;
-      text-align: center;
-      margin-top: 10px;
+    .container {
+      display: flex;
+      flex-direction: column;
+      height: 1100px;
+      margin-top: 0px;
+      padding-top: 0px;
+      width: 90%;
+      align-items: center;
 
-      a.btn{
+      a.map {
+        width: 100%;
+        height: 50%;
+        margin-left: 0px;
+        border-radius: 0%;
+      }
+
+      .text {
+        width: 95%;
+        height: 50%;
+        font-size: 19px;
         text-align: center;
-        padding-top: 10px;
-        padding-bottom: 10px;
-        width: 220px!important;
-        color: black;
-        text-decoration: none;
-        font-size: 35px;
-        font-family: "Signika", sans-serif;
-        font-weight: 700;
-        background-color: #FCDB88;
-        border-radius: 10px;
-        border-width: 4px;
-        border-style: solid;
-        border-color: black;
         margin-top: 10px;
-        margin-bottom: 10px;
+
+        a.btn {
+          text-align: center;
+          padding-top: 10px;
+          padding-bottom: 10px;
+          width: 220px !important;
+          color: black;
+          text-decoration: none;
+          font-size: 35px;
+          font-family: "Signika", sans-serif;
+          font-weight: 700;
+          background-color: #fcdb88;
+          border-radius: 10px;
+          border-width: 4px;
+          border-style: solid;
+          border-color: black;
+          margin-top: 10px;
+          margin-bottom: 10px;
+        }
       }
     }
   }
-}
-
 }
 </style>

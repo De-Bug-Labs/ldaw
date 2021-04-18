@@ -4,8 +4,10 @@
       ><img src="../public/img/roof.svg" />
       <p>GAAP</p></router-link
     >
-    <a class="toggle"><i class="large material-icons">dehaze</i></a>
-    <ul class="">
+    <a class="toggle" @click="movile = !movile"
+      ><i class="large material-icons">dehaze</i></a
+    >
+    <ul :class="{ active1: movile }">
       <li>
         <router-link to="/about"
           >Material <img src="../public/img/globe.svg"
@@ -37,6 +39,16 @@
   <router-view />
 </template>
 
+<script lang="ts">
+export default {
+  data: function () {
+    return {
+      movile: false,
+    };
+  },
+};
+</script>
+
 <style lang="scss">
 @import url("https://fonts.googleapis.com/css2?family=Signika:ital,wght@0,200;0,300;0,400;0,600;0,700;1,200;1,300;1,400;1,600&display=swap");
 @import url("https://fonts.googleapis.com/icon?family=Material+Icons");
@@ -57,7 +69,6 @@ body {
 }
 
 .nav {
-  overflow: hidden;
   position: fixed;
   top: 0;
   left: 0;
@@ -66,8 +77,9 @@ body {
   padding: 10px 50px;
   box-sizing: border-box;
   transition: 0.5s;
-  background-color: #dcf2fc;
-  box-shadow: 0px 5px 5px rgba(255, 255, 255, 0.1);
+  background-color: #8edafd;
+  box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.2);
+  z-index: +1;
 
   .logo1 {
     float: left;
@@ -145,27 +157,39 @@ body {
 
 @media screen and (max-width: 900px) {
   .nav {
-    padding: 0 0 !important;
-    width: 100vw !important;
+    padding: 0 0;
+    width: 100vw;
 
     ul {
-      width: 100% !important;
-      top: 16px !important;
-      display: none !important;
+      width: 100%;
+      top: 16px;
+      display: none;
+      border-top: 3px solid rgb(0, 0, 0);
 
       li {
+        border-bottom: 3px solid rgb(0, 0, 0);
+        text-align: center;
         a {
-          margin: 0 !important;
-          display: block !important;
-          text-align: center !important;
-          color: white !important;
-          background: rgba(0, 0, 0, 0.6) !important;
+          margin: 0;
+          display: flex;
+          color: rgb(0, 0, 0);
+          background: #8edafd;
+          text-transform: uppercase;
+          align-items: center;
+
+          img {
+            padding-top: 5px;
+          }
+
+          &.router-link-exact-active {
+            background: #ffffff;
+          }
         }
       }
     }
 
     ul.active1 {
-      display: block !important;
+      display: block;
     }
 
     .logo1 {
