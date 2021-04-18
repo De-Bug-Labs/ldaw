@@ -1,6 +1,6 @@
 <template>
   <div class="nav">
-    <router-link to="/about" class="logo1"
+    <router-link to="/" class="logo1"
       ><img src="../public/img/roof.svg" />
       <p>GAAP</p></router-link
     >
@@ -33,16 +33,14 @@
       </li>
     </ul>
   </div>
-  
+
   <router-view />
-  
 </template>
 
 <style lang="scss">
 @import url("https://fonts.googleapis.com/css2?family=Signika:ital,wght@0,200;0,300;0,400;0,600;0,700;1,200;1,300;1,400;1,600&display=swap");
 @import url("https://fonts.googleapis.com/icon?family=Material+Icons");
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,200;0,300;0,400;0,600;0,700;1,200;1,300;1,400;1,600&display=swap");
-
 
 body::-webkit-scrollbar {
   display: none;
@@ -67,7 +65,7 @@ body {
   height: 100px;
   padding: 10px 50px;
   box-sizing: border-box;
-  transition: .5s;
+  transition: 0.5s;
   background-color: #dcf2fc;
   box-shadow: 0px 5px 5px rgba(255, 255, 255, 0.1);
 

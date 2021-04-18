@@ -25,16 +25,14 @@
   }
 }
 
-
-@media (max-width: 900px){
-  .home{
+@media (max-width: 900px) {
+  .home {
     .parallax {
-    height: 500px;
-    background-size: cover;
-    background-position: center;
+      height: 500px;
+      background-size: cover;
+      background-position: center;
+    }
   }
-  }
- 
 }
 </style>
 

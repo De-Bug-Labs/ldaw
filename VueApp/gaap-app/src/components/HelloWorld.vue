@@ -2,15 +2,17 @@
   <div class="hello">
     <h1>{{ msg }}</h1>
     <div class="container">
-      <p>{{ cont }}</p>
+      <div class="text">
+        <p>{{ cont }}</p>
+        <router-link to="/about" class="btn">Conócenos!</router-link>
+      </div>
+      
 
       <a
         class="map"
         href="https://www.google.com/maps/place/GAAP+I.A.P/@20.6480779,-100.3937311,15z/data=!4m5!3m4!1s0x0:0x4d39c77b4d14e302!8m2!3d20.6480779!4d-100.3937311"
       ></a>
-    </div>
-    <div class="cont2">
-      <router-link to="/about">Conócenos!</router-link>
+      
     </div>
   </div>
   
@@ -39,24 +41,30 @@ export default defineComponent({
   display: flex;
   flex-direction: column;
   align-items: center;
+  
 
   h1 {
     margin-top: 100px;
     font-family: "Signika", sans-serif;
     color: black;
     font-size: 50px;
+    
   }
 
   .container {
     display: flex;
-    width: 80%;
+    width: 70%;
     justify-content: center;
     flex-direction: row;
     text-align: left;
-    height: 500px;
-    margin-top: 100px;
+    height: 550px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+    padding-top: 50px;
+    background-color: rgb(249, 249, 249);
 
-    .map {
+    a.map {
       height: 400px;
       background-color: black;
       width: 40%;
@@ -67,28 +75,25 @@ export default defineComponent({
       box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
       margin-top: 20px;
     }
-    p {
+    .text {
       width: 40%;
       font-size: 25px;
+      height: 100%;
       font-family: "Open Sans", sans-serif;
       font-weight: 600;
-    }
-  }
-  .cont2{
-     width: 100vw;
-      height: 50px;
-      margin-top: 100px;
-      display: flex;
-      justify-content: center;
       align-items: center;
-      margin-bottom: 100px;
-      vertical-align: middle;
+      display: flex;
       flex-direction: column;
-    a{
+      p {
+        margin-block-start: 0;
+        margin-block-end: 1em;
+      }
+
+      a.btn{
+        text-align: center;
         padding-top: 10px;
         padding-bottom: 10px;
-        width: 220px;
-        height: 80px;
+        width: 220px!important;
         color: black;
         text-decoration: none;
         font-size: 35px;
@@ -99,7 +104,9 @@ export default defineComponent({
         border-width: 4px;
         border-style: solid;
         border-color: black;
+      }
     }
+       
   }
 }
 
@@ -113,20 +120,44 @@ export default defineComponent({
   .container {
     display: flex;
     flex-direction: column;
-    text-align: center;
-    height: 1080px;
+    height: 1100px;
     margin-top: 0px;
+    padding-top: 0px;
+    width: 90%;
+    align-items: center;
 
-    .map {
+    a.map {
       width: 100%;
       height: 50%;
       margin-left: 0px;
+      border-radius: 0%;
     }
-    p {
-      font-size: 20px;
-      width: 100%;
 
-      margin-bottom: 50px;
+   .text {
+      width: 95%;
+      height: 50%;
+      font-size: 19px;
+      text-align: center;
+      margin-top: 10px;
+
+      a.btn{
+        text-align: center;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        width: 220px!important;
+        color: black;
+        text-decoration: none;
+        font-size: 35px;
+        font-family: "Signika", sans-serif;
+        font-weight: 700;
+        background-color: #FCDB88;
+        border-radius: 10px;
+        border-width: 4px;
+        border-style: solid;
+        border-color: black;
+        margin-top: 10px;
+        margin-bottom: 10px;
+      }
     }
   }
 }
