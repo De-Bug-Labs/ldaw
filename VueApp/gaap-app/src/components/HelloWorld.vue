@@ -121,6 +121,10 @@ export default defineComponent({
       padding-top: 0px;
       width: 90%;
       align-items: center;
+      padding-bottom: 0px;
+      border-width: 1px;
+      border-style: solid;
+      border-color: rgb(223, 223, 223);
 
       a.map {
         width: 100%;
