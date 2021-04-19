@@ -1,6 +1,6 @@
 <template>
   <div class="nav">
-    <router-link to="/" class="logo1"
+    <router-link to="/about" class="logo1"
       ><img src="../public/img/roof.svg" />
       <p>GAAP</p></router-link
     >
@@ -9,34 +9,36 @@
     >
     <ul :class="{ active1: movile }">
       <li>
-        <router-link to="/about"
+        <router-link to="/temp"
           >Material <img src="../public/img/globe.svg"
         /></router-link>
       </li>
       <li>
-        <router-link to="/about"
+        <router-link to="/temp"
           >Ayuda <img src="../public/img/information.svg"
         /></router-link>
       </li>
       <li>
-        <router-link to="/about"
+        <router-link to="/temp"
           >Apóyanos <img src="../public/img/love.svg"
         /></router-link>
       </li>
       <li>
-        <router-link to="/about"
+        <router-link to="/temp"
           >Calendario <img src="../public/img/calendar.svg"
         /></router-link>
       </li>
       <li>
-        <router-link to="/about"
+        <router-link to="/temp"
           >Salon de la fama <img src="../public/img/trophy.svg"
         /></router-link>
       </li>
     </ul>
   </div>
-
   <router-view />
+  <div class="footer">
+    <h1>GAAP Centro Integral de Apoyo Geriatrico, I.A.P</h1>
+  </div>
 </template>
 
 <script lang="ts">
@@ -60,12 +62,29 @@ body::-webkit-scrollbar {
 body {
   overflow-x: hidden;
   margin: 0px;
+  height: 100%;
 }
 #app {
   margin-top: 100px;
   left: 0px;
-  color: #2c3e50;
+  color: #000000;
   overflow: hidden;
+}
+
+.footer {
+  bottom: 0;
+  width: 100%;
+  height: 80px;
+  background-color: #8edafd;
+  box-shadow: 0px -5px 11px rgba(0, 0, 0, 0.2);
+  font-family: "Signika", sans-serif;
+  display: flex;
+  align-items: center;
+  font-size: 0.8rem;
+
+  h1 {
+    margin-left: 20px;
+  }
 }
 
 .nav {
@@ -78,7 +97,7 @@ body {
   box-sizing: border-box;
   transition: 0.5s;
   background-color: #8edafd;
-  box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2);
   z-index: +1;
 
   .logo1 {
@@ -156,6 +175,12 @@ body {
 }
 
 @media screen and (max-width: 900px) {
+  .footer {
+    h1 {
+      margin-left: 20px;
+      font-size: 15px;
+    }
+  }
   .nav {
     padding: 0 0;
     width: 100vw;
