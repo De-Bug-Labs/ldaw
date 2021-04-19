@@ -1,7 +1,6 @@
 import { shallowMount } from "@vue/test-utils";
 import HelloWorld from "@/components/HelloWorld.vue";
 import GaapInfo from "@/components/GaapInfo.vue";
-import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 
 describe("HelloWorld.vue", () => {
   it("renders props.msg when passed", () => {
