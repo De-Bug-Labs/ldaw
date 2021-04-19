@@ -53,7 +53,8 @@ export default defineComponent({
     justify-content: center;
     flex-direction: row;
     text-align: left;
-    height: 550px;
+    height: calc(100% / 2 + 20px);
+    padding-bottom: 20px;
     margin-top: 50px;
     margin-bottom: 50px;
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
