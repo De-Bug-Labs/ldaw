@@ -2,7 +2,7 @@
   <div class="container">
     <div class="box1">
       <div class="textbox">
-        <h1>Conoce a GAAP I.A.P</h1>
+        <h1>GAAP I.A.P</h1>
         <p>{{ mision }}</p>
       </div>
       <div class="imagebox"></div>
@@ -45,7 +45,7 @@ export default defineComponent({
 .container {
   display: flex;
   width: 100vw;
-  height: 100%;
+  height: calc(100% + 500px);
   flex-direction: column;
   align-items: center;
   margin-bottom: 50px;
@@ -58,7 +58,7 @@ export default defineComponent({
 
   .box1 {
     width: 55%;
-    height: 400px;
+    height: 500px;
     background-color: #399da3;
     margin-bottom: 50px;
     font-family: "Open Sans", sans-serif;
@@ -74,10 +74,15 @@ export default defineComponent({
       color: white;
       font-size: 3rem;
     }
+
     .textbox {
       width: 50%;
       padding-left: 20px;
       padding-right: 10px;
+      overflow: hidden;
+      word-wrap: break-word;
+      text-overflow: ellipsis;
+      height: 100%;
     }
     p {
       font-size: 20px;
@@ -96,7 +101,7 @@ export default defineComponent({
 
   .box2 {
     width: 55%;
-    height: 400px;
+    height: 500px;
     background-color: #fcdb88;
     margin-bottom: 50px;
     font-family: "Open Sans", sans-serif;
@@ -114,6 +119,9 @@ export default defineComponent({
       width: 50%;
       padding-left: 20px;
       padding-right: 10px;
+      overflow: hidden;
+      word-wrap: break-word;
+      text-overflow: ellipsis;
     }
     p {
       font-size: 20px;
@@ -132,7 +140,7 @@ export default defineComponent({
 
   .box3 {
     width: 55%;
-    height: 400px;
+    height: 500px;
     background-color: #2888a8;
     margin-bottom: 50px;
     font-family: "Open Sans", sans-serif;
@@ -153,6 +161,9 @@ export default defineComponent({
       width: 50%;
       padding-left: 20px;
       padding-right: 10px;
+      overflow: hidden;
+      word-wrap: break-word;
+      text-overflow: ellipsis;
     }
     p {
       font-size: 20px;
@@ -187,7 +198,7 @@ export default defineComponent({
         border-radius: 0px 0px 15px 15px;
       }
       p {
-        font-size: 17px;
+        font-size: 1.3rem;
         padding-left: 5px;
         padding-right: 5px;
       }

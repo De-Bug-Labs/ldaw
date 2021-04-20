@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <div class="parallax">
-      <h1>CENTRO INTEGRAL <br />DE APOYO GERIATRICO</h1>
+      <h1>CENTRO INTEGRAL DE APOYO GERIATRICO</h1>
     </div>
     <HelloWorld
       msg="Apoyo y compañia para el adulto mayor"
@@ -28,14 +28,14 @@
     background-repeat: no-repeat;
     background-attachment: fixed;
     overflow: hidden;
-    background-position: right;
+    background-position: bottom;
     width: 100vw;
 
     h1 {
-      text-align: left;
+      text-align: center;
       position: absolute;
       top: 50%;
-      left: 30%;
+      left: 50%;
       font-family: "Open Sans", sans-serif;
       font-size: 6rem;
       transform: translate(-50%, -50%);
