@@ -1,5 +1,5 @@
 <template>
-  <form class="container">
+  <form class="container" id="help-form" @submit.prevent="postForm">
     <h1>Portal de Ayuda</h1>
     <h3>
       Aqui podras ponerte en contacto con asesores de GAAP I.A.P para recibir
@@ -21,7 +21,7 @@
 
       <label for="name" class="form-label">Nombre</label>
       <input
-        v-model="name"
+        v-model="nombre"
         type="text"
         id="name"
         name="name"
@@ -30,7 +30,7 @@
 
       <label for="mail" class="form-label">Correo Electronico</label>
       <input
-        v-model="mail"
+        v-model="correo"
         type="mail"
         id="mail"
         name="name"
@@ -39,7 +39,7 @@
 
       <label for="phone" class="form-label">Telefono</label>
       <input
-        v-model="number"
+        v-model="telefono"
         type="tel"
         id="phone"
         name="phone"
@@ -49,6 +49,7 @@
     <div class="section">
       <h2>Paso 3: Escribe en que necesitas ayuda</h2>
       <textarea
+        v-model="mensaje"
         name="message"
         id="message"
         placeholder="Redacta aqui tu duda en 250 caracteres o menos"
@@ -67,14 +68,26 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-
 export default defineComponent({
   name: "HelpForm",
-  props: {
-    nombre: String,
-    correo: String,
-    telefono: Number,
-    mensaje: String,
+  data() {
+    return {
+      seccion: "",
+      nombre: "",
+      correo: "",
+      telefono: "",
+      mensaje: "",
+    };
+  },
+  methods: {
+    postForm: function () {
+      console.log({
+        seccion: this.seccion,
+        nombre: this.nombre,
+        correo: this.correo,
+        telefono: this.telefono,
+      });
+    },
   },
 });
 </script>

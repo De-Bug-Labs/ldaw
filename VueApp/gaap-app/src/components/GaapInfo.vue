@@ -45,7 +45,7 @@ export default defineComponent({
 .container {
   display: flex;
   width: 100vw;
-  height: calc(100% + 500px);
+  height: calc(100% + 600px);
   flex-direction: column;
   align-items: center;
   margin-bottom: 50px;
@@ -82,7 +82,6 @@ export default defineComponent({
       overflow: hidden;
       word-wrap: break-word;
       text-overflow: ellipsis;
-      height: 100%;
     }
     p {
       font-size: 20px;
@@ -198,13 +197,13 @@ export default defineComponent({
         border-radius: 0px 0px 15px 15px;
       }
       p {
-        font-size: 1.3rem;
+        font-size: 17px;
         padding-left: 5px;
         padding-right: 5px;
       }
       h1 {
-        margin-block-start: 0.1em;
-        margin-block-end: 0.1em;
+        margin-block-start: 0.5em;
+        margin-block-end: 0.5em;
       }
     }
     .box2 {
