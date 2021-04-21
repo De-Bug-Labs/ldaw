@@ -14,7 +14,7 @@
         /></router-link>
       </li>
       <li>
-        <router-link to="/temp"
+        <router-link to="/help"
           >Ayuda <img src="../public/img/information.svg"
         /></router-link>
       </li>
@@ -43,7 +43,7 @@
 
 <script lang="ts">
 export default {
-  data: function () {
+  data() {
     return {
       movile: false,
     };
@@ -172,6 +172,28 @@ body {
   padding: 5px;
   cursor: pointer;
   font-size: 24px;
+}
+
+@media screen and (max-width: 1080px) {
+  .nav {
+    padding: 0 0;
+    width: 100vw;
+
+    ul {
+      width: 70%;
+      li {
+        a {
+          display: flex;
+          padding: 10px 10px;
+          font-size: 18px;
+        }
+      }
+    }
+    .logo1 {
+      margin-top: 10px;
+      margin-left: 10px;
+    }
+  }
 }
 
 @media screen and (max-width: 900px) {
