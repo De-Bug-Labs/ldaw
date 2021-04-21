@@ -84,7 +84,7 @@ export default defineComponent({
       text-overflow: ellipsis;
     }
     p {
-      font-size: 20px;
+      font-size: 22px;
       margin-block-start: 0;
       display: flex;
       margin-block-end: 0;
@@ -123,7 +123,7 @@ export default defineComponent({
       text-overflow: ellipsis;
     }
     p {
-      font-size: 20px;
+      font-size: 22px;
       margin-block-start: 0;
       display: flex;
       margin-block-end: 0;
@@ -165,7 +165,7 @@ export default defineComponent({
       text-overflow: ellipsis;
     }
     p {
-      font-size: 20px;
+      font-size: 22px;
       margin-block-start: 0;
       display: flex;
       margin-block-end: 0;
