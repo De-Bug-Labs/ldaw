@@ -49,19 +49,19 @@ export default defineComponent({
   justify-content: center;
   flex-direction: column;
   height: calc(100% / 2 + 20px);
-  margin-top: 50px;
+  margin-top: 60px;
   margin-bottom: 50px;
-  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
-  background-color: rgb(249, 249, 249);
+  -moz-box-shadow: 0 0 5px rgb(199, 199, 199);
+  -webkit-box-shadow: 0 0 5px rgb(212, 212, 212);
+  box-shadow: 0 0 5px rgb(199, 199, 199);
+  background-color: rgb(251, 251, 251);
   align-items: center;
-  padding-left: 40px;
   padding-bottom: 30px;
 
   .row,
   .row1 {
     display: flex;
     flex-direction: row;
-    padding-bottom: 30px;
     width: 100%;
     justify-content: center;
     h1 {
@@ -89,10 +89,10 @@ export default defineComponent({
       display: flex;
       flex-direction: column;
       text-align: left;
-      margin-right: 50px;
       p {
         margin-block-start: 0;
         margin-block-end: 1em;
+        padding-right: 5%;
       }
 
       a.btn {
