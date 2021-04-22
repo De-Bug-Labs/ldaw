@@ -1,0 +1,24 @@
+name: Continuous Testing 🧪
+on:
+  pull_request:
+    branches: [ master, develop ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      # Downloads a copy of the code in your repository before running CI tests
+        - name: Check out repository code 🛎️
+          uses: actions/checkout@master
+        - name: Init node 🟢 
+          uses: actions/setup-node@master
+          with:
+            node-version: 14.16.0
+        # - name: Copy .env 📋
+        #   run: cp .env.example .env
+        - name: Install dependencies 🛠️
+          run: npm ci
+        - name: Build JS 🏗️
+          run: npm run build
+        - name: Run Source Code Tests 🧪
+          run: npm run unit
