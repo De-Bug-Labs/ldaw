@@ -6,13 +6,13 @@
           <div class="imagebox"></div>
           <div class="textbox">
             <h1>¡Apoya al Centro Geriátrico!</h1>
-            <p>{{ mision }}</p>
+            <p>Denme dinero grasias</p>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="cardBtns">1</div>
+    <div class="cardBtns"></div>
   </section>
 </template>
 
@@ -20,11 +20,9 @@
 import { defineComponent } from "vue";
 
 export default defineComponent({
-  name: "GaapInfo",
+  name: "Donativos",
   props: {
-    mision: String,
-    instalaciones: String,
-    equipo: String,
+    example: String,
   },
 });
 </script>
