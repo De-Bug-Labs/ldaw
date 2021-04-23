@@ -7,7 +7,12 @@
     </h3>
     <div class="section">
       <h2>Paso 1: Selecciona el tema de ayuda</h2>
-      <select id="seccion" v-model="seccion" name="seccion">
+      <select
+        id="seccion"
+        v-model="seccion"
+        name="seccion"
+        :class="{ missing }"
+      >
         <option value="1">Ayuda con Nutricion</option>
         <option value="2">Ayuda con Medicina</option>
         <option value="3">Ayuda con Dental</option>
@@ -21,6 +26,7 @@
 
       <label for="name" class="form-label">Nombre</label>
       <input
+        :class="{ missing }"
         v-model="nombre"
         type="text"
         id="name"
@@ -30,6 +36,7 @@
 
       <label for="mail" class="form-label">Correo Electronico</label>
       <input
+        :class="{ missing }"
         v-model="correo"
         type="mail"
         id="mail"
@@ -39,6 +46,7 @@
 
       <label for="phone" class="form-label">Telefono</label>
       <input
+        :class="{ missing }"
         v-model="telefono"
         type="tel"
         id="phone"
@@ -49,6 +57,7 @@
     <div class="section">
       <h2>Paso 3: Escribe en que necesitas ayuda</h2>
       <textarea
+        :class="{ missing }"
         v-model="mensaje"
         name="message"
         id="message"
@@ -77,6 +86,8 @@ export default defineComponent({
       correo: "",
       telefono: "",
       mensaje: "",
+      complete: false,
+      missing: false,
     };
   },
   methods: {
@@ -145,6 +156,10 @@ export default defineComponent({
     border-radius: 10px;
     font-family: "Open Sans", sans-serif;
   }
+  textarea:focus::placeholder {
+    color: transparent;
+    transition: 0.4s;
+  }
   input {
     padding: 10px 0;
     margin-bottom: 30px;
@@ -154,15 +169,32 @@ export default defineComponent({
     border: none;
     border-bottom: 2px solid rgb(0, 0, 0);
   }
+  input.missing {
+    border-bottom: 2px solid rgb(255, 0, 0);
+  }
+
+  input:focus::placeholder {
+    color: transparent;
+    transition: 0.4s;
+  }
+  input:focus {
+    color: transparent;
+    transition: 0.4s;
+    border-bottom: 2px solid rgb(0, 0, 0);
+  }
   select {
-    background-color: #288ba8;
-    color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
     font-size: 20px;
-    border: none;
+    border-radius: 5px;
+    border: 2px solid black;
     option {
       font-family: "Open Sans", sans-serif;
       font-size: 20px;
     }
+  }
+
+  select.missing {
+    border: 2px solid rgb(255, 0, 0);
   }
 
   input[type="submit"] {
@@ -176,66 +208,24 @@ export default defineComponent({
     font-size: 25px;
     background-color: #28a82d;
     border-radius: 10px;
-    padding-top: 1px;
     color: white;
     font-weight: 700;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    margin-bottom: 0px;
+  }
+
+  input[type="submit"]:hover {
     border: 4px solid black;
   }
 }
 @media screen and (max-width: 900px) {
   .container {
     .section {
-      margin-bottom: 80px;
-      display: flex;
-      flex-direction: column;
-      text-align: center;
-      width: 70%;
-    }
-
-    textarea {
-      height: 200px !important;
-      box-sizing: border-box;
-      box-shadow: none;
-      outline: none;
-      border: 2px solid black;
-      border-radius: 10px;
-      font-family: "Open Sans", sans-serif;
-    }
-    input {
-      padding: 10px 0;
-      margin-bottom: 30px;
-      box-sizing: border-box;
-      box-shadow: none;
-      outline: none;
-      border: none;
-      border-bottom: 2px solid rgb(0, 0, 0);
-    }
-    select {
-      background-color: #288ba8;
-      color: rgb(255, 255, 255);
-      font-size: 20px;
-      border: none;
-      option {
-        color: rgb(255, 255, 255);
-        font-family: "Open Sans", sans-serif;
-        font-size: 20px;
-      }
-    }
-    input[type="submit"] {
-      border-bottom: none;
-      cursor: pointer;
-      width: 195px;
-      height: 45px;
-      align-self: center;
-      font-family: "Open Sans", sans-serif;
-      text-transform: uppercase;
-      font-size: 25px;
-      background-color: #28a82d;
-      border-radius: 10px;
-      padding-top: 1px;
-      color: white;
-      font-weight: 700;
-      border: 4px solid black;
+      margin-bottom: 60px;
+      width: 80%;
     }
   }
 }
