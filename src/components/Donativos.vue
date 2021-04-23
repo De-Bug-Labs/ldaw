@@ -126,7 +126,7 @@ export default defineComponent({
     .imagebox {
       width: 100%;
       height: 100%;
-      background: url("../assets/prueba.jpg");
+      background: url("../assets/gracias.jpg");
       background-size: cover;
       background-position: center;
       border-radius: 15px 15px 0px 0px;
