@@ -1,5 +1,5 @@
 <template>
-  <form class="container" id="help-form" @submit.prevent="postForm">
+  <form class="container" id="help-form" @submit.prevent="submitForm">
     <h1>Portal de Ayuda</h1>
     <h3>
       Aqui podras ponerte en contacto con asesores de GAAP I.A.P para recibir
@@ -7,11 +7,13 @@
     </h3>
     <div class="section">
       <h2>Paso 1: Selecciona el tema de ayuda</h2>
+
       <select
+        @click="secInv = false"
         id="seccion"
         v-model="seccion"
         name="seccion"
-        :class="{ missing }"
+        :class="{ secInv }"
       >
         <option value="1">Ayuda con Nutricion</option>
         <option value="2">Ayuda con Medicina</option>
@@ -19,50 +21,68 @@
         <option value="4">Ayuda con Rehabilitacion</option>
         <option value="5">Ayuda con Tanatologia</option>
       </select>
+      <p :class="{ on: secInv }">Selecciona un tema</p>
     </div>
 
     <div class="section">
       <h2>Paso 2: Ingresa tu informacion de contacto</h2>
-
-      <label for="name" class="form-label">Nombre</label>
-      <input
-        :class="{ missing }"
-        v-model="nombre"
-        type="text"
-        id="name"
-        name="name"
-        placeholder="Escribe tu nombre completo aqui"
-      />
-
-      <label for="mail" class="form-label">Correo Electronico</label>
-      <input
-        :class="{ missing }"
-        v-model="correo"
-        type="mail"
-        id="mail"
-        name="name"
-        placeholder="ejemplo@correo.com"
-      />
-
-      <label for="phone" class="form-label">Telefono</label>
-      <input
-        :class="{ missing }"
-        v-model="telefono"
-        type="tel"
-        id="phone"
-        name="phone"
-        placeholder="10 digitos"
-      />
+      <div class="miniCont">
+        <label for="name" class="form-label">Nombre</label>
+        <input
+          @click="nomInv = false"
+          :class="{ nomInv }"
+          v-model="nombre"
+          type="text"
+          id="name"
+          name="name"
+          placeholder="Escribe tu nombre completo aqui"
+          maxlength="64"
+        />
+        <p :class="{ on: nomInv }">Asegurate de ingresar un nombre valido</p>
+      </div>
+      <div class="miniCont">
+        <label for="mail" class="form-label">Correo Electronico</label>
+        <input
+          @click="corInv = false"
+          :class="{ corInv }"
+          v-model="correo"
+          type="mail"
+          id="mail"
+          name="name"
+          placeholder="ejemplo@correo.com"
+        />
+        <p :class="{ on: corInv }">
+          Asegurate de ingresar un Correo valido ejemplo@correo.com
+        </p>
+      </div>
+      <div class="miniCont">
+        <label for="phone" class="form-label">Telefono</label>
+        <input
+          :class="{ telInv }"
+          @click="telInv = false"
+          v-model="telefono"
+          type="tel"
+          id="phone"
+          name="phone"
+          placeholder="10 digitos"
+          maxlength="10"
+        />
+        <p :class="{ on: telInv }">Ingresa un numero valido de 10 digitos</p>
+      </div>
     </div>
     <div class="section">
       <h2>Paso 3: Escribe en que necesitas ayuda</h2>
       <textarea
-        :class="{ missing }"
+        :class="{ menInv }"
         v-model="mensaje"
+        @click="menInv = false"
+        type="text"
         name="message"
         id="message"
         placeholder="Redacta aqui tu duda en 250 caracteres o menos"
+        maxlength="250"
       ></textarea>
+      <p :class="{ on: menInv }">Asegurate de escribir tu Mensaje</p>
     </div>
     <div class="section">
       <h2>Paso 4: Envia tu solicitud de ayuda</h2>
@@ -81,29 +101,93 @@ export default defineComponent({
   name: "HelpForm",
   data() {
     return {
-      seccion: "",
+      seccion: 0,
       nombre: "",
       correo: "",
       telefono: "",
       mensaje: "",
-      complete: false,
-      missing: false,
+      secInv: false,
+      nomInv: false,
+      corInv: false,
+      telInv: false,
+      menInv: false,
     };
   },
   methods: {
-    postForm: function () {
-      console.log({
-        seccion: this.seccion,
-        nombre: this.nombre,
-        correo: this.correo,
-        telefono: this.telefono,
-      });
+    checkTema() {
+      if (this.seccion <= 0 || this.seccion >= 6) {
+        this.secInv = true;
+      } else {
+        this.secInv = false;
+      }
+    },
+    checkNombre() {
+      var regex = /^[a-zA-Z\s]*$/;
+      if (
+        this.nombre.length <= 2 ||
+        this.nombre.length > 64 ||
+        !regex.test(this.nombre)
+      ) {
+        this.nomInv = true;
+      } else {
+        this.nomInv = false;
+      }
+    },
+    checkCorreo() {
+      var regex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+      if (!regex.test(this.correo)) {
+        this.corInv = true;
+      } else {
+        this.corInv = false;
+      }
+    },
+    checkTelefono() {
+      var regex = /\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/;
+      if (!regex.test(this.telefono)) {
+        this.telInv = true;
+      } else {
+        this.telInv = false;
+      }
+    },
+    checkMensaje() {
+      var regex = /^[-\w\s]+$/;
+      if (
+        !regex.test(this.mensaje) ||
+        this.mensaje.length < 5 ||
+        this.mensaje.length > 250
+      ) {
+        this.menInv = true;
+      } else {
+        this.menInv = false;
+      }
+    },
+
+    submitForm() {
+      this.checkTema();
+      this.checkNombre();
+      this.checkCorreo();
+      this.checkTelefono();
+      this.checkMensaje();
+      if (
+        !this.secInv &&
+        !this.nomInv &&
+        !this.corInv &&
+        !this.telInv &&
+        !this.menInv
+      ) {
+        console.log("posted");
+      } else {
+        console.log("nel");
+      }
     },
   },
 });
 </script>
 
 <style scoped lang="scss">
+@import url("https://fonts.googleapis.com/css2?family=Signika:ital,wght@0,200;0,300;0,400;0,600;0,700;1,200;1,300;1,400;1,600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,200;0,300;0,400;0,600;0,700;1,200;1,300;1,400;1,600&display=swap");
+
 .container {
   height: 100%;
   width: 100vw;
@@ -119,6 +203,15 @@ export default defineComponent({
     flex-direction: column;
     text-align: center;
     width: 30%;
+    p {
+      display: none;
+    }
+    p.on {
+      color: rgb(255, 0, 0);
+      display: flex;
+      margin-block-start: 0em;
+      margin-block-end: 0em;
+    }
   }
 
   h1 {
@@ -156,20 +249,30 @@ export default defineComponent({
     border-radius: 10px;
     font-family: "Open Sans", sans-serif;
   }
+  textarea.menInv {
+    border: 2px solid rgb(255, 0, 0);
+  }
   textarea:focus::placeholder {
     color: transparent;
     transition: 0.4s;
   }
   input {
     padding: 10px 0;
-    margin-bottom: 30px;
     box-sizing: border-box;
     box-shadow: none;
     outline: none;
     border: none;
     border-bottom: 2px solid rgb(0, 0, 0);
   }
-  input.missing {
+  .miniCont {
+    margin-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  input.nomInv,
+  input.corInv,
+  input.telInv {
     border-bottom: 2px solid rgb(255, 0, 0);
   }
 
@@ -178,8 +281,6 @@ export default defineComponent({
     transition: 0.4s;
   }
   input:focus {
-    color: transparent;
-    transition: 0.4s;
     border-bottom: 2px solid rgb(0, 0, 0);
   }
   select {
@@ -191,10 +292,16 @@ export default defineComponent({
       font-family: "Open Sans", sans-serif;
       font-size: 20px;
     }
+    option:hover {
+      background-color: rgb(0, 98, 255);
+    }
   }
 
-  select.missing {
+  select.secInv {
     border: 2px solid rgb(255, 0, 0);
+  }
+  .select-selected {
+    background-color: rgb(0, 98, 255);
   }
 
   input[type="submit"] {
@@ -223,6 +330,7 @@ export default defineComponent({
 }
 @media screen and (max-width: 900px) {
   .container {
+    text-align: center;
     .section {
       margin-bottom: 60px;
       width: 80%;
