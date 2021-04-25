@@ -1,5 +1,14 @@
 <template>
-  <form class="container" id="help-form" @submit.prevent="submitForm">
+  <form class="container" id="help-form" @submit.prevent="validateForm">
+    <ModalHelp
+      v-if="confirmed"
+      @close="confirmed = false"
+      @enviar="submitForm"
+      :nombre="nombre"
+      :seccion="tema"
+      :correo="correo"
+      :telefono="telefono"
+    />
     <h1>Portal de Ayuda</h1>
     <h3>
       Aqui podras ponerte en contacto con asesores de GAAP I.A.P para recibir
@@ -97,8 +106,13 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import ModalHelp from "@/components/ModalHelp.vue";
+
 export default defineComponent({
   name: "HelpForm",
+  components: {
+    ModalHelp,
+  },
   data() {
     return {
       seccion: 0,
@@ -111,14 +125,32 @@ export default defineComponent({
       corInv: false,
       telInv: false,
       menInv: false,
+      confirmed: false,
+      enviar: false,
+      tema: "",
     };
   },
   methods: {
-    checkTema() {
+    checkSeccion() {
       if (this.seccion <= 0 || this.seccion >= 6) {
         this.secInv = true;
       } else {
         this.secInv = false;
+        if (this.seccion == 1) {
+          this.tema = "Nutricion";
+        }
+        if (this.seccion == 2) {
+          this.tema = "Medicina";
+        }
+        if (this.seccion == 3) {
+          this.tema = "Dental";
+        }
+        if (this.seccion == 4) {
+          this.tema = "Rehabilitacion";
+        }
+        if (this.seccion == 5) {
+          this.tema = "Tanatologia";
+        }
       }
     },
     checkNombre() {
@@ -162,12 +194,13 @@ export default defineComponent({
       }
     },
 
-    submitForm() {
-      this.checkTema();
+    validateForm() {
+      this.checkSeccion();
       this.checkNombre();
       this.checkCorreo();
       this.checkTelefono();
       this.checkMensaje();
+      this.confirmed = false;
       if (
         !this.secInv &&
         !this.nomInv &&
@@ -175,10 +208,14 @@ export default defineComponent({
         !this.telInv &&
         !this.menInv
       ) {
-        console.log("posted");
+        this.confirmed = true;
       } else {
-        console.log("nel");
+        this.confirmed = false;
       }
+    },
+    submitForm() {
+      console.log("posted");
+      this.$router.push("/");
     },
   },
 });
@@ -288,6 +325,7 @@ export default defineComponent({
     font-size: 20px;
     border-radius: 5px;
     border: 2px solid black;
+    background-color: rgb(241, 241, 241);
     option {
       font-family: "Open Sans", sans-serif;
       font-size: 20px;
