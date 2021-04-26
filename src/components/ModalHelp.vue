@@ -5,10 +5,10 @@
         <h1>Verifica que tus datos sean correctos</h1>
       </div>
       <div class="content">
-        <h2>Nombre: {{ nombre }}</h2>
-        <h2>Correo: {{ correo }}</h2>
-        <h2>Numero de telefono: {{ telefono }}</h2>
-        <h2>Tema de ayuda: {{ seccion }}</h2>
+        <h2>NOMBRE: {{ nombre }}</h2>
+        <h2>CORREO: {{ correo }}</h2>
+        <h2>TELEFONO: {{ telefono }}</h2>
+        <h2>TEMA SELECCIONADO: {{ seccion }}</h2>
       </div>
       <div class="buttons">
         <p class="confirmar" @click="$emit('enviar')">Confirmar</p>
@@ -37,7 +37,6 @@ export default defineComponent({
   width: 100% !important;
   height: 100% !important;
   position: fixed;
-  background-color: rgba(0, 0, 0, 0.3);
   z-index: 100;
   display: flex;
   align-items: center;
@@ -50,14 +49,16 @@ export default defineComponent({
     height: 40%;
     display: flex;
     flex-direction: column;
-    border: 4px solid black;
     border-radius: 10px;
     align-items: center;
+    -moz-box-shadow: 0 0 5px rgb(105, 105, 105);
+    -webkit-box-shadow: 0 0 5px rgb(105, 105, 105);
+    box-shadow: 0 0 10px rgb(134, 134, 134);
     .title {
       width: 100%;
       height: 15%;
       font-size: 15px;
-      border-bottom: 4px solid black;
+      border-bottom: 2px solid rgb(214, 214, 214);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -82,7 +83,7 @@ export default defineComponent({
       align-items: center;
       justify-content: center;
       flex-direction: row;
-      border-top: 4px solid black;
+      border-top: 2px solid rgb(214, 214, 214);
       p.confirmar {
         width: 195px;
         height: 45px;
