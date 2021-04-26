@@ -37,6 +37,7 @@ export default defineComponent({
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color: #2888a8;
 
   .title {
     display: flex;
@@ -54,6 +55,7 @@ export default defineComponent({
       font-size: 6rem;
       margin-block-start: 0em;
       margin-block-end: 0em;
+      color: rgb(255, 255, 255);
     }
   }
   .content {
