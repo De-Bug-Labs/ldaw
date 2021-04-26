@@ -19,7 +19,7 @@
         /></router-link>
       </li>
       <li>
-        <router-link to="/temp"
+        <router-link to="/donaciones"
           >Apóyanos <img src="../public/img/love.svg"
         /></router-link>
       </li>
