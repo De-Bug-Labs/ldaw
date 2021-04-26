@@ -1,6 +1,6 @@
 <template>
   <div class="nav">
-    <router-link to="/about" class="logo1"
+    <router-link to="/" class="logo1"
       ><img src="../public/img/roof.svg" />
       <p>GAAP</p></router-link
     >
@@ -8,6 +8,11 @@
       ><i class="large material-icons">dehaze</i></a
     >
     <ul :class="{ active1: movile }">
+      <li>
+        <router-link to="/about"
+          >Nosotros <img src="../public/img/g.svg"
+        /></router-link>
+      </li>
       <li>
         <router-link to="/temp"
           >Material <img src="../public/img/globe.svg"
@@ -135,7 +140,6 @@ body {
 
     li {
       list-style: none;
-
       a {
         position: relative;
         padding: 5px 20px;
@@ -185,7 +189,11 @@ body {
         a {
           display: flex;
           padding: 10px 10px;
-          font-size: 18px;
+          font-size: 16px;
+          img {
+            height: 19px;
+            margin-left: 5px;
+          }
         }
       }
     }
@@ -229,6 +237,9 @@ body {
           }
 
           &.router-link-exact-active {
+            background: #ffffff;
+          }
+          &:hover {
             background: #ffffff;
           }
         }
