@@ -1,5 +1,5 @@
 <template>
-  <div class="nav">
+  <div class="nav" v-if="regular">
     <router-link to="/" class="logo1"
       ><img src="../public/img/roof.svg" />
       <p>GAAP</p></router-link
@@ -40,8 +40,8 @@
       </li>
     </ul>
   </div>
-  <router-view />
-  <div class="footer">
+  <router-view @admin="regular = false" />
+  <div class="footer" v-if="regular">
     <h1>GAAP Centro Integral de Apoyo Geriatrico, I.A.P</h1>
   </div>
 </template>
@@ -51,6 +51,7 @@ export default {
   data() {
     return {
       movile: false,
+      regular: true,
     };
   },
 };
