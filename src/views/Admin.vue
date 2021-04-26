@@ -20,7 +20,6 @@ export default defineComponent({
     LogIn,
   },
   mounted() {
-    console.log("elemento montado");
     this.$emit("admin");
   },
 });
