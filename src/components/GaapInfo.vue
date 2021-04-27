@@ -56,7 +56,7 @@ export default defineComponent({
 
   .box1 {
     width: 55%;
-    height: 500px;
+    height: calc(100% / 2);
     background-color: #399da3;
     margin-bottom: 50px;
     font-family: "Open Sans", sans-serif;
@@ -80,9 +80,10 @@ export default defineComponent({
       overflow: hidden;
       word-wrap: break-word;
       text-overflow: ellipsis;
+      margin-bottom: 5%;
     }
     p {
-      font-size: 22px;
+      font-size: 20px;
       margin-block-start: 0;
       display: flex;
       margin-block-end: 0;
@@ -98,7 +99,7 @@ export default defineComponent({
 
   .box2 {
     width: 55%;
-    height: 500px;
+    height: calc(100% / 2);
     background-color: #fcdb88;
     margin-bottom: 50px;
     font-family: "Open Sans", sans-serif;
@@ -119,9 +120,10 @@ export default defineComponent({
       overflow: hidden;
       word-wrap: break-word;
       text-overflow: ellipsis;
+      margin-bottom: 5%;
     }
     p {
-      font-size: 22px;
+      font-size: 20px;
       margin-block-start: 0;
       display: flex;
       margin-block-end: 0;
@@ -137,7 +139,7 @@ export default defineComponent({
 
   .box3 {
     width: 55%;
-    height: 500px;
+    height: calc(100% / 2);
     background-color: #2888a8;
     margin-bottom: 50px;
     font-family: "Open Sans", sans-serif;
@@ -161,9 +163,10 @@ export default defineComponent({
       overflow: hidden;
       word-wrap: break-word;
       text-overflow: ellipsis;
+      margin-bottom: 5%;
     }
     p {
-      font-size: 22px;
+      font-size: 20px;
       margin-block-start: 0;
       display: flex;
       margin-block-end: 0;

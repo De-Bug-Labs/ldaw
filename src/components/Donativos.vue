@@ -44,9 +44,9 @@ export default defineComponent({
     width: 50%;
 
     .box1 {
-      width: 85%;
+      width: 90%;
       height: 600px;
-      background-color: #399da3;
+      background-color: #2888a8;
       border-radius: 15px;
       display: flex;
       flex-direction: column;
@@ -75,17 +75,18 @@ export default defineComponent({
         font-family: "Open Sans", sans-serif;
         color: white;
         padding-bottom: 20px;
+        justify-content: center;
 
         h1 {
           font-family: "Open Sans", sans-serif;
           font-size: 2.5rem;
           margin-block-start: 0.2em;
-          margin-block-end: 1em;
+          margin-block-end: 0.8em;
         }
         p {
-          font-size: 1.4rem;
-          padding-left: 5%;
-          padding-right: 5%;
+          font-size: 1.35rem;
+          padding-left: 3%;
+          padding-right: 3%;
           margin-block-start: 0em;
           margin-block-end: 0em;
         }
