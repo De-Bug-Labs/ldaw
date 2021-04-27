@@ -15,6 +15,7 @@ export default defineComponent({
   data() {
     return {
       information: Object,
+      completed: false,
     };
   },
 
@@ -31,6 +32,7 @@ export default defineComponent({
       } catch (error) {
         console.log(error);
       }
+      this.completed = true;
     },
   },
 

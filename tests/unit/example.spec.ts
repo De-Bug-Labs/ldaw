@@ -3,6 +3,7 @@ import HelloWorld from "@/components/HelloWorld.vue";
 import GaapInfo from "@/components/GaapInfo.vue";
 import ModalHelp from "@/components/ModalHelp.vue";
 import HelpForm from "@/components/HelpForm.vue";
+import About from "@/views/About.vue";
 
 describe("HelloWorld.vue", () => {
   it("muestra propiedad de mensaje correcta", () => {
@@ -24,33 +25,11 @@ describe("HelloWorld.vue", () => {
   });
 });
 
-describe("GaapInfo.vue", () => {
-  it("muestra propiedad de mision correcta", () => {
-    const mision = "Text content";
-    const wrapper = shallowMount(GaapInfo, {
-      props: { mision },
-    });
-    expect(wrapper.text()).toMatch(mision);
-  });
-});
-
-describe("GaapInfo.vue", () => {
-  it("muestra propiedades de instalaciones correcta", () => {
-    const instalaciones = "Text content";
-    const wrapper = shallowMount(GaapInfo, {
-      props: { instalaciones },
-    });
-    expect(wrapper.text()).toMatch(instalaciones);
-  });
-});
-
-describe("GaapInfo.vue", () => {
-  it("muestra propiedad de equipo correcta", () => {
-    const equipo = "Text content";
-    const wrapper = shallowMount(GaapInfo, {
-      props: { equipo },
-    });
-    expect(wrapper.text()).toMatch(equipo);
+describe("About.vue", () => {
+  it("muestra query correcto", () => {
+    const wrapper = shallowMount(About);
+    wrapper.vm.getInfo();
+    expect(wrapper.vm.completed).toBe(true);
   });
 });
 
