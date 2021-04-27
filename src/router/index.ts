@@ -43,6 +43,33 @@ const routes: Array<RouteRecordRaw> = [
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/Admin.vue"),
   },
+  {
+    path: "/salon",
+    name: "Salon",
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/Salon.vue"),
+  },
+  {
+    path: "/material",
+    name: "Material",
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/Material.vue"),
+  },
+  {
+    path: "/calendar",
+    name: "Calendar",
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/Calendar.vue"),
+  },
 ];
 
 const router = createRouter({

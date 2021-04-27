@@ -14,7 +14,7 @@
         /></router-link>
       </li>
       <li>
-        <router-link to="/temp"
+        <router-link to="/material"
           >Material <img src="../public/img/globe.svg"
         /></router-link>
       </li>
@@ -29,12 +29,12 @@
         /></router-link>
       </li>
       <li>
-        <router-link to="/temp"
+        <router-link to="/calendar"
           >Calendario <img src="../public/img/calendar.svg"
         /></router-link>
       </li>
       <li>
-        <router-link to="/temp"
+        <router-link to="/salon"
           >Salon de la fama <img src="../public/img/trophy.svg"
         /></router-link>
       </li>
@@ -239,9 +239,11 @@ body {
 
           &.router-link-exact-active {
             background: #ffffff;
+            border-bottom: none;
           }
           &:hover {
             background: #ffffff;
+            border-bottom: none;
           }
         }
       }

@@ -5,7 +5,6 @@
       <div class="mini">
         <label for="uname" class="form-label">Usuario</label>
         <input
-          v-model="unombre"
           type="text"
           id="uname"
           name="uname"
