@@ -1,19 +1,16 @@
 <template>
-  <section class="basic-grid">
+  <div class="basic-grid">
     <div class="cardInfo">
-      <div class="containerInfo">
-        <div class="box1">
-          <div class="imagebox"></div>
-          <div class="textbox">
-            <h1>¡Apoya al Centro Geriátrico!</h1>
-            <p>Denme dinero grasias</p>
-          </div>
+      <div class="box1">
+        <div class="imgBox"></div>
+        <div class="textBox">
+          <h1>¡Apoya al Centro Geriátrico!</h1>
+          <p>{{ mensaje }}</p>
         </div>
       </div>
     </div>
-
     <div class="cardBtns"></div>
-  </section>
+  </div>
 </template>
 
 <script lang="ts">
@@ -22,7 +19,7 @@ import { defineComponent } from "vue";
 export default defineComponent({
   name: "Donativos",
   props: {
-    example: String,
+    mensaje: String,
   },
 });
 </script>
@@ -33,208 +30,135 @@ export default defineComponent({
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,200;0,300;0,400;0,600;0,700;1,200;1,300;1,400;1,600&display=swap");
 
 .basic-grid {
-  display: grid;
-  grid-template-columns: 60% 40%;
-}
-
-.cardInfo {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  font-size: 3rem;
-  color: #fff;
-  height: 100%;
-  width: 100%;
-  border-radius: 4px;
-  transition: all 500ms;
-  overflow: hidden;
+  width: 100vw;
+  height: 82vh;
+  flex-direction: row;
 
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-}
-.cardBtns {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  font-size: 3rem;
-  color: #fff;
-  height: 100%;
-  width: 100%;
-  border-radius: 4px;
-  transition: all 500ms;
-  overflow: hidden;
-
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-}
-
-.containerInfo {
-  display: flex;
-  width: 100%;
-  height: calc(100% + 600px);
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 50px;
-  padding-top: 50px;
-
-  h1 {
-    color: #000;
-    font-family: "Signika", sans-serif;
-  }
-
-  .box1 {
-    width: 75%;
-    height: 560px;
-    background-color: #399da3;
-    margin-bottom: 50px;
-    font-family: "Open Sans", sans-serif;
-    border-radius: 15px;
+  .cardInfo {
     display: flex;
-    flex-direction: row;
-    -moz-box-shadow: 0 0 5px rgb(134, 134, 134);
-    -webkit-box-shadow: 0 0 5px #999;
-    box-shadow: 0 0 5px rgb(134, 134, 134);
-    color: white;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 50%;
 
-    display: grid;
-    grid-template-rows: 40% 60%;
-
-    h1 {
-      color: white;
-      font-size: 3rem;
-    }
-
-    .textbox {
-      height: 100%;
-      width: 100%;
-      padding-left: 20px;
-      padding-right: 10px;
-      /*    overflow: hidden;
-      word-wrap: break-word;
-      text-overflow: ellipsis; */
-    }
-    p {
-      font-size: 22px;
-      margin-block-start: 0;
+    .box1 {
+      width: 85%;
+      height: 600px;
+      background-color: #399da3;
+      border-radius: 15px;
       display: flex;
-      margin-block-end: 0;
-    }
-    .imagebox {
-      width: 100%;
-      height: 100%;
-      background: url("../assets/gracias.jpg");
-      background-size: cover;
-      background-position: center;
-      border-radius: 15px 15px 0px 0px;
+      flex-direction: column;
+      -moz-box-shadow: 0 0 5px rgb(134, 134, 134);
+      -webkit-box-shadow: 0 0 5px #999;
+      box-shadow: 0 0 5px rgb(134, 134, 134);
+
+      .imgBox {
+        display: flex;
+        width: 100%;
+        height: 40%;
+        background: url("../assets/gracias.jpg");
+        background-size: cover;
+        background-position: center;
+        border-radius: 15px 15px 0px 0px;
+      }
+      .textBox {
+        display: flex;
+        width: 100%;
+        height: 60%;
+        overflow: hidden;
+        word-wrap: break-word;
+        text-overflow: ellipsis;
+        flex-direction: column;
+        text-align: center;
+        font-family: "Open Sans", sans-serif;
+        color: white;
+        padding-bottom: 20px;
+
+        h1 {
+          font-family: "Open Sans", sans-serif;
+          font-size: 2.5rem;
+          margin-block-start: 0.2em;
+          margin-block-end: 1em;
+        }
+        p {
+          font-size: 1.4rem;
+          padding-left: 5%;
+          padding-right: 5%;
+          margin-block-start: 0em;
+          margin-block-end: 0em;
+        }
+      }
     }
   }
-}
 
-.containerButtons {
-  display: flex;
-  width: 100%;
-  height: calc(100% + 600px);
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 50px;
-  padding-top: 50px;
-
-  h1 {
-    color: #000;
-    font-family: "Signika", sans-serif;
-  }
-
-  .box1 {
-    width: 55%;
-    height: 500px;
-    background-color: #399da3;
-    margin-bottom: 50px;
-    font-family: "Open Sans", sans-serif;
-    border-radius: 15px;
+  .cardBtns {
     display: flex;
-    flex-direction: row;
-    -moz-box-shadow: 0 0 5px rgb(134, 134, 134);
-    -webkit-box-shadow: 0 0 5px #999;
-    box-shadow: 0 0 5px rgb(134, 134, 134);
-    color: white;
-
-    h1 {
-      color: white;
-      font-size: 3rem;
-    }
-
-    .textbox {
-      height: 50%;
-      padding-left: 20px;
-      padding-right: 10px;
-      overflow: hidden;
-      word-wrap: break-word;
-      text-overflow: ellipsis;
-    }
-    p {
-      font-size: 22px;
-      margin-block-start: 0;
-      display: flex;
-      margin-block-end: 0;
-    }
-    .imagebox {
-      width: 50%;
-      background: url("../assets/banner1.jpg");
-      background-size: cover;
-      background-position: center;
-      border-radius: 0px 15px 15px 0px;
-    }
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 50%;
   }
 }
-
-.column {
-  float: left;
-  padding: 10px;
-  margin-right: 10%;
-}
-
-.left {
-  width: 50%;
-}
-.right {
-  width: 30%;
-}
-
-.row {
-  display: flex;
-  flex-wrap: wrap;
-  width: 100%;
+@media screen and (max-width: 1080px) {
+  .basic-grid {
+    margin-bottom: 8%;
+    .cardInfo {
+      .box1 {
+        width: 90%;
+        height: 90%;
+        .textBox {
+          h1 {
+            font-size: 2rem;
+            margin-block-start: 0.1em;
+            margin-block-end: 0.5em;
+          }
+          p {
+            font-size: 1.1rem;
+            padding-left: 2%;
+            padding-right: 2%;
+          }
+        }
+      }
+    }
+  }
 }
 
 @media screen and (max-width: 900px) {
-  .box1 {
+  .basic-grid {
     flex-direction: column;
-    height: 800px;
-    width: 90%;
-    .textbox {
+    height: 100vh;
+    .cardInfo {
+      flex-direction: row;
       width: 100%;
-      height: 60%;
-      padding-left: 0px;
-      padding-right: 0px;
-      text-align: center;
+      height: 80%;
+      .box1 {
+        width: 95%;
+        height: 90%;
+        .textBox {
+          height: 70%;
+          justify-content: center;
+          h1 {
+            font-size: 1.6rem;
+            margin-block-end: 0.8em;
+          }
+          p {
+            font-size: 1rem;
+            padding-left: 2%;
+            padding-right: 2%;
+          }
+        }
+        .imgBox {
+          height: 30%;
+        }
+      }
     }
-    .imagebox {
+    .cardBtns {
+      flex-direction: row;
       width: 100%;
-      height: 50%;
-      border-radius: 0px 0px 15px 15px;
-    }
-    p {
-      font-size: 17px;
-      padding-left: 5px;
-      padding-right: 5px;
-    }
-    h1 {
-      margin-block-start: 0.5em;
-      margin-block-end: 0.5em;
+      height: 20%;
     }
   }
 }
