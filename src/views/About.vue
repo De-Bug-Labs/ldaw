@@ -1,9 +1,5 @@
 <template>
-  <GaapInfo
-    mision="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-    instalaciones="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-    equipo="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-  />
+  <GaapInfo v-bind:information="information" />
 </template>
 
 <script lang="ts">
@@ -14,6 +10,40 @@ export default defineComponent({
   name: "About",
   components: {
     GaapInfo,
+  },
+
+  data() {
+    return {
+      information: Object,
+    };
+  },
+
+  methods: {
+    /*  getInfo(){
+      try{
+        const data = fetch('http://localhost:5000/api/information/03ea46a0-6ddd-45dd-9c56-ab7f53f6d0a3')
+        .then((res) => res.json())
+        .then((data) => {
+          this.information = data;
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    }, */
+  },
+
+  mounted() {
+    try {
+      const data = fetch(
+        "http://localhost:5000/api/information/03ea46a0-6ddd-45dd-9c56-ab7f53f6d0a3"
+      )
+        .then((res) => res.json())
+        .then((data) => {
+          this.information = data;
+        });
+    } catch (error) {
+      console.log(error);
+    }
   },
 });
 </script>

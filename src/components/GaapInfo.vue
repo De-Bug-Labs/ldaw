@@ -3,7 +3,7 @@
     <div class="box1">
       <div class="textbox">
         <h1>GAAP I.A.P</h1>
-        <p>{{ mision }}</p>
+        <p>{{ information.mision }}</p>
       </div>
       <div class="imagebox"></div>
     </div>
@@ -11,13 +11,13 @@
       <div class="imagebox"></div>
       <div class="textbox">
         <h1>Instalaciones</h1>
-        <p>{{ instalaciones }}</p>
+        <p>{{ information.instalation }}</p>
       </div>
     </div>
     <div class="box3">
       <div class="textbox">
         <h1>Nuestro equipo</h1>
-        <p>{{ equipo }}</p>
+        <p>{{ information.team }}</p>
       </div>
       <div class="imagebox"></div>
     </div>
@@ -30,9 +30,7 @@ import { defineComponent } from "vue";
 export default defineComponent({
   name: "GaapInfo",
   props: {
-    mision: String,
-    instalaciones: String,
-    equipo: String,
+    information: Object,
   },
 });
 </script>
