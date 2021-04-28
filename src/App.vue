@@ -185,7 +185,7 @@ body {
     width: 100vw;
 
     ul {
-      width: 70%;
+      width: 75%;
       li {
         a {
           display: flex;

@@ -1,6 +1,5 @@
 import { shallowMount } from "@vue/test-utils";
 import HelloWorld from "@/components/HelloWorld.vue";
-import GaapInfo from "@/components/GaapInfo.vue";
 import ModalHelp from "@/components/ModalHelp.vue";
 import HelpForm from "@/components/HelpForm.vue";
 import About from "@/views/About.vue";
