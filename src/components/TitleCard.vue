@@ -101,7 +101,7 @@ export default defineComponent({
   -webkit-box-shadow: 0 0 5px #999;
   box-shadow: 0 0 5px rgb(134, 134, 134);
   width: 80%;
-  height: 40%;
+  height: 35%;
   display: flex;
   flex-direction: row;
   .textBox {
