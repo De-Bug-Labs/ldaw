@@ -8,7 +8,7 @@
     <div class="miniCont">
       <div class="row">
         <BoxMaterial
-          v-for="material in information.slice(0, 4)"
+          v-for="material in materiales.slice(0, 4)"
           :key="material"
           :message="material.title"
           :src="material.link"
@@ -16,7 +16,7 @@
       </div>
       <div class="row">
         <BoxMaterial
-          v-for="material in information.slice(4, 8)"
+          v-for="material in materiales.slice(4, 8)"
           :key="material"
           :message="material.title"
           :src="material.link"
@@ -25,10 +25,10 @@
     </div>
     <div class="buttons">
       <div class="col" v-if="page > 1">
-        <button @click="page += 1">Anterior</button>
+        <button @click="lastPage()">Anterior</button>
       </div>
-      <div class="col">
-        <button @click="page += 1">Siguiente</button>
+      <div class="col" v-if="page < totalPages">
+        <button @click="nextPage()">Siguiente</button>
       </div>
     </div>
   </div>
@@ -47,29 +47,57 @@ export default defineComponent({
   },
   data() {
     return {
-      information: [],
+      materiales: [],
+      pages: { pageCount: 1 },
       completeQuery: false,
       page: 1,
+      totalPages: 0,
     };
   },
   methods: {
     getInfo() {
       try {
         const data = fetch(
-          "http://localhost:5000/api/material?page=1&pageSize=8"
+          "http://localhost:5000/api/material?page=" + this.page + "&pageSize=8"
         )
           .then((res) => res.json())
           .then((data) => {
-            this.information = data;
+            this.materiales = data;
           });
       } catch (error) {
         console.log(error);
       }
       this.completeQuery = true;
     },
+    getPages() {
+      try {
+        const data = fetch(
+          "http://localhost:5000/api/material/pages?page=0&pageSize=8"
+        )
+          .then((res) => res.json())
+          .then((data) => {
+            this.pages = data;
+            this.totalPages = this.pages.pageCount;
+          });
+      } catch (error) {
+        console.log(error);
+      }
+      this.completeQuery = true;
+    },
+    nextPage() {
+      if (this.page + 1 <= this.totalPages) {
+        this.page++;
+        this.getInfo();
+      }
+    },
+    lastPage() {
+      this.page--;
+      this.getInfo();
+    },
   },
   mounted() {
     this.getInfo();
+    this.getPages();
   },
 });
 </script>
@@ -82,6 +110,7 @@ export default defineComponent({
   flex-direction: column;
   align-items: center;
   margin-bottom: 50px;
+  font-family: "Open Sans", sans-serif;
   .buttons {
     display: flex;
     flex-direction: row;
@@ -107,7 +136,7 @@ export default defineComponent({
         font-weight: bold;
         font-size: 18px;
         height: 100%;
-        width: 90%;
+        width: 150px;
         cursor: pointer;
         display: flex;
         align-items: center;

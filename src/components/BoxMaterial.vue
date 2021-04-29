@@ -31,7 +31,6 @@ export default defineComponent({
       } else {
         this.imageLink = "http://i3.ytimg.com/vi/" + data[1] + "/hqdefault.jpg";
       }
-      console.log(this.imageLink);
     },
   },
   mounted() {
