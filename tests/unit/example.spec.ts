@@ -2,7 +2,9 @@ import { shallowMount } from "@vue/test-utils";
 import HelloWorld from "@/components/HelloWorld.vue";
 import ModalHelp from "@/components/ModalHelp.vue";
 import HelpForm from "@/components/HelpForm.vue";
+import TitleCard from "@/components/TitleCard.vue";
 import About from "@/views/About.vue";
+import Salon from "@/views/Salon.vue";
 
 describe("HelloWorld.vue", () => {
   it("muestra propiedad de mensaje correcta", () => {
@@ -234,5 +236,32 @@ describe("ModalHelp.vue", () => {
     wrapper.setData({ mensaje: "mensaje generico aceptable" });
     wrapper.vm.checkMensaje();
     expect(wrapper.vm.menInv).toBe(false);
+  });
+});
+
+describe("Salon.vue", () => {
+  it("Salon de la fama es cargado", () => {
+    const wrapper = shallowMount(Salon);
+    expect(wrapper.vm.mounted).toBe(true);
+  });
+});
+
+describe("Salon.vue", () => {
+  it("Tarjeta de salon de la fama cargada correctamente", () => {
+    const titulo = "Header Text";
+    const wrapper = shallowMount(TitleCard, {
+      props: { titulo },
+    });
+    expect(wrapper.text()).toMatch(titulo);
+  });
+});
+
+describe("Salon.vue", () => {
+  it("Tarjeta de salon de la fama cargada correctamente", () => {
+    const mensaje = "Body text";
+    const wrapper = shallowMount(TitleCard, {
+      props: { mensaje },
+    });
+    expect(wrapper.text()).toMatch(mensaje);
   });
 });

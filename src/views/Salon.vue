@@ -38,6 +38,14 @@ export default defineComponent({
   components: {
     TitleCard,
   },
+  data() {
+    return {
+      mounted: false,
+    };
+  },
+  mounted() {
+    this.mounted = true;
+  },
 });
 </script>
 
