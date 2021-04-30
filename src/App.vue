@@ -61,36 +61,38 @@ export default {
 @import url("https://fonts.googleapis.com/css2?family=Signika:ital,wght@0,200;0,300;0,400;0,600;0,700;1,200;1,300;1,400;1,600&display=swap");
 @import url("https://fonts.googleapis.com/icon?family=Material+Icons");
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,200;0,300;0,400;0,600;0,700;1,200;1,300;1,400;1,600&display=swap");
-
+html {
+  height: 100% !important;
+}
 body::-webkit-scrollbar {
   display: none;
 }
 body {
+  margin: 0;
   overflow-x: hidden;
-  margin: 0px;
-  height: 100%;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.6;
+  .footer {
+    width: 100%;
+    background-color: #8edafd;
+    box-shadow: 0px -5px 11px rgba(0, 0, 0, 0.2);
+    font-family: "Signika", sans-serif;
+    display: flex;
+    align-items: center;
+    font-size: 0.8rem;
+    margin-top: auto;
+    h1 {
+      margin-left: 20px;
+    }
+  }
 }
 #app {
   margin-top: 100px;
   left: 0px;
-  color: #000000;
   overflow: hidden;
-}
-
-.footer {
-  bottom: 0;
-  width: 100%;
-  height: 80px;
-  background-color: #8edafd;
-  box-shadow: 0px -5px 11px rgba(0, 0, 0, 0.2);
-  font-family: "Signika", sans-serif;
-  display: flex;
-  align-items: center;
-  font-size: 0.8rem;
-
-  h1 {
-    margin-left: 20px;
-  }
+  height: 100%;
 }
 
 .nav {

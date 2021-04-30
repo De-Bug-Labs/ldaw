@@ -5,10 +5,10 @@
         <h1>GAAP I.A.P</h1>
         <p>{{ information.mision }}</p>
       </div>
-      <div class="imagebox"></div>
+      <div class="imagebox"><img src="../assets/banner1.jpg" alt="#" /></div>
     </div>
     <div class="box2">
-      <div class="imagebox"></div>
+      <div class="imagebox"><img src="../assets/banner1.jpg" alt="#" /></div>
       <div class="textbox">
         <h1>Instalaciones</h1>
         <p>{{ information.instalation }}</p>
@@ -19,7 +19,7 @@
         <h1>Nuestro equipo</h1>
         <p>{{ information.team }}</p>
       </div>
-      <div class="imagebox"></div>
+      <div class="imagebox"><img src="../assets/banner1.jpg" alt="#" /></div>
     </div>
   </div>
 </template>
@@ -56,7 +56,7 @@ export default defineComponent({
 
   .box1 {
     width: 55%;
-    height: calc(100% / 2);
+    height: auto;
     background-color: #399da3;
     margin-bottom: 50px;
     font-family: "Open Sans", sans-serif;
@@ -90,16 +90,20 @@ export default defineComponent({
     }
     .imagebox {
       width: 50%;
+      border-radius: 0px 15px 15px 0px;
       background: url("../assets/banner1.jpg");
       background-size: cover;
       background-position: center;
       border-radius: 0px 15px 15px 0px;
+      img {
+        display: none;
+      }
     }
   }
 
   .box2 {
     width: 55%;
-    height: calc(100% / 2);
+    height: auto;
     background-color: #fcdb88;
     margin-bottom: 50px;
     font-family: "Open Sans", sans-serif;
@@ -134,12 +138,15 @@ export default defineComponent({
       background-size: cover;
       background-position: center;
       border-radius: 15px 0px 0px 15px;
+      img {
+        display: none;
+      }
     }
   }
 
   .box3 {
     width: 55%;
-    height: calc(100% / 2);
+    height: auto;
     background-color: #2888a8;
     margin-bottom: 50px;
     font-family: "Open Sans", sans-serif;
@@ -177,17 +184,20 @@ export default defineComponent({
       background-size: cover;
       background-position: center;
       border-radius: 0px 15px 15px 0px;
+      img {
+        display: none;
+      }
     }
   }
 
   @media screen and (max-width: 900px) {
     .box1 {
       flex-direction: column;
-      height: 800px;
+      height: auto;
       width: 90%;
       .textbox {
         width: 100%;
-        height: 60%;
+        height: 50%;
         padding-left: 0px;
         padding-right: 0px;
         text-align: center;
@@ -196,6 +206,12 @@ export default defineComponent({
         width: 100%;
         height: 50%;
         border-radius: 0px 0px 15px 15px;
+        img {
+          width: 100%;
+          height: 50%;
+          border-radius: 0px 0px 15px 15px;
+          display: inline;
+        }
       }
       p {
         font-size: 17px;
@@ -209,7 +225,7 @@ export default defineComponent({
     }
     .box2 {
       flex-direction: column;
-      height: 800px;
+      height: auto;
       width: 90%;
       .textbox {
         width: 100%;
@@ -222,6 +238,12 @@ export default defineComponent({
         width: 100%;
         height: 50%;
         border-radius: 15px 15px 0px 0px;
+        img {
+          width: 100%;
+          height: 50%;
+          border-radius: 15px 15px 0px 0px;
+          display: inline;
+        }
       }
       p {
         font-size: 17px;
@@ -235,7 +257,7 @@ export default defineComponent({
     }
     .box3 {
       flex-direction: column;
-      height: 800px;
+      height: auto;
       width: 90%;
       .textbox {
         width: 100%;
@@ -248,6 +270,12 @@ export default defineComponent({
         width: 100%;
         height: 50%;
         border-radius: 0px 0px 15px 15px;
+        img {
+          display: inline;
+          width: 100%;
+          height: 50%;
+          border-radius: 0px 0px 15px 15px;
+        }
       }
       p {
         font-size: 17px;

@@ -23,13 +23,20 @@ export default defineComponent({
   methods: {
     getImageLink() {
       this.temp = this.src!;
-      let data = this.temp.split("v=");
-      this.temp = data[1];
-      if (this.temp.indexOf("&") != -1) {
-        data = this.temp.split("&");
-        this.imageLink = "http://i3.ytimg.com/vi/" + data[0] + "/hqdefault.jpg";
-      } else {
+      let data;
+      if (this.temp.indexOf("=") == -1) {
+        data = this.temp.split("be/");
         this.imageLink = "http://i3.ytimg.com/vi/" + data[1] + "/hqdefault.jpg";
+      } else {
+        data = this.temp.split("v=");
+        this.imageLink = "http://i3.ytimg.com/vi/" + data[1] + "/hqdefault.jpg";
+        this.temp = data[1];
+
+        if (this.temp.indexOf("&") != -1) {
+          data = this.temp.split("&");
+          this.imageLink =
+            "http://i3.ytimg.com/vi/" + data[0] + "/hqdefault.jpg";
+        }
       }
     },
   },
@@ -70,6 +77,25 @@ export default defineComponent({
     -moz-box-shadow: 0 0 5px rgb(134, 134, 134);
     -webkit-box-shadow: 0 0 5px #999;
     box-shadow: 0 0 10px rgb(114, 114, 114);
+  }
+}
+@media screen and (max-width: 1080px) {
+  .container {
+    width: 95%;
+    height: 90%;
+    margin-left: 2%;
+    margin-right: 2%;
+    justify-content: end;
+    img {
+      margin-top: 10%;
+      height: 60%;
+      width: 80%;
+    }
+    h3 {
+      font-size: 1.3rem;
+      margin-block-start: 0.5em;
+      margin-block-end: 0em;
+    }
   }
 }
 @media screen and (max-width: 900px) {

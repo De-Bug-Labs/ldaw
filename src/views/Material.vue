@@ -1,10 +1,11 @@
 <template>
-  <div class="bigCont">
-    <TitleCard
+  <div class="bigCont" :class="{ single: !secondRow }">
+    <h1>Material de Apoyo</h1>
+    <!-- <TitleCard
       :b="true"
       titulo="Material de Apoyo"
       mensaje="Aqui podras encontrar videos curados por nosotros para ayudar, orientar o divertir!"
-    />
+    /> -->
     <div class="miniCont">
       <div class="row">
         <BoxMaterial
@@ -14,7 +15,7 @@
           :src="material.link"
         />
       </div>
-      <div class="row">
+      <div class="row" v-if="secondRow">
         <BoxMaterial
           v-for="material in materiales.slice(4, 8)"
           :key="material"
@@ -36,22 +37,24 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import TitleCard from "@/components/TitleCard.vue"; // @ is an alias to /src
+//import TitleCard from "@/components/TitleCard.vue"; // @ is an alias to /src
 import BoxMaterial from "@/components/BoxMaterial.vue";
 
 export default defineComponent({
   name: "Material",
   components: {
-    TitleCard,
+    //TitleCard,
     BoxMaterial,
   },
   data() {
     return {
       materiales: [],
-      pages: { pageCount: 1 },
+      pages: { pageCount: 1, materialsCount: 0 },
       completeQuery: false,
       page: 1,
       totalPages: 0,
+      totalMaterial: 0,
+      secondRow: true,
     };
   },
   methods: {
@@ -78,6 +81,10 @@ export default defineComponent({
           .then((data) => {
             this.pages = data;
             this.totalPages = this.pages.pageCount;
+            this.totalMaterial = this.pages.materialsCount;
+            if (this.totalMaterial - this.page * 8 < 4) {
+              this.secondRow = false;
+            }
           });
       } catch (error) {
         console.log(error);
@@ -86,6 +93,9 @@ export default defineComponent({
     },
     nextPage() {
       if (this.page + 1 <= this.totalPages) {
+        if (this.totalMaterial - this.page * 8 < 4) {
+          this.secondRow = false;
+        }
         this.page++;
         this.getInfo();
       }
@@ -94,25 +104,32 @@ export default defineComponent({
       if (this.page - 1 > 0) {
         this.page--;
         this.getInfo();
+        this.secondRow = true;
       }
     },
   },
   mounted() {
-    this.getInfo();
     this.getPages();
+    this.getInfo();
   },
 });
 </script>
 
 <style scoped lang="scss">
 .bigCont {
-  height: calc(100vh + 100px);
+  height: 85vh;
   width: 100vw;
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-bottom: 50px;
-  font-family: "Open Sans", sans-serif;
+  font-family: "Signika", sans-serif;
+  text-align: center;
+  h1 {
+    font-size: 3rem;
+    margin-block-start: 0.5em;
+    margin-block-end: 0em;
+  }
   .buttons {
     display: flex;
     flex-direction: row;
@@ -121,6 +138,7 @@ export default defineComponent({
     margin-top: 10px;
     width: 20%;
     height: 50px;
+    font-family: "Open Sans", sans-serif;
     .col {
       display: flex;
       flex-direction: column;
@@ -164,11 +182,27 @@ export default defineComponent({
       position: relative;
     }
   }
+  &.single {
+    height: auto;
+    .miniCont {
+      .row {
+        width: 84% !important;
+        height: 60% !important;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+      }
+    }
+  }
 }
+
 @media screen and (max-width: 1080px) {
   .bigCont {
     .buttons {
       width: 30%;
+      margin-top: 5%;
       .col {
         button {
           font-size: 18px;
@@ -177,14 +211,23 @@ export default defineComponent({
         }
       }
     }
+    .miniCont {
+      .row {
+        width: 95%;
+        height: 50%;
+      }
+    }
   }
 }
 @media screen and (max-width: 900px) {
   .bigCont {
-    height: calc(100vh + 1600px);
+    height: auto;
+    h1 {
+      font-size: 2.5rem;
+    }
     .buttons {
       margin-top: 40px;
-      width: 80%;
+      width: 150px;
       .col {
         button {
           font-size: 18px;
@@ -197,6 +240,28 @@ export default defineComponent({
       .row {
         width: 90%;
         height: 50%;
+        display: flex;
+        flex-direction: column;
+      }
+    }
+  }
+  .bigCont.single {
+    height: auto;
+    .buttons {
+      margin-top: 40px;
+      width: 150px;
+      .col {
+        button {
+          font-size: 18px;
+          height: 100%;
+          width: 90%;
+        }
+      }
+    }
+    .miniCont {
+      .row {
+        width: 90%;
+        height: 120%;
         display: flex;
         flex-direction: column;
       }
