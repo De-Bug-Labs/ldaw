@@ -91,8 +91,10 @@ export default defineComponent({
       }
     },
     lastPage() {
-      this.page--;
-      this.getInfo();
+      if (this.page - 1 > 0) {
+        this.page--;
+        this.getInfo();
+      }
     },
   },
   mounted() {

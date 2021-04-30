@@ -5,6 +5,7 @@ import HelpForm from "@/components/HelpForm.vue";
 import TitleCard from "@/components/TitleCard.vue";
 import About from "@/views/About.vue";
 import Salon from "@/views/Salon.vue";
+import Material from "@/views/Material.vue";
 
 describe("HelloWorld.vue", () => {
   it("muestra propiedad de mensaje correcta", () => {
@@ -263,5 +264,60 @@ describe("Salon.vue", () => {
       props: { mensaje },
     });
     expect(wrapper.text()).toMatch(mensaje);
+  });
+});
+
+describe("Material", () => {
+  it("muestra query correcto en busqueda de material", () => {
+    const wrapper = shallowMount(Material);
+    wrapper.setData({ page: 1 });
+    wrapper.setData({ completeQuery: false });
+    wrapper.vm.getInfo();
+    expect(wrapper.vm.completeQuery).toBe(true);
+  });
+});
+
+describe("Material", () => {
+  it("muestra query correcto en paginacion", () => {
+    const wrapper = shallowMount(Material);
+    wrapper.setData({ completeQuery: false });
+    wrapper.vm.getPages();
+    expect(wrapper.vm.completeQuery).toBe(true);
+  });
+});
+
+describe("Material", () => {
+  it("cambio de pagina valido +", () => {
+    const wrapper = shallowMount(Material);
+    wrapper.setData({ page: 1, totalPages: 2 });
+    wrapper.vm.nextPage();
+    expect(wrapper.vm.page).toBe(2);
+  });
+});
+
+describe("Material", () => {
+  it("cambio de pagina invalido +", () => {
+    const wrapper = shallowMount(Material);
+    wrapper.setData({ page: 2, totalPages: 2 });
+    wrapper.vm.nextPage();
+    expect(wrapper.vm.page).toBe(2);
+  });
+});
+
+describe("Material", () => {
+  it("cambio de pagina valido -", () => {
+    const wrapper = shallowMount(Material);
+    wrapper.setData({ page: 2, totalPages: 2 });
+    wrapper.vm.lastPage();
+    expect(wrapper.vm.page).toBe(1);
+  });
+});
+
+describe("Material", () => {
+  it("cambio de pagina valido -", () => {
+    const wrapper = shallowMount(Material);
+    wrapper.setData({ page: 1, totalPages: 2 });
+    wrapper.vm.lastPage();
+    expect(wrapper.vm.page).toBe(1);
   });
 });
