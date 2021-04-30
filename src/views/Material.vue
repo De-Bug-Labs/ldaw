@@ -8,19 +8,27 @@
     <div class="miniCont">
       <div class="row">
         <BoxMaterial
-          v-for="bong in items"
-          :key="bong"
-          :message="bong.mensaje"
-          src="https://img.youtube.com/vi/0iyIdto1Whg/maxresdefault.jpg"
+          v-for="material in materiales.slice(0, 4)"
+          :key="material"
+          :message="material.title"
+          :src="material.link"
         />
       </div>
       <div class="row">
         <BoxMaterial
-          v-for="bong in items"
-          :key="bong"
-          :message="bong.mensaje"
-          src="https://img.youtube.com/vi/0iyIdto1Whg/maxresdefault.jpg"
+          v-for="material in materiales.slice(4, 8)"
+          :key="material"
+          :message="material.title"
+          :src="material.link"
         />
+      </div>
+    </div>
+    <div class="buttons">
+      <div class="col" v-if="page > 1">
+        <button @click="lastPage()">Anterior</button>
+      </div>
+      <div class="col" v-if="page < totalPages">
+        <button @click="nextPage()">Siguiente</button>
       </div>
     </div>
   </div>
@@ -39,25 +47,105 @@ export default defineComponent({
   },
   data() {
     return {
-      items: [
-        { mensaje: "Caidas y como evitarlas" },
-        { mensaje: "Aceptando la vejez" },
-        { mensaje: "Pasas" },
-        { mensaje: "Bistec" },
-      ],
+      materiales: [],
+      pages: { pageCount: 1 },
+      completeQuery: false,
+      page: 1,
+      totalPages: 0,
     };
+  },
+  methods: {
+    getInfo() {
+      try {
+        const data = fetch(
+          "http://localhost:5000/api/material?page=" + this.page + "&pageSize=8"
+        )
+          .then((res) => res.json())
+          .then((data) => {
+            this.materiales = data;
+          });
+      } catch (error) {
+        console.log(error);
+      }
+      this.completeQuery = true;
+    },
+    getPages() {
+      try {
+        const data = fetch(
+          "http://localhost:5000/api/material/pages?page=0&pageSize=8"
+        )
+          .then((res) => res.json())
+          .then((data) => {
+            this.pages = data;
+            this.totalPages = this.pages.pageCount;
+          });
+      } catch (error) {
+        console.log(error);
+      }
+      this.completeQuery = true;
+    },
+    nextPage() {
+      if (this.page + 1 <= this.totalPages) {
+        this.page++;
+        this.getInfo();
+      }
+    },
+    lastPage() {
+      if (this.page - 1 > 0) {
+        this.page--;
+        this.getInfo();
+      }
+    },
+  },
+  mounted() {
+    this.getInfo();
+    this.getPages();
   },
 });
 </script>
 
 <style scoped lang="scss">
 .bigCont {
-  height: 100vh;
+  height: calc(100vh + 100px);
   width: 100vw;
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-bottom: 50px;
+  font-family: "Open Sans", sans-serif;
+  .buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    position: relative;
+    margin-top: 10px;
+    width: 20%;
+    height: 50px;
+    .col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 500px;
+      height: 100%;
+      button {
+        font-family: "Open Sans", sans-serif;
+        background-color: #2888a8;
+        border-radius: 2px;
+        border: none;
+        color: rgb(255, 255, 255);
+        text-transform: uppercase;
+        font-weight: bold;
+        font-size: 18px;
+        height: 100%;
+        width: 150px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+  }
   .miniCont {
     width: 100%;
     height: 100%;
@@ -77,10 +165,34 @@ export default defineComponent({
     }
   }
 }
-
+@media screen and (max-width: 1080px) {
+  .bigCont {
+    .buttons {
+      width: 30%;
+      .col {
+        button {
+          font-size: 18px;
+          height: 100%;
+          width: 90%;
+        }
+      }
+    }
+  }
+}
 @media screen and (max-width: 900px) {
   .bigCont {
-    height: calc(100vh + 1500px);
+    height: calc(100vh + 1600px);
+    .buttons {
+      margin-top: 40px;
+      width: 80%;
+      .col {
+        button {
+          font-size: 18px;
+          height: 100%;
+          width: 90%;
+        }
+      }
+    }
     .miniCont {
       .row {
         width: 90%;

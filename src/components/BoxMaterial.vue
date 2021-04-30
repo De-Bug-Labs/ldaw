@@ -1,8 +1,8 @@
 <template>
-  <div class="container">
-    <img :src="src" alt="#" />
+  <a class="container" :href="src">
+    <img :src="imageLink" alt="#" />
     <h3>{{ message }}</h3>
-  </div>
+  </a>
 </template>
 
 <script lang="ts">
@@ -13,6 +13,28 @@ export default defineComponent({
   props: {
     message: String,
     src: String,
+  },
+  data() {
+    return {
+      imageLink: "",
+      temp: "",
+    };
+  },
+  methods: {
+    getImageLink() {
+      this.temp = this.src!;
+      let data = this.temp.split("v=");
+      this.temp = data[1];
+      if (this.temp.indexOf("&") != -1) {
+        data = this.temp.split("&");
+        this.imageLink = "http://i3.ytimg.com/vi/" + data[0] + "/hqdefault.jpg";
+      } else {
+        this.imageLink = "http://i3.ytimg.com/vi/" + data[1] + "/hqdefault.jpg";
+      }
+    },
+  },
+  mounted() {
+    this.getImageLink();
   },
 });
 </script>
@@ -27,12 +49,13 @@ export default defineComponent({
   color: rgb(255, 255, 255);
   width: 20%;
   height: 80%;
-  cursor: pointer;
   background-color: #2888a8;
   border-radius: 15px;
   margin-left: 2.5%;
   margin-right: 2.5%;
   transition: 0.2s ease-out;
+  text-align: center;
+  text-decoration: none;
   img {
     height: 60%;
     width: 80%;
