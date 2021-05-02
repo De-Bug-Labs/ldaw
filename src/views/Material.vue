@@ -199,6 +199,7 @@ export default defineComponent({
 
 @media screen and (max-width: 1080px) {
   .bigCont {
+    height: 100vh;
     .buttons {
       width: 30%;
       margin-top: 5%;

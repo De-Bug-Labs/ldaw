@@ -212,7 +212,7 @@ export default defineComponent({
     flex-direction: column;
     .textBox {
       padding-top: 7%;
-      padding-bottom: 10%;
+      padding-bottom: 10px;
       flex-direction: column;
       height: 60%;
       width: 100%;
@@ -231,7 +231,7 @@ export default defineComponent({
       }
     }
     .imgBox {
-      height: 40%;
+      height: 200px;
       width: 100%;
       border-radius: 0px 0px 15px 15px;
     }
@@ -256,7 +256,6 @@ export default defineComponent({
     height: 90%;
     .textBox {
       padding-top: 0;
-      padding-bottom: 100px;
       p {
         font-size: 1rem;
         padding-left: 1%;
