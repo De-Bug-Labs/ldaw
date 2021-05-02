@@ -76,7 +76,8 @@ export default defineComponent({
   &:hover {
     -moz-box-shadow: 0 0 5px rgb(134, 134, 134);
     -webkit-box-shadow: 0 0 5px #999;
-    box-shadow: 0 0 10px rgb(114, 114, 114);
+    box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.2),
+      0 6px 20px 0 rgba(0, 0, 0, 0.19);
   }
 }
 @media screen and (max-width: 1080px) {

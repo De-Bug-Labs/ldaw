@@ -5,10 +5,10 @@
         <h1>GAAP I.A.P</h1>
         <p>{{ information.mision }}</p>
       </div>
-      <div class="imagebox"><img src="../assets/banner1.jpg" alt="#" /></div>
+      <div class="imagebox"><img src=" " alt="" /></div>
     </div>
     <div class="box2">
-      <div class="imagebox"><img src="../assets/banner1.jpg" alt="#" /></div>
+      <div class="imagebox"><img src=" " alt="" /></div>
       <div class="textbox">
         <h1>Instalaciones</h1>
         <p>{{ information.instalation }}</p>
@@ -19,7 +19,7 @@
         <h1>Nuestro equipo</h1>
         <p>{{ information.team }}</p>
       </div>
-      <div class="imagebox"><img src="../assets/banner1.jpg" alt="#" /></div>
+      <div class="imagebox"><img src=" " alt="" /></div>
     </div>
   </div>
 </template>
@@ -90,12 +90,14 @@ export default defineComponent({
     }
     .imagebox {
       width: 50%;
-      border-radius: 0px 15px 15px 0px;
       background: url("../assets/banner1.jpg");
       background-size: cover;
       background-position: center;
-      border-radius: 0px 15px 15px 0px;
+      border-radius: 0px 15px 15px 0px !important;
       img {
+        border-radius: 15px 0px 0px 15px;
+        height: 200px;
+        width: 100%;
         display: none;
       }
     }
@@ -139,6 +141,9 @@ export default defineComponent({
       background-position: center;
       border-radius: 15px 0px 0px 15px;
       img {
+        border-radius: 15px 0px 0px 15px;
+        height: 200px;
+        width: 100%;
         display: none;
       }
     }
@@ -185,7 +190,11 @@ export default defineComponent({
       background-position: center;
       border-radius: 0px 15px 15px 0px;
       img {
+        border-radius: 0px 15px 15px 0px;
+        height: 200px;
+        width: 100%;
         display: none;
+        border: none;
       }
     }
   }
@@ -208,9 +217,8 @@ export default defineComponent({
         border-radius: 0px 0px 15px 15px;
         img {
           width: 100%;
-          height: 50%;
           border-radius: 0px 0px 15px 15px;
-          display: inline;
+          display: flex;
         }
       }
       p {
@@ -240,9 +248,8 @@ export default defineComponent({
         border-radius: 15px 15px 0px 0px;
         img {
           width: 100%;
-          height: 50%;
           border-radius: 15px 15px 0px 0px;
-          display: inline;
+          display: flex;
         }
       }
       p {
@@ -261,7 +268,7 @@ export default defineComponent({
       width: 90%;
       .textbox {
         width: 100%;
-        height: 60%;
+        height: 50%;
         padding-left: 0px;
         padding-right: 0px;
         text-align: center;
@@ -271,10 +278,9 @@ export default defineComponent({
         height: 50%;
         border-radius: 0px 0px 15px 15px;
         img {
-          display: inline;
           width: 100%;
-          height: 50%;
           border-radius: 0px 0px 15px 15px;
+          display: flex;
         }
       }
       p {

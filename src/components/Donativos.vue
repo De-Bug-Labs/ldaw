@@ -44,8 +44,8 @@ export default defineComponent({
     width: 50%;
 
     .box1 {
-      width: 90%;
-      height: 600px;
+      width: 80%;
+      height: auto;
       background-color: #2888a8;
       border-radius: 15px;
       display: flex;
@@ -57,7 +57,7 @@ export default defineComponent({
       .imgBox {
         display: flex;
         width: 100%;
-        height: 40%;
+        height: 250px;
         background: url("../assets/gracias.jpg");
         background-size: cover;
         background-position: center;
@@ -66,7 +66,7 @@ export default defineComponent({
       .textBox {
         display: flex;
         width: 100%;
-        height: 60%;
+        height: auto;
         overflow: hidden;
         word-wrap: break-word;
         text-overflow: ellipsis;
@@ -105,11 +105,11 @@ export default defineComponent({
 }
 @media screen and (max-width: 1080px) {
   .basic-grid {
-    margin-bottom: 8%;
+    margin-bottom: 5%;
     .cardInfo {
       .box1 {
         width: 90%;
-        height: 90%;
+        height: auto;
         .textBox {
           h1 {
             font-size: 2rem;

@@ -1,11 +1,10 @@
 <template>
   <div class="bigCont" :class="{ single: !secondRow }">
-    <h1>Material de Apoyo</h1>
-    <!-- <TitleCard
+    <TitleCard
       :b="true"
       titulo="Material de Apoyo"
       mensaje="Aqui podras encontrar videos curados por nosotros para ayudar, orientar o divertir!"
-    /> -->
+    />
     <div class="miniCont">
       <div class="row">
         <BoxMaterial
@@ -37,13 +36,13 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-//import TitleCard from "@/components/TitleCard.vue"; // @ is an alias to /src
+import TitleCard from "@/components/TitleCard.vue"; // @ is an alias to /src
 import BoxMaterial from "@/components/BoxMaterial.vue";
 
 export default defineComponent({
   name: "Material",
   components: {
-    //TitleCard,
+    TitleCard,
     BoxMaterial,
   },
   data() {
@@ -61,7 +60,7 @@ export default defineComponent({
     getInfo() {
       try {
         const data = fetch(
-          "http://localhost:5000/api/material?page=" + this.page + "&pageSize=8"
+          "http://localhost:5000/api/material?page=" + this.page + "&pageSize=8" //agregar variable de entorno para ruta
         )
           .then((res) => res.json())
           .then((data) => {
@@ -183,7 +182,7 @@ export default defineComponent({
     }
   }
   &.single {
-    height: auto;
+    height: calc(100vh - 220px);
     .miniCont {
       .row {
         width: 84% !important;
@@ -215,6 +214,17 @@ export default defineComponent({
       .row {
         width: 95%;
         height: 50%;
+      }
+    }
+    &.single {
+      height: 100vh;
+      .miniCont {
+        width: 90%;
+        height: 50%;
+        .row {
+          width: 100% !important;
+          height: 80% !important;
+        }
       }
     }
   }

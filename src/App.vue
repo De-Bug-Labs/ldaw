@@ -76,6 +76,7 @@ body {
   line-height: 1.6;
   .footer {
     width: 100%;
+    height: 80px;
     background-color: #8edafd;
     box-shadow: 0px -5px 11px rgba(0, 0, 0, 0.2);
     font-family: "Signika", sans-serif;
