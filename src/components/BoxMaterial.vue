@@ -55,7 +55,7 @@ export default defineComponent({
   font-family: "Signika", sans-serif;
   color: rgb(255, 255, 255);
   width: 20%;
-  height: 80%;
+  height: auto;
   background-color: #2888a8;
   border-radius: 15px;
   margin-left: 2.5%;
@@ -64,14 +64,15 @@ export default defineComponent({
   text-align: center;
   text-decoration: none;
   img {
-    height: 60%;
+    margin-top: 10px;
+    height: 160px;
     width: 80%;
     border-radius: 15px;
   }
   h3 {
     font-size: 1.6rem;
     margin-block-start: 0.5em;
-    margin-block-end: 0.1em;
+    margin-block-end: 0.5em;
   }
   &:hover {
     box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);

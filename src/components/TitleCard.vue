@@ -53,7 +53,7 @@ export default defineComponent({
   -webkit-box-shadow: 0 0 5px #999;
   box-shadow: 0 0 5px rgb(134, 134, 134);
   width: 80%;
-  height: 30%;
+  height: auto;
   display: flex;
   flex-direction: row;
   .textBox {
@@ -125,7 +125,6 @@ export default defineComponent({
     }
   }
   .imgBox {
-    height: 100%;
     width: 40%;
     display: flex;
     flex-direction: column;

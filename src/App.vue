@@ -41,9 +41,6 @@
     </ul>
   </div>
   <router-view @admin="regular = false" />
-  <div class="footer" v-if="regular">
-    <h1>GAAP Centro Integral de Apoyo Geriatrico, I.A.P</h1>
-  </div>
 </template>
 
 <script lang="ts">
@@ -74,26 +71,15 @@ body {
   display: flex;
   flex-direction: column;
   line-height: 1.6;
-  .footer {
+  #app {
+    margin-top: 100px;
+    left: 0px;
+    overflow: hidden;
+    height: 100% !important;
     width: 100%;
-    height: 80px;
-    background-color: #8edafd;
-    box-shadow: 0px -5px 11px rgba(0, 0, 0, 0.2);
-    font-family: "Signika", sans-serif;
     display: flex;
-    align-items: center;
-    font-size: 0.8rem;
-    margin-top: auto;
-    h1 {
-      margin-left: 20px;
-    }
+    flex-direction: column;
   }
-}
-#app {
-  margin-top: 100px;
-  left: 0px;
-  overflow: hidden;
-  height: 100%;
 }
 
 .nav {

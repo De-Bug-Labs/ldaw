@@ -110,9 +110,10 @@ export default defineComponent({
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-bottom: 50px;
   .row {
     width: 82%;
-    height: 100%;
+    height: 90%;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -120,12 +121,12 @@ export default defineComponent({
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
       width: 33.33%;
       height: 100%;
       .card {
+        margin-top: 10%;
         width: 90%;
-        height: 70%;
+        height: auto;
         border-radius: 15px;
         background-color: #f8f8f8;
         display: flex;
@@ -135,7 +136,7 @@ export default defineComponent({
         cursor: pointer;
         transition: 0.2s ease-in-out;
         img {
-          height: 60%;
+          height: 300px;
           margin-top: 10%;
           transition: 0.2s ease-in-out;
         }
@@ -149,7 +150,7 @@ export default defineComponent({
             border-bottom: 4px solid black;
           }
           img {
-            height: 65%;
+            height: 350px;
             margin-top: 5%;
           }
         }
@@ -159,19 +160,17 @@ export default defineComponent({
 }
 @media screen and (max-width: 1080px) {
   .bigCont {
-    padding-bottom: 100px;
     .row {
       width: 100%;
-      height: 80%;
+      height: 70%;
       justify-content: center;
       .column {
         width: 30%;
-        height: 80%;
+        height: 100%;
         .card {
           width: 90%;
-          height: 70%;
           img {
-            height: 55%;
+            height: 220px;
             margin-top: 5%;
           }
           h1 {
@@ -179,7 +178,7 @@ export default defineComponent({
           }
           &:hover {
             img {
-              height: 60%;
+              height: 250px;
               margin-top: 5%;
             }
           }
