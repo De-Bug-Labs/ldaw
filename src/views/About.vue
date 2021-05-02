@@ -23,7 +23,7 @@ export default defineComponent({
     getInfo() {
       try {
         const data = fetch(
-          "http://localhost:5000/api/information/03ea46a0-6ddd-45dd-9c56-ab7f53f6d0a3"
+          "http://localhost:5000/api/information/b473bf27-8b8e-463c-93c9-bb95c6aad53a"
         )
           .then((res) => res.json())
           .then((data) => {

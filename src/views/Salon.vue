@@ -94,6 +94,9 @@ export default defineComponent({
           -moz-box-shadow: 0 0 5px rgb(119, 119, 119);
           -webkit-box-shadow: 0 0 5px rgb(119, 119, 119);
           box-shadow: 0 0 6px rgb(119, 119, 119);
+          h1 {
+            border-bottom: 4px solid black;
+          }
         }
       }
     }

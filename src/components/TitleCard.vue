@@ -4,7 +4,9 @@
       <h1>{{ titulo }}</h1>
       <p>{{ mensaje }}</p>
     </div>
-    <div class="imgBox" :class="{ blue: b, green: g }"></div>
+    <div class="imgBox" :class="{ blue: b, green: g }">
+      <img src="" alt="" />
+    </div>
   </div>
 </template>
 
@@ -87,26 +89,20 @@ export default defineComponent({
     background-size: cover;
     background-position: center;
   }
-
-  .imgBox.blue {
-    background: url("../assets/banner1.jpg");
-    background-size: cover;
-    background-position: center;
-  }
 }
 .titleCard.blue {
-  margin-top: 50px;
+  margin-top: 25px;
   border-radius: 15px;
   -moz-box-shadow: 0 0 5px rgb(134, 134, 134);
   -webkit-box-shadow: 0 0 5px #999;
   box-shadow: 0 0 5px rgb(134, 134, 134);
   width: 80%;
-  height: 35%;
+  height: auto;
   display: flex;
   flex-direction: row;
   .textBox {
     color: rgb(255, 255, 255);
-    height: 100%;
+    height: auto;
     width: 60%;
     display: flex;
     flex-direction: column;
@@ -115,14 +111,17 @@ export default defineComponent({
     overflow: hidden;
     word-wrap: break-word;
     text-overflow: ellipsis;
+    text-align: left;
     h1 {
       font-family: "Signika", sans-serif;
+      margin-block-start: 0;
+      margin-block-end: 0.1em;
     }
     p {
       font-family: "Open Sans", sans-serif;
       margin-block-start: 0;
       display: flex;
-      margin-block-end: 0;
+      margin-block-end: 0.2em;
     }
   }
   .imgBox {
@@ -134,16 +133,21 @@ export default defineComponent({
     background: url("../assets/banner1.jpg");
     background-size: cover;
     background-position: center;
+    img {
+      border-radius: 0px 15px 15px 0px;
+      height: 200px;
+      width: 100%;
+      display: none;
+    }
   }
 }
 @media screen and (max-width: 1080px) {
   .titleCard.green {
     width: 90%;
-    height: 30%;
+    height: auto;
     display: flex;
     flex-direction: row;
     .textBox {
-      padding-bottom: 15%;
       p {
         font-size: 1.1rem;
       }
@@ -155,17 +159,13 @@ export default defineComponent({
 
   .titleCard.blue {
     width: 90%;
-    height: 25%;
     display: flex;
-    flex-direction: row;
     .textBox {
-      padding-bottom: 15%;
       p {
         font-size: 1.5rem;
       }
       h1 {
         font-size: 2rem;
-        margin-block-end: 0.8em;
       }
     }
   }
@@ -191,6 +191,10 @@ export default defineComponent({
       height: 50%;
       width: 100%;
       border-radius: 0px 0px 15px 15px;
+      img {
+        display: flex;
+        width: auto;
+      }
     }
     p {
       font-size: 1.8rem;
@@ -204,7 +208,7 @@ export default defineComponent({
   .green.titleCard {
     margin-top: 20px;
     width: 90%;
-    height: 80%;
+    height: auto;
     flex-direction: column;
     .textBox {
       padding-top: 7%;
