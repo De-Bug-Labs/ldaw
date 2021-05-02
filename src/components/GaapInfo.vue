@@ -55,7 +55,7 @@ export default defineComponent({
   }
 
   .box1 {
-    width: 55%;
+    width: 60%;
     height: auto;
     background-color: #399da3;
     margin-bottom: 50px;
@@ -104,7 +104,7 @@ export default defineComponent({
   }
 
   .box2 {
-    width: 55%;
+    width: 60%;
     height: auto;
     background-color: #fcdb88;
     margin-bottom: 50px;
@@ -150,7 +150,7 @@ export default defineComponent({
   }
 
   .box3 {
-    width: 55%;
+    width: 60%;
     height: auto;
     background-color: #2888a8;
     margin-bottom: 50px;

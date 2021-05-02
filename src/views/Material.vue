@@ -116,7 +116,7 @@ export default defineComponent({
 
 <style scoped lang="scss">
 .bigCont {
-  height: 85vh;
+  height: auto;
   width: 100vw;
   display: flex;
   flex-direction: column;
@@ -134,8 +134,8 @@ export default defineComponent({
     flex-direction: row;
     justify-content: center;
     position: relative;
-    margin-top: 10px;
-    width: 20%;
+    margin-top: 50px;
+    width: 25%;
     height: 50px;
     font-family: "Open Sans", sans-serif;
     .col {
@@ -164,6 +164,7 @@ export default defineComponent({
     }
   }
   .miniCont {
+    margin-top: 20px;
     width: 100%;
     height: 100%;
     display: flex;
@@ -172,6 +173,7 @@ export default defineComponent({
     justify-content: center;
     position: relative;
     .row {
+      margin-top: 20px;
       width: 84%;
       height: 50%;
       display: flex;
@@ -199,6 +201,7 @@ export default defineComponent({
 
 @media screen and (max-width: 1080px) {
   .bigCont {
+    height: 100vh;
     .buttons {
       width: 30%;
       margin-top: 5%;

@@ -48,7 +48,7 @@ export default defineComponent({
   width: 80%;
   justify-content: center;
   flex-direction: column;
-  height: calc(100% / 2 + 20px);
+  height: auto;
   margin-top: 60px;
   margin-bottom: 50px;
   -moz-box-shadow: 0 0 5px rgb(199, 199, 199);
@@ -120,7 +120,7 @@ export default defineComponent({
     .container {
       display: flex;
       flex-direction: column;
-      height: 1200px;
+      height: auto;
       margin-top: 50px;
       padding-top: 0px;
       width: 90%;
@@ -144,13 +144,12 @@ export default defineComponent({
         flex-direction: column;
         align-items: center;
         height: 80%;
-        padding-bottom: 0px;
         justify-content: end;
       }
 
       a.map {
         width: 100%;
-        height: 40%;
+        height: 300px;
         margin-left: 0px;
         border-radius: 0%;
         align-self: baseline;
@@ -180,7 +179,7 @@ export default defineComponent({
           border-style: solid;
           border-color: black;
           margin-top: 10px;
-          margin-bottom: 10px;
+          margin-bottom: 30px;
         }
       }
     }

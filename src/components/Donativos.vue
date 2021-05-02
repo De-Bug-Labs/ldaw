@@ -32,9 +32,10 @@ export default defineComponent({
 .basic-grid {
   display: flex;
   width: 100vw;
-  height: 82vh;
+  height: 90vh;
   flex-direction: row;
-
+  justify-content: center;
+  align-items: center;
   .cardInfo {
     display: flex;
     flex-direction: column;
@@ -101,6 +102,21 @@ export default defineComponent({
     align-items: center;
     height: 100%;
     width: 50%;
+  }
+  .footer {
+    width: 100%;
+    height: 80px;
+    background-color: #8edafd;
+    box-shadow: 0px -5px 11px rgba(0, 0, 0, 0.2);
+    font-family: "Signika", sans-serif;
+    align-items: center;
+    display: flex;
+    font-size: 0.8rem;
+    margin-top: auto !important;
+    position: fixed;
+    h1 {
+      margin-left: 20px;
+    }
   }
 }
 @media screen and (max-width: 1080px) {

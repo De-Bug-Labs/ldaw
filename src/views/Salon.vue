@@ -1,26 +1,32 @@
 <template>
   <div class="bigCont">
+    <Seccion
+      :titulo="seccionTitulo"
+      :seccion="seccion"
+      v-if="!main"
+      @return="main = true"
+    />
     <TitleCard
+      v-if="main"
       :g="true"
       titulo="Salon de la Fama"
       mensaje="Es con mucho orgullo que les presentamos el salón de la fama de GAAP I.A.P donde podrán conocer a todas las personas que han proporcionado ayuda a la institución de maneras extraordinarias merecedoras de reconocimiento y agradecimiento por parte nuestra."
     />
-
-    <div class="row">
+    <div class="row" v-if="main">
       <div class="column">
-        <div class="card">
+        <div class="card" @click="irEmpresarios()">
           <img src="@/assets/manager.svg" alt="#" />
           <h1>Empresarios</h1>
         </div>
       </div>
       <div class="column">
-        <div class="card">
+        <div class="card" @click="irProfesionales()">
           <img src="@/assets/doctor.svg" alt="#" />
           <h1>Profesionales</h1>
         </div>
       </div>
       <div class="column">
-        <div class="card">
+        <div class="card" @click="irEstudiantes()">
           <img src="@/assets/student.svg" alt="#" />
           <h1>Estudiantes</h1>
         </div>
@@ -32,19 +38,64 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import TitleCard from "@/components/TitleCard.vue"; // @ is an alias to /src
+import Seccion from "@/components/SeccionSalon.vue";
 
 export default defineComponent({
   name: "Salon",
   components: {
     TitleCard,
+    Seccion,
   },
   data() {
     return {
+      secciones: [],
       mounted: false,
+      main: true,
+      seccion: "",
+      seccionTitulo: "",
+      completeQuery: false,
     };
+  },
+  methods: {
+    irEmpresarios() {
+      this.findID("Empresarios");
+      this.seccionTitulo = "Empresarios";
+      this.main = false;
+    },
+    irProfesionales() {
+      this.findID("Profesionales");
+      this.seccionTitulo = "Profesionales";
+      this.main = false;
+    },
+    irEstudiantes() {
+      this.findID("Estudiantes");
+      this.seccionTitulo = "Estudiantes";
+      this.main = false;
+    },
+    findID(find: string) {
+      this.secciones.forEach((element) => {
+        if (element["name"] == find) {
+          this.seccion = element["id"];
+          console.log(this.seccion);
+        }
+      });
+    },
+    getInfo() {
+      try {
+        const data = fetch("http://localhost:5000/api/section")
+          .then((res) => res.json())
+          .then((data) => {
+            this.secciones = data;
+          });
+      } catch (error) {
+        console.log(error);
+      }
+      this.completeQuery = true;
+    },
   },
   mounted() {
     this.mounted = true;
+    this.getInfo();
   },
 });
 </script>
@@ -59,9 +110,10 @@ export default defineComponent({
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-bottom: 50px;
   .row {
     width: 82%;
-    height: 100%;
+    height: 90%;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -69,12 +121,12 @@ export default defineComponent({
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
       width: 33.33%;
       height: 100%;
       .card {
+        margin-top: 10%;
         width: 90%;
-        height: 70%;
+        height: auto;
         border-radius: 15px;
         background-color: #f8f8f8;
         display: flex;
@@ -84,18 +136,22 @@ export default defineComponent({
         cursor: pointer;
         transition: 0.2s ease-in-out;
         img {
-          height: 60%;
+          height: 300px;
           margin-top: 10%;
+          transition: 0.2s ease-in-out;
         }
         h1 {
           font-size: 3rem;
         }
         &:hover {
-          -moz-box-shadow: 0 0 5px rgb(119, 119, 119);
-          -webkit-box-shadow: 0 0 5px rgb(119, 119, 119);
-          box-shadow: 0 0 6px rgb(119, 119, 119);
+          box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25),
+            0 10px 10px rgba(0, 0, 0, 0.22);
           h1 {
             border-bottom: 4px solid black;
+          }
+          img {
+            height: 350px;
+            margin-top: 5%;
           }
         }
       }
@@ -104,53 +160,65 @@ export default defineComponent({
 }
 @media screen and (max-width: 1080px) {
   .bigCont {
-    padding-bottom: 100px;
     .row {
       width: 100%;
-      height: 80%;
+      height: 70%;
       justify-content: center;
       .column {
         width: 30%;
-        height: 80%;
+        height: 100%;
         .card {
           width: 90%;
-          height: 70%;
           img {
-            height: 60%;
+            height: 220px;
             margin-top: 5%;
           }
           h1 {
-            font-size: 2.7rem;
+            font-size: 2.4rem;
+          }
+          &:hover {
+            img {
+              height: 250px;
+              margin-top: 5%;
+            }
           }
         }
       }
     }
   }
-}
-@media screen and (max-width: 900px) {
-  .bigCont {
-    height: 1000px;
-    .row {
-      flex-direction: column;
-      width: 100%;
-      margin-top: 20px;
-      justify-content: flex-start;
-      .column {
-        flex-direction: row;
-        height: 30%;
+  @media screen and (max-width: 900px) {
+    .bigCont {
+      height: auto;
+      padding-bottom: 50px;
+      .row {
+        flex-direction: column;
         width: 100%;
-        .card {
-          width: 90%;
-          height: 90%;
-          justify-content: center;
-          img {
-            height: 50%;
-            margin-top: 5%;
-          }
-          h1 {
-            font-size: 2.5rem;
-            margin-block-start: 0.4em;
-            margin-block-end: 0.4em;
+        margin-top: 20px;
+        justify-content: flex-start;
+        .column {
+          flex-direction: row;
+          height: 30%;
+          width: 100%;
+          .card {
+            margin-top: 20px;
+            width: 90%;
+            height: 90%;
+            justify-content: center;
+            img {
+              height: 200px;
+              margin-top: 5%;
+            }
+            h1 {
+              font-size: 2.5rem;
+              margin-block-start: 0.4em;
+              margin-block-end: 0.4em;
+            }
+            &:hover {
+              img {
+                height: 220px;
+                margin-top: 5%;
+              }
+            }
           }
         }
       }
