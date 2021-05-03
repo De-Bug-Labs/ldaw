@@ -11,7 +11,7 @@
         <h2>CONTASEÑA: {{ contrasena }}</h2>
       </div>
       <div class="buttons">
-        <p class="confirmar" @click="$emit('enviar')">Confirmar</p>
+        <p class="confirmar" @click="addUser()">Confirmar</p>
         <p class="cancelar" @click="$emit('close')">Cancelar</p>
       </div>
     </div>
@@ -20,7 +20,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-/* import axios, { AxiosInstance, AxiosResponse } from 'axios'; */
+import axios, { AxiosInstance, AxiosResponse } from "axios";
 
 export default defineComponent({
   name: "ModalUser",
@@ -31,18 +31,27 @@ export default defineComponent({
     apellido: String,
     contrasena: String,
   },
-  /*   data(){
-      return {
-          user
-      }
+  data() {
+    return {
+      user: {
+        name: this.nombre,
+        lastName: this.apellido,
+        email: this.correo,
+        password: this.contrasena,
+        roleId: "2483c39a-a349-4e2b-affe-858e304d2eb4",
+      },
+    };
   },
+
   methods: {
-      addUser(): void {
-          axios.post('http://localhost:5000/api/user', {
-              name:
-          })
-      }
-  } */
+    addUser(): void {
+      console.log(this.user);
+      console.log("hola");
+      /*           axios.post('http://localhost:5000/api/user', {
+              this.user
+          }) */
+    },
+  },
 });
 </script>
 
