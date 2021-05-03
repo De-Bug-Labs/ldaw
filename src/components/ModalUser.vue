@@ -6,9 +6,9 @@
       </div>
       <div class="content">
         <h2>NOMBRE: {{ nombre }}</h2>
+        <h2>APELLIDO: {{ apellido }}</h2>
         <h2>CORREO: {{ correo }}</h2>
-        <h2>TELEFONO: {{ telefono }}</h2>
-        <h2>TEMA SELECCIONADO: {{ seccion }}</h2>
+        <h2>CONTASEÑA: {{ contrasena }}</h2>
       </div>
       <div class="buttons">
         <p class="confirmar" @click="$emit('enviar')">Confirmar</p>
@@ -20,15 +20,29 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
+/* import axios, { AxiosInstance, AxiosResponse } from 'axios'; */
 
 export default defineComponent({
-  name: "ModalHelp",
+  name: "ModalUser",
   props: {
     seccion: String,
     nombre: String,
     correo: String,
-    telefono: String,
+    apellido: String,
+    contrasena: String,
   },
+  /*   data(){
+      return {
+          user
+      }
+  },
+  methods: {
+      addUser(): void {
+          axios.post('http://localhost:5000/api/user', {
+              name:
+          })
+      }
+  } */
 });
 </script>
 
@@ -90,7 +104,7 @@ export default defineComponent({
         align-self: center;
         font-family: "Open Sans", sans-serif;
         text-transform: uppercase;
-        font-size: 25px;
+        font-size: 20px;
         background-color: #28a82d;
         border-radius: 10px;
         color: white;
@@ -104,9 +118,9 @@ export default defineComponent({
       }
       p.cancelar {
         width: 195px;
-        height: 45px;
+        height: 30px;
         display: flex;
-        font-size: 25px;
+        font-size: 20px;
         justify-content: center;
         align-items: center;
         font-weight: 700;
