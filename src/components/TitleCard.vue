@@ -80,7 +80,6 @@ export default defineComponent({
   }
 
   .imgBox {
-    height: 100%;
     width: 40%;
     display: flex;
     flex-direction: column;

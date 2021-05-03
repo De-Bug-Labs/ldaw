@@ -35,7 +35,7 @@
       </li>
       <li>
         <router-link to="/salon"
-          >Salon de la fama <img src="../public/img/trophy.svg"
+          >Salón de la fama <img src="../public/img/trophy.svg"
         /></router-link>
       </li>
     </ul>

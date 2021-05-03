@@ -11,7 +11,7 @@
     />
     <h1>Portal de Ayuda</h1>
     <h3>
-      Aqui podras ponerte en contacto con asesores de GAAP I.A.P para recibir
+      Aquí podras ponerte en contacto con asesores de GAAP I.A.P para recibir
       ayuda de manera digital.
     </h3>
     <div class="section">
@@ -24,17 +24,17 @@
         name="seccion"
         :class="{ secInv }"
       >
-        <option value="1">Ayuda con Nutricion</option>
+        <option value="1">Ayuda con Nutrición</option>
         <option value="2">Ayuda con Medicina</option>
         <option value="3">Ayuda con Dental</option>
-        <option value="4">Ayuda con Rehabilitacion</option>
-        <option value="5">Ayuda con Tanatologia</option>
+        <option value="4">Ayuda con Rehabilitación</option>
+        <option value="5">Ayuda con Tanatología</option>
       </select>
       <p :class="{ on: secInv }">Selecciona un tema</p>
     </div>
 
     <div class="section">
-      <h2>Paso 2: Ingresa tu informacion de contacto</h2>
+      <h2>Paso 2: Ingresa tu información de contacto</h2>
       <div class="miniCont">
         <label for="name" class="form-label">Nombre</label>
         <input
@@ -44,13 +44,13 @@
           type="text"
           id="name"
           name="name"
-          placeholder="Escribe tu nombre completo aqui"
+          placeholder="Mariana Sandoval Arrieta"
           maxlength="64"
         />
-        <p :class="{ on: nomInv }">Asegurate de ingresar un nombre valido</p>
+        <p :class="{ on: nomInv }">Asegurate de ingresar un nombre válido</p>
       </div>
       <div class="miniCont">
-        <label for="mail" class="form-label">Correo Electronico</label>
+        <label for="mail" class="form-label">Correo Electrónico</label>
         <input
           @click="corInv = false"
           :class="{ corInv }"
@@ -61,11 +61,11 @@
           placeholder="ejemplo@correo.com"
         />
         <p :class="{ on: corInv }">
-          Asegurate de ingresar un Correo valido ejemplo@correo.com
+          Asegurate de ingresar un Correo válido ejemplo@correo.com
         </p>
       </div>
       <div class="miniCont">
-        <label for="phone" class="form-label">Telefono</label>
+        <label for="phone" class="form-label">Teléfono</label>
         <input
           :class="{ telInv }"
           @click="telInv = false"
@@ -73,14 +73,14 @@
           type="tel"
           id="phone"
           name="phone"
-          placeholder="10 digitos"
+          placeholder="4421234560"
           maxlength="10"
         />
-        <p :class="{ on: telInv }">Ingresa un numero valido de 10 digitos</p>
+        <p :class="{ on: telInv }">Ingresa un número válido de 10 dígitos</p>
       </div>
     </div>
     <div class="section">
-      <h2>Paso 3: Escribe en que necesitas ayuda</h2>
+      <h2>Paso 3: Escribe en qué necesitas ayuda</h2>
       <textarea
         :class="{ menInv }"
         v-model="mensaje"
@@ -88,17 +88,17 @@
         type="text"
         name="message"
         id="message"
-        placeholder="Redacta aqui tu duda en 250 caracteres o menos"
+        placeholder="Tengo una duda sobre ..."
         maxlength="250"
       ></textarea>
-      <p :class="{ on: menInv }">Asegurate de escribir tu Mensaje</p>
+      <p :class="{ on: menInv }">Asegúrate de escribir tu Mensaje</p>
     </div>
     <div class="section">
-      <h2>Paso 4: Envia tu solicitud de ayuda</h2>
+      <h2>Paso 4: Envía tu solicitud de ayuda</h2>
       <input type="submit" name="submit" value="Enviar" />
     </div>
     <p>
-      *Una vez enviada tu solicitud un asesor designado de GAAP se pondra en
+      *Una vez enviada tu solicitud un asesor designado de GAAP se pondrá en
       contacto contigo a la brevedad para dar seguimiento.
     </p>
   </form>

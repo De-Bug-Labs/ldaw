@@ -3,7 +3,7 @@
     <TitleCard
       :b="true"
       titulo="Material de Apoyo"
-      mensaje="Aqui podras encontrar videos curados por nosotros para ayudar, orientar o divertir!"
+      mensaje="Aquí podras encontrar videos curados por nosotros para ayudar, orientar o divertir!"
     />
     <div class="miniCont">
       <div class="row">
@@ -154,7 +154,7 @@ export default defineComponent({
         text-transform: uppercase;
         font-weight: bold;
         font-size: 18px;
-        height: 100%;
+        height: 40px;
         width: 150px;
         cursor: pointer;
         display: flex;
