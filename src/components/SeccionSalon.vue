@@ -1,14 +1,44 @@
 <template>
   <div class="container">
     <div class="title">
-      <a @click="$emit('return')"
-        ><i class="large material-icons">arrow_back</i>Regresar</a
-      >
       <h1>{{ titulo }}</h1>
     </div>
-    <h2 v-for="colaborador in colaboradores" :key="colaborador">
-      {{ colaborador.name }}
-    </h2>
+    <div class="colabCont">
+      <div class="row">
+        <div
+          class="cardColab"
+          v-for="colaborador in colaboradores.slice(0, 4)"
+          :key="colaborador"
+          @click="idElem(colaborador.id)"
+        >
+          <img src="@/assets/portrait.jpg" alt="#" />
+          <h2>{{ colaborador.name }}</h2>
+          <h3>{{ colaborador.institution }}</h3>
+        </div>
+      </div>
+      <div class="row" v-if="secondRow">
+        <div
+          class="cardColab"
+          v-for="colaborador in colaboradores.slice(4, 8)"
+          :key="colaborador"
+        >
+          <img src="@/assets/portrait.jpg" alt="#" />
+          <h2>{{ colaborador.name }}</h2>
+          <h3>{{ colaborador.institution }}</h3>
+        </div>
+      </div>
+    </div>
+    <div class="buttons" v-if="totalPages > 1">
+      <div class="col" v-if="page > 1">
+        <button @click="lastPage()">Anterior</button>
+      </div>
+      <div class="col" v-if="page < totalPages">
+        <button @click="nextPage()">Siguiente</button>
+      </div>
+    </div>
+    <a @click="$emit('return')" class="bottom"
+      ><i class="large material-icons">arrow_back</i>Regresar</a
+    >
   </div>
 </template>
 
@@ -23,10 +53,13 @@ export default defineComponent({
   },
   data() {
     return {
-      pages: 0,
       completeQuery: false,
       idSeccion: this.seccion,
       colaboradores: [],
+      page: 1,
+      totalPages: 0,
+      totalColaboradores: 0,
+      secondRow: true,
     };
   },
   methods: {
@@ -39,7 +72,8 @@ export default defineComponent({
         )
           .then((res) => res.json())
           .then((data) => {
-            this.pages = data;
+            this.totalColaboradores = data;
+            this.totalPages = Math.ceil(this.totalColaboradores / 8);
           });
       } catch (error) {
         console.log(error);
@@ -51,7 +85,8 @@ export default defineComponent({
         const data = fetch(
           "http://localhost:5000/api/section/" +
             this.idSeccion +
-            "?pageSize=8&page=1"
+            "?pageSize=8&page=" +
+            this.page
         )
           .then((res) => res.json())
           .then((data) => {
@@ -61,6 +96,25 @@ export default defineComponent({
         console.log(error);
       }
       this.completeQuery = true;
+    },
+    nextPage() {
+      if (this.page + 1 <= this.totalPages) {
+        if (this.totalColaboradores - this.page * 8 < 4) {
+          this.secondRow = false;
+        }
+        this.page++;
+        this.getColaboradores();
+      }
+    },
+    lastPage() {
+      if (this.page - 1 > 0) {
+        this.page--;
+        this.secondRow = true;
+        this.getColaboradores();
+      }
+    },
+    idElem(id: string) {
+      console.log(id);
     },
   },
   mounted() {
@@ -76,10 +130,34 @@ export default defineComponent({
 
 .container {
   height: auto;
-  width: 100%;
+  width: 100vw;
   display: flex;
   flex-direction: column;
   align-items: center;
+  a.bottom {
+    display: flex;
+    font-family: "Open Sans", sans-serif;
+    width: auto;
+    height: auto;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    background: none;
+    font-weight: bold;
+    margin-right: auto;
+    margin-left: 5%;
+    margin-top: 2%;
+    i {
+      font-size: 30px;
+      font-weight: bold;
+    }
+    &:hover {
+      border-bottom: 2px solid black;
+    }
+  }
   .title {
     width: 100%;
     height: auto;
@@ -91,24 +169,136 @@ export default defineComponent({
       font-family: "Signika", sans-serif;
       font-size: 3rem;
     }
-    a {
-      position: absolute;
+  }
+  .colabCont {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .row {
       display: flex;
-      left: 0;
-      margin-left: 5%;
-      font-family: "Open Sans", sans-serif;
-      width: auto;
-      height: auto;
+      flex-direction: row;
       align-items: center;
       justify-content: center;
-      font-size: 20px;
-      text-transform: uppercase;
-      border: none;
-      cursor: pointer;
-      background: none;
-      font-weight: bold;
-      &:hover {
-        border-bottom: 2px solid black;
+      width: 100%;
+      .cardColab {
+        width: 300px;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        font-family: "Signika", sans-serif;
+        margin-left: 2%;
+        margin-right: 2%;
+        margin-top: 2%;
+        background-color: #ededed;
+        border-radius: 15px;
+        transition: 0.2s ease-in-out;
+        cursor: pointer;
+        overflow: hidden;
+        img {
+          height: 200px;
+          width: 100%;
+          border-radius: 15px 15px 0px 0px;
+          transition: 0.2s ease-in-out;
+        }
+        h2 {
+          margin-block-start: 0.5em;
+          margin-block-end: 0.5em;
+        }
+        h3 {
+          margin-block-start: 0.5em;
+          margin-block-end: 0.8em;
+        }
+        &:hover {
+          box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25),
+            0 10px 10px rgba(0, 0, 0, 0.22);
+          img {
+            transform: scale(1.1);
+          }
+        }
+      }
+    }
+  }
+  .buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    position: relative;
+    margin-top: 50px;
+    width: 25%;
+    height: 50px;
+    font-family: "Open Sans", sans-serif;
+    .col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 500px;
+      height: 100%;
+      button {
+        font-family: "Open Sans", sans-serif;
+        background-color: #2888a8;
+        border-radius: 2px;
+        border: none;
+        color: rgb(255, 255, 255);
+        text-transform: uppercase;
+        font-weight: bold;
+        font-size: 18px;
+        height: 100%;
+        width: 150px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+  }
+}
+@media screen and (max-width: 900px) {
+  .container {
+    a.bottom {
+      margin-left: 0;
+      margin-bottom: 0.4em;
+      margin-right: 0;
+      margin-top: 15%;
+    }
+    .title {
+      flex-direction: column;
+      h1 {
+        font-family: "Signika", sans-serif;
+        font-size: 2.5rem;
+        margin-block-start: 0.2em;
+        margin-block-end: 0.4em;
+      }
+      a {
+        position: relative;
+        margin-left: 0;
+        margin-bottom: 0.4em;
+      }
+    }
+    .colabCont {
+      .row {
+        flex-direction: column;
+        width: 95%;
+        .cardColab {
+          margin-top: 5%;
+        }
+      }
+    }
+    .buttons {
+      margin-top: 40px;
+      width: 80%;
+      .col {
+        width: 150px;
+        button {
+          font-size: 15px;
+          height: 100%;
+          width: 90%;
+        }
       }
     }
   }
