@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <div class="parallax">
-      <h1>CENTRO INTEGRAL DE APOYO GERIATRICO</h1>
+      <h1>CENTRO INTEGRAL DE APOYO GERIÁTRICO</h1>
     </div>
     <HelloWorld
       msg="Apoyo y compañia para el adulto mayor"

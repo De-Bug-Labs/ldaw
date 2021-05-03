@@ -3,7 +3,7 @@
     <TitleCard
       :b="true"
       titulo="Material de Apoyo"
-      mensaje="Aqui podras encontrar videos curados por nosotros para ayudar, orientar o divertir!"
+      mensaje="Aquí podras encontrar videos curados por nosotros para ayudar, orientar o divertir!"
     />
     <div class="miniCont">
       <div class="row">
