@@ -4,6 +4,7 @@
       v-if="confirmed"
       @close="confirmed = false"
       @enviar="submitForm"
+      @done="$emit('done')"
       :nombre="nombre"
       :apellido="apellido"
       :correo="correo"

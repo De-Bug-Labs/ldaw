@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <HelpForm />
+    <HelpForm v-if="formActive" @done="formActive = false" />
   </div>
 </template>
 
@@ -12,6 +12,11 @@ export default defineComponent({
   name: "Help",
   components: {
     HelpForm,
+  },
+  data() {
+    return {
+      formActive: true,
+    };
   },
   mounted() {
     this.$emit("admin");

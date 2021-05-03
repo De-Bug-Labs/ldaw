@@ -55,6 +55,7 @@ export default defineComponent({
         .then((response) => response.json())
         .then((data) => {
           console.log("Success:", data);
+          this.$emit("done");
         })
         .catch((error) => {
           console.error("Error:", error);
