@@ -76,7 +76,6 @@ export default defineComponent({
       this.secciones.forEach((element) => {
         if (element["name"] == find) {
           this.seccion = element["id"];
-          console.log(this.seccion);
         }
       });
     },
@@ -105,7 +104,7 @@ export default defineComponent({
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,200;0,300;0,400;0,600;0,700;1,200;1,300;1,400;1,600&display=swap");
 
 .bigCont {
-  height: 100vh;
+  height: auto;
   width: 100vw;
   display: flex;
   flex-direction: column;
@@ -113,7 +112,7 @@ export default defineComponent({
   padding-bottom: 50px;
   .row {
     width: 82%;
-    height: 90%;
+    height: 100%;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -197,6 +196,7 @@ export default defineComponent({
         justify-content: flex-start;
         .column {
           flex-direction: row;
+          justify-content: center;
           height: 30%;
           width: 100%;
           .card {
