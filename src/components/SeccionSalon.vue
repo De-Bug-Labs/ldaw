@@ -3,7 +3,12 @@
     <div class="title">
       <h1>{{ titulo }}</h1>
     </div>
-    <div class="colabCont">
+    <ModalSalon
+      v-if="viewing"
+      @close="viewing = false"
+      :colaborador="informacion"
+    />
+    <div class="colabCont" v-if="!viewing">
       <div class="row">
         <div
           class="cardColab"
@@ -21,6 +26,7 @@
           class="cardColab"
           v-for="colaborador in colaboradores.slice(4, 8)"
           :key="colaborador"
+          @click="idElem(colaborador.id)"
         >
           <img src="@/assets/portrait.jpg" alt="#" />
           <h2>{{ colaborador.name }}</h2>
@@ -28,7 +34,7 @@
         </div>
       </div>
     </div>
-    <div class="buttons" v-if="totalPages > 1">
+    <div class="buttons" v-if="totalPages > 1 && !viewing">
       <div class="col" v-if="page > 1">
         <button @click="lastPage()">Anterior</button>
       </div>
@@ -36,7 +42,7 @@
         <button @click="nextPage()">Siguiente</button>
       </div>
     </div>
-    <a @click="$emit('return')" class="bottom"
+    <a @click="regresar()" class="bottom"
       ><i class="large material-icons">arrow_back</i>Regresar</a
     >
   </div>
@@ -44,9 +50,13 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import ModalSalon from "@/components/ModalSalon.vue";
 
 export default defineComponent({
   name: "SeccionSalon",
+  components: {
+    ModalSalon,
+  },
   props: {
     titulo: String,
     seccion: String,
@@ -60,6 +70,9 @@ export default defineComponent({
       totalPages: 0,
       totalColaboradores: 0,
       secondRow: true,
+      viewing: false,
+      idColaborador: "",
+      informacion: Object,
     };
   },
   methods: {
@@ -97,6 +110,20 @@ export default defineComponent({
       }
       this.completeQuery = true;
     },
+    getDetalles() {
+      try {
+        const data = fetch(
+          "http://localhost:5000/api/collaborator/" + this.idColaborador
+        )
+          .then((res) => res.json())
+          .then((data) => {
+            this.informacion = data;
+          });
+      } catch (error) {
+        console.log(error);
+      }
+      this.completeQuery = true;
+    },
     nextPage() {
       if (this.page + 1 <= this.totalPages) {
         if (this.totalColaboradores - this.page * 8 < 4) {
@@ -114,7 +141,16 @@ export default defineComponent({
       }
     },
     idElem(id: string) {
-      console.log(id);
+      this.idColaborador = id;
+      this.viewing = true;
+      this.getDetalles();
+    },
+    regresar() {
+      if (!this.viewing) {
+        this.$emit("return");
+      } else {
+        this.viewing = false;
+      }
     },
   },
   mounted() {
