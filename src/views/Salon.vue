@@ -9,7 +9,7 @@
     <TitleCard
       v-if="main"
       :g="true"
-      titulo="Salon de la Fama"
+      titulo="Salón de la Fama"
       mensaje="Es con mucho orgullo que les presentamos el salón de la fama de GAAP I.A.P donde podrán conocer a todas las personas que han proporcionado ayuda a la institución de maneras extraordinarias merecedoras de reconocimiento y agradecimiento por parte nuestra."
     />
     <div class="row" v-if="main">
