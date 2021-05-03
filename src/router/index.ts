@@ -71,13 +71,13 @@ const routes: Array<RouteRecordRaw> = [
       import(/* webpackChunkName: "about" */ "../views/Calendar.vue"),
   },
   {
-    path: "/admin/nuevoUsuario",
-    name: "NuevoUsuario",
+    path: "/admin/main",
+    name: "Main",
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/NuevoUsuario.vue"),
+      import(/* webpackChunkName: "about" */ "../views/Principal.vue"),
   },
 ];
 
