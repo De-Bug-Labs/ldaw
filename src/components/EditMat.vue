@@ -1,24 +1,16 @@
 <template>
   <form class="container1" id="help-form" @submit.prevent="validateForm">
-    <ModalUser
+    <ConfirmModal
       v-if="confirmed"
       @close="confirmed = false"
-      @enviar="submitForm"
-      @done="$emit('done')"
-      :nombre="nombre"
-      :apellido="apellido"
-      :correo="correo"
-      :contrasena="contrasena"
+      @modificar="submitForm()"
     />
-    <h1>Registrar nuevo administrador</h1>
-    <h3>
-      Ingresa la información solicitada para registrar una nueva cuenta de
-      administrador.
-    </h3>
+    <h1>Editar</h1>
+    <h3>Ingresa la informacióna a modificar.</h3>
 
     <div class="section">
       <div class="miniCont">
-        <label for="name" class="form-label">Nombre</label>
+        <label for="name" class="form-label">Titulo</label>
         <input
           @click="nomInv = false"
           :class="{ nomInv }"
@@ -26,91 +18,62 @@
           type="text"
           id="name"
           name="name"
-          placeholder="Escribe el nombre aquí"
-          maxlength="64"
+          placeholder="Escribe el titulo aquí"
+          maxlength="40"
         />
-        <p :class="{ on: nomInv }">Asegúrate de ingresar un nombre válido</p>
+        <p :class="{ on: nomInv }">Asegúrate de ingresar un titulo válido</p>
       </div>
       <div class="miniCont">
-        <label for="apellido" class="form-label">Apellido</label>
+        <label for="link" class="form-label">Link</label>
         <input
-          @click="apelInv = false"
-          :class="{ apelInv }"
-          v-model="apellido"
+          @click="linkInv = false"
+          :class="{ linkInv }"
+          v-model="link"
           type="text"
-          id="apellido"
-          name="apellido"
-          placeholder="Escribe el apellido aquí"
-          maxlength="64"
+          id="link"
+          name="link"
+          placeholder="Escribe el Link aquí"
+          maxlength="100"
         />
-        <p :class="{ on: apelInv }">Asegúrate de ingresar un apellido válido</p>
-      </div>
-      <div class="miniCont">
-        <label for="mail" class="form-label">Correo Electrónico</label>
-        <input
-          @click="corInv = false"
-          :class="{ corInv }"
-          v-model="correo"
-          type="mail"
-          id="mail"
-          name="name"
-          placeholder="ejemplo@correo.com"
-        />
-        <p :class="{ on: corInv }">
-          Asegúrate de ingresar un correo válido ejemplo@correo.com
-        </p>
-      </div>
-      <div class="miniCont">
-        <label for="password" class="form-label">Contraseña</label>
-        <input
-          @click="passInv = false"
-          :class="{ passInv }"
-          v-model="contrasena"
-          type="password"
-          id="password"
-          name="password"
-          placeholder="Ingresa una contraseña segura"
-        />
-        <p :class="{ on: passInv }">
-          Asegúrate de ingresar una contraseña segura
-        </p>
+        <p :class="{ on: linkInv }">Asegúrate de ingresar un link valido</p>
       </div>
     </div>
     <div class="section">
       <input type="submit" name="submit" value="Enviar" />
     </div>
+    <button @click="$emit('regresar')">Cancelar</button>
   </form>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import ModalUser from "@/components/ModalUser.vue";
+import ConfirmModal from "@/components/ConfirmModal.vue";
 
 export default defineComponent({
-  name: "NewUser",
+  name: "EditMat",
   components: {
-    ModalUser,
+    ConfirmModal,
+  },
+  props: {
+    elementoId: String,
   },
   data() {
     return {
       nombre: "",
-      apellido: "",
-      correo: "",
-      contrasena: "",
+      link: "",
       nomInv: false,
-      corInv: false,
-      apelInv: false,
-      passInv: false,
+      linkInv: false,
       confirmed: false,
       enviar: false,
+      id: this,
     };
   },
   methods: {
     checkNombre() {
-      var regex = /^[a-zA-Z\s]*$/;
+      var regex = /^[-\w\s]+$/;
       if (
         this.nombre.length <= 2 ||
-        this.nombre.length > 64 ||
+        this.nombre.length > 40 ||
         !regex.test(this.nombre)
       ) {
         this.nomInv = true;
@@ -118,50 +81,30 @@ export default defineComponent({
         this.nomInv = false;
       }
     },
-    checkApellido() {
-      var regex = /^[a-zA-Z\s]*$/;
-      if (
-        this.apellido.length <= 2 ||
-        this.apellido.length > 64 ||
-        !regex.test(this.apellido)
-      ) {
-        this.apelInv = true;
+    checkLink() {
+      if (this.link.length > 0) {
+        if (this.link.length <= 5 || this.link.length > 200) {
+          this.linkInv = true;
+        } else {
+          this.linkInv = false;
+        }
       } else {
-        this.apelInv = false;
+        this.linkInv = false;
       }
     },
-    checkCorreo() {
-      var regex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-      if (!regex.test(this.correo)) {
-        this.corInv = true;
-      } else {
-        this.corInv = false;
-      }
-    },
-    checkPassword() {
-      var regex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]/;
-      if (!regex.test(this.contrasena)) {
-        this.passInv = true;
-      } else {
-        this.passInv = false;
-      }
-    },
-
     validateForm() {
       this.checkNombre();
-      this.checkCorreo();
-      this.checkApellido();
-      this.checkPassword();
+      this.checkLink();
       this.confirmed = false;
-      if (!this.nomInv && !this.corInv && !this.apelInv && !this.passInv) {
+      if (!this.nomInv && !this.linkInv) {
         this.confirmed = true;
       } else {
         this.confirmed = false;
       }
     },
     submitForm() {
-      console.log("posted");
-      this.$router.push("/");
+      console.log(this.elementoId);
+      this.confirmed = false;
     },
   },
 });
@@ -198,7 +141,7 @@ export default defineComponent({
   }
 
   h1 {
-    font-size: 3rem;
+    font-size: 2.5rem;
   }
 
   h2 {
@@ -254,8 +197,7 @@ export default defineComponent({
   }
 
   input.nomInv,
-  input.corInv,
-  input.telInv {
+  input.linkInv {
     border-bottom: 2px solid rgb(255, 0, 0);
   }
 
@@ -310,6 +252,32 @@ export default defineComponent({
 
   input[type="submit"]:hover {
     border: 4px solid black;
+  }
+  button {
+    margin-top: 10%;
+    margin-right: auto;
+    margin-left: 10%;
+    border-bottom: none;
+    cursor: pointer;
+    width: auto;
+    height: 45px;
+    align-self: center;
+    font-family: "Open Sans", sans-serif;
+    text-transform: uppercase;
+    font-size: 20px;
+    background-color: #7a7a7a;
+    border-radius: 10px;
+    color: white;
+    font-weight: 700;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 4px 4px 4px 4px;
+    margin-bottom: 0px;
+    border: none;
+    &:hover {
+      border: 2px solid rgb(0, 0, 0);
+    }
   }
 }
 @media screen and (max-width: 900px) {

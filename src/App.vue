@@ -136,13 +136,13 @@ body {
         margin: 20px 0;
         color: black;
         text-decoration: none;
-        font-size: 20px;
+        font-size: 18px;
         font-family: "Open Sans", sans-serif;
-        font-weight: 600 !important;
+        font-weight: 700 !important;
         display: flex;
 
         img {
-          height: 30px;
+          height: 28px;
           transition: 0.5s;
           margin-left: 10px;
         }
@@ -168,7 +168,7 @@ body {
   font-size: 24px;
 }
 
-@media screen and (max-width: 1080px) {
+@media screen and (max-width: 1320px) {
   .nav {
     padding: 0 0;
     width: 100vw;
@@ -178,11 +178,11 @@ body {
       li {
         a {
           display: flex;
-          padding: 10px 10px;
-          font-size: 16px;
+          padding: 10px 15px;
+          font-size: 17px;
           img {
-            height: 19px;
-            margin-left: 5px;
+            height: 25px;
+            margin-left: 8px;
           }
         }
       }
