@@ -8,7 +8,6 @@
         <h2>NOMBRE: {{ nombre }}</h2>
         <h2>APELLIDO: {{ apellido }}</h2>
         <h2>CORREO: {{ correo }}</h2>
-        <h2>CONTASEÑA: {{ contrasena }}</h2>
       </div>
       <div class="buttons">
         <p class="confirmar" @click="addUser()">Confirmar</p>
