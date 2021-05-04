@@ -2,14 +2,10 @@
   <div class="box1" @click="$emit('close')">
     <div class="modal" @click.stop>
       <div class="title">
-        <h1>Verifica el elemento a eliminar</h1>
-      </div>
-      <div class="content">
-        <h2>{{ elemento.title }}</h2>
-        <h2>{{ elemento.link }}</h2>
+        <h1>¿Seguro que deseas eliminarlo?</h1>
       </div>
       <div class="buttons">
-        <p class="confirmar" @click="deleteMaterial(elemento.id)">Eliminar</p>
+        <p class="confirmar" @click="$emit('borrar')">Eliminar</p>
         <p class="cancelar" @click="$emit('close')">Cancelar</p>
       </div>
     </div>
@@ -21,30 +17,11 @@ import { defineComponent } from "vue";
 
 export default defineComponent({
   name: "ModalDel",
-  props: {
-    elemento: Object,
-  },
   data() {
     return {
       deletedResponse: {},
       completeQuery: false,
     };
-  },
-  methods: {
-    deleteMaterial(elim: string) {
-      fetch("http://localhost:5000/api/material/" + elim, {
-        method: "DELETE",
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          console.log("Success:", data);
-          this.$emit("confirmar");
-        })
-        .catch((error) => {
-          console.error("Error:", error);
-        });
-      this.completeQuery = true;
-    },
   },
 });
 </script>

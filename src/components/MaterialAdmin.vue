@@ -5,7 +5,7 @@
       v-if="eliminar"
       @close="(eliminar = false), (material = {})"
       :elemento="material"
-      @confirmar="getInfo(), (eliminar = false)"
+      @borrar="deleteMaterial(idMaterial), (idMaterial = '')"
     />
     <EditMat
       v-if="editar"
@@ -34,7 +34,7 @@
           <th>Link</th>
         </tr>
         <tr v-for="material in materiales" :key="material">
-          <th><p class="eliminar" @click="borrar(material)">Eliminar</p></th>
+          <th><p class="eliminar" @click="borrar(material.id)">Eliminar</p></th>
           <th>
             <p class="editar" @click="editarTitulo(material.id)">Editar</p>
           </th>
@@ -120,6 +120,21 @@ export default defineComponent({
       }
       this.completeQuery = true;
     },
+    deleteMaterial(elim: string) {
+      fetch("http://localhost:5000/api/material/" + elim, {
+        method: "DELETE",
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log("Success:", data);
+          this.getInfo();
+          this.eliminar = false;
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
+      this.completeQuery = true;
+    },
     nextPage() {
       if (this.page + 1 <= this.totalPages) {
         this.page++;
@@ -132,9 +147,9 @@ export default defineComponent({
         this.getInfo();
       }
     },
-    borrar(seleccionado: any) {
+    borrar(id: string) {
       this.eliminar = true;
-      this.material = seleccionado;
+      this.idMaterial = id;
     },
     sortByProperty(property: any) {
       return function (a: any, b: any) {
