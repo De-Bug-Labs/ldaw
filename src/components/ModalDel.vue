@@ -2,7 +2,10 @@
   <div class="box1" @click="$emit('close')">
     <div class="modal" @click.stop>
       <div class="title">
-        <h1>¿Seguro que deseas eliminarlo?</h1>
+        <h1>¿Seguro que deseas eliminar?</h1>
+      </div>
+      <div class="content">
+        <h2>{{ titulo }}</h2>
       </div>
       <div class="buttons">
         <p class="confirmar" @click="$emit('borrar')">Eliminar</p>
@@ -17,6 +20,9 @@ import { defineComponent } from "vue";
 
 export default defineComponent({
   name: "ModalDel",
+  props: {
+    titulo: String,
+  },
   data() {
     return {
       deletedResponse: {},

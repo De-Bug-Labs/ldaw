@@ -4,7 +4,7 @@
     <ModalEliminar
       v-if="eliminar"
       @close="(eliminar = false), (material = {})"
-      :elemento="material"
+      :titulo="tituloMaterial"
       @borrar="deleteMaterial(idMaterial), (idMaterial = '')"
     />
     <EditMat
@@ -34,7 +34,11 @@
           <th>Link</th>
         </tr>
         <tr v-for="material in materiales" :key="material">
-          <th><p class="eliminar" @click="borrar(material.id)">Eliminar</p></th>
+          <th>
+            <p class="eliminar" @click="borrar(material.id, material.title)">
+              Eliminar
+            </p>
+          </th>
           <th>
             <p class="editar" @click="editarTitulo(material.id)">Editar</p>
           </th>
@@ -88,6 +92,7 @@ export default defineComponent({
       eliminar: false,
       editar: false,
       nombre: "",
+      tituloMaterial: "",
     };
   },
   methods: {
@@ -147,9 +152,10 @@ export default defineComponent({
         this.getInfo();
       }
     },
-    borrar(id: string) {
+    borrar(id: string, titulo: string) {
       this.eliminar = true;
       this.idMaterial = id;
+      this.tituloMaterial = titulo;
     },
     sortByProperty(property: any) {
       return function (a: any, b: any) {
