@@ -38,18 +38,28 @@ export default defineComponent({
         lastName: this.apellido,
         email: this.correo,
         password: this.contrasena,
-        roleId: "2483c39a-a349-4e2b-affe-858e304d2eb4",
+        roleId: ["2483c39a-a349-4e2b-affe-858e304d2eb4"],
       },
     };
   },
 
   methods: {
     addUser(): void {
-      console.log(this.user);
-      console.log("hola");
-      /*           axios.post('http://localhost:5000/api/user', {
-              this.user
-          }) */
+      fetch("http://localhost:5000/api/user", {
+        method: "POST", // or 'PUT'
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(this.user),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log("Success:", data);
+          this.$emit("done");
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
     },
   },
 });
