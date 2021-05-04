@@ -1,5 +1,5 @@
 <template>
-  <form class="container" id="help-form" @submit.prevent="validateForm">
+  <form class="container1" id="help-form" @submit.prevent="validateForm">
     <ModalUser
       v-if="confirmed"
       @close="confirmed = false"
@@ -171,9 +171,9 @@ export default defineComponent({
 @import url("https://fonts.googleapis.com/css2?family=Signika:ital,wght@0,200;0,300;0,400;0,600;0,700;1,200;1,300;1,400;1,600&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,200;0,300;0,400;0,600;0,700;1,200;1,300;1,400;1,600&display=swap");
 
-.container {
+.container1 {
   height: 100%;
-  width: 100vw;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
