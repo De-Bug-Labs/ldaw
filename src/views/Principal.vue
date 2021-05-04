@@ -6,7 +6,7 @@
         <p>GAAP</p></a
       >
       <div class="navCont">
-        <div class="elemento" @click="viewingUser = true">
+        <div class="elemento" @click="vUsuarios()">
           <a>Usuarios</a>
         </div>
         <div class="elemento">
@@ -21,25 +21,28 @@
         <div class="elemento">
           <a>Salon de la Fama</a>
         </div>
-        <div class="elemento">
+        <div class="elemento" @click="vMaterial()">
           <a>Material didactico</a>
         </div>
       </div>
     </div>
     <div class="content">
-      <HelpForm v-if="viewingUser" @done="viewingUser = false" />
+      <NewUser v-if="viewingUser" @done="viewingUser = false" />
+      <Material v-if="viewingMaterial" />
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import HelpForm from "@/components/NewUser.vue";
+import NewUser from "@/components/NewUser.vue";
+import Material from "@/components/MaterialAdmin.vue";
 
 export default defineComponent({
   name: "Help",
   components: {
-    HelpForm,
+    NewUser,
+    Material,
   },
   mounted() {
     this.$emit("admin");
@@ -47,7 +50,18 @@ export default defineComponent({
   data() {
     return {
       viewingUser: false,
+      viewingMaterial: false,
     };
+  },
+  methods: {
+    vMaterial() {
+      this.viewingMaterial = true;
+      this.viewingUser = false;
+    },
+    vUsuarios() {
+      this.viewingMaterial = false;
+      this.viewingUser = true;
+    },
   },
 });
 </script>
@@ -61,7 +75,7 @@ export default defineComponent({
   display: flex;
   flex-direction: column;
   align-items: center;
-
+  font-family: "Signika", sans-serif;
   .sideNav {
     position: absolute;
     top: 0;
@@ -72,6 +86,7 @@ export default defineComponent({
     display: flex;
     flex-direction: column;
     align-items: center;
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
     .navCont {
       display: flex;
       flex-direction: column;
@@ -82,16 +97,16 @@ export default defineComponent({
         display: flex;
         flex-direction: row;
         align-items: center;
-        justify-content: center;
         width: 300px;
         height: 70px;
         cursor: pointer;
         transition: 0.2s ease-out;
         a {
-          font-size: 2rem;
+          font-size: 1.8rem;
           font-family: "Signika", sans-serif;
           color: white;
           font-weight: bold;
+          margin-left: 20px;
         }
         &:hover {
           background-color: white;
