@@ -5,14 +5,24 @@
       v-if="eliminar"
       @close="(eliminar = false), (material = {})"
       :titulo="tituloMaterial"
-      @borrar="deleteMaterial(idMaterial), (idMaterial = '')"
+      @borrar="deleteMaterial(idMaterial), (idMaterial = ''), recargar"
     />
+    <ExitoModal v-if="exito" @close="(exito = false), recargar()" />
+    <ErrorModal v-if="error" @close="error = false" />
     <EditMat
       v-if="editar"
       :elementoId="idMaterial"
+      @exito="exito = true"
+      @error="error = true"
       @regresar="(editar = false), (idMaterial = '')"
     />
-    <div class="listBox" v-if="!editar">
+    <NewMaterial
+      v-if="crear"
+      @exito="exito = true"
+      @error="error = true"
+      @regresar="(crear = false), (idMaterial = ''), recargar"
+    />
+    <div class="listBox" v-if="!editar && !crear">
       <div class="search">
         <a @click="materiales.sort(sortByName('title', nombre))"
           ><i class="large material-icons">search</i></a
@@ -64,7 +74,9 @@
         </div>
       </div>
     </div>
-    <button class="agregar" v-if="!editar">Agregar Material</button>
+    <button class="agregar" v-if="!editar && !crear" @click="crear = true">
+      Agregar Material
+    </button>
   </div>
 </template>
 
@@ -72,12 +84,18 @@
 import { defineComponent } from "vue";
 import ModalEliminar from "@/components/ModalDel.vue";
 import EditMat from "@/components/EditMat.vue";
+import NewMaterial from "@/components/NewMaterial.vue";
+import ExitoModal from "@/components/ExitoModal.vue";
+import ErrorModal from "@/components/ErrorModal.vue";
 
 export default defineComponent({
   name: "MaterialAdmin",
   components: {
     ModalEliminar,
     EditMat,
+    NewMaterial,
+    ExitoModal,
+    ErrorModal,
   },
   data() {
     return {
@@ -91,8 +109,11 @@ export default defineComponent({
       material: {},
       eliminar: false,
       editar: false,
+      crear: false,
       nombre: "",
       tituloMaterial: "",
+      exito: false,
+      error: false,
     };
   },
   methods: {
@@ -104,6 +125,7 @@ export default defineComponent({
           .then((res) => res.json())
           .then((data) => {
             this.materiales = data;
+            this.$forceUpdate();
           });
       } catch (error) {
         console.log(error);
@@ -132,11 +154,12 @@ export default defineComponent({
         .then((response) => response.json())
         .then((data) => {
           console.log("Success:", data);
-          this.getInfo();
           this.eliminar = false;
+          this.exito = true;
         })
         .catch((error) => {
           console.error("Error:", error);
+          this.error = true;
         });
       this.completeQuery = true;
     },
@@ -175,6 +198,10 @@ export default defineComponent({
     editarTitulo(id: string) {
       this.editar = true;
       this.idMaterial = id;
+    },
+    recargar() {
+      console.log("entro");
+      this.getInfo();
     },
   },
   mounted() {
