@@ -1,14 +1,18 @@
 <template>
-  <h1>Administradores</h1>
-  <button class="agregar" v-if="!editar">Nuevo admin</button>
-  <div class="box">
+  <NewUser v-if="crear" :elementoId="idMaterial" @regresar="crear = false" />
+  <div class="box" v-if="!crear">
     <ModalEliminar
       v-if="eliminar"
-      @close="(eliminar = false), (material = {})"
-      :titulo="tituloMaterial"
+      @close="eliminar = false"
+      :titulo="tituloModal"
       @borrar="deleteUser(idUser), (idUser = '')"
     />
-
+    <div class="titulo">
+      <h1 v-if="!crear">Administradores</h1>
+      <button class="agregarUsuario" v-if="!crear" @click="crearUsuario()">
+        Nuevo admin
+      </button>
+    </div>
     <div class="listBox" v-for="user in users" :key="user">
       <table>
         <tr>
@@ -31,10 +35,13 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import ModalEliminar from "@/components/ModalDel.vue";
+import NewUser from "@/components/NewUser.vue";
+
 export default defineComponent({
   name: "MaterialAdmin",
   components: {
     ModalEliminar,
+    NewUser,
   },
   data() {
     return {
@@ -43,9 +50,10 @@ export default defineComponent({
       completeQuery: false,
       idUser: "",
       eliminar: false,
-      editar: false,
+      crear: false,
       name: "",
       lastName: "",
+      tituloModal: "",
     };
   },
   methods: {
@@ -69,6 +77,11 @@ export default defineComponent({
       this.idUser = id;
       this.name = name;
       this.lastName = lastName;
+      this.tituloModal = name + " " + lastName;
+    },
+
+    crearUsuario() {
+      this.crear = true;
     },
 
     deleteUser(elim: string) {
@@ -77,7 +90,7 @@ export default defineComponent({
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(elim),
+        body: JSON.stringify({ userId: elim }),
       })
         .then((response) => response.json())
         .then((data) => {
@@ -99,7 +112,11 @@ export default defineComponent({
 </script>
 
 <style scoped lang="scss">
-button.agregar {
+.titulo {
+  margin-bottom: 30px;
+}
+
+button.agregarUsuario {
   margin-top: 10 px;
   border-bottom: none;
   cursor: pointer;
@@ -130,7 +147,6 @@ button.agregar {
   flex-direction: column;
   align-items: center;
   justify-content: top;
-  margin-top: 3%;
 
   h1 {
     font-family: "Signika", sans-serif;
@@ -196,7 +212,7 @@ button.agregar {
           text-transform: uppercase;
           cursor: pointer;
         }
-        p.editar {
+        p.crear {
           font-size: 14px;
           color: #007df0;
           text-transform: uppercase;

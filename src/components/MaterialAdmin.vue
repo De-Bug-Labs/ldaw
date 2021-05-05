@@ -72,7 +72,6 @@
 import { defineComponent } from "vue";
 import ModalEliminar from "@/components/ModalDel.vue";
 import EditMat from "@/components/EditMat.vue";
-
 export default defineComponent({
   name: "MaterialAdmin",
   components: {
@@ -259,7 +258,6 @@ export default defineComponent({
     display: flex;
     flex-direction: column;
     align-items: center;
-
     table {
       border-collapse: collapse;
       margin-left: 50px;

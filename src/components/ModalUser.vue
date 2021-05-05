@@ -66,7 +66,7 @@ export default defineComponent({
 
 <style scoped lang="scss">
 .box {
-  width: 100% !important;
+  width: calc(100% - 300px);
   height: 100% !important;
   position: fixed;
   z-index: 100;
@@ -74,6 +74,7 @@ export default defineComponent({
   align-items: center;
   justify-content: center;
   font-family: "Signika", sans-serif;
+  background-color: rgba(0, 0, 0, 0.5);
 
   .modal {
     background-color: white;
