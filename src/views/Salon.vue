@@ -54,6 +54,7 @@ export default defineComponent({
       seccion: "",
       seccionTitulo: "",
       completeQuery: false,
+      apiUrl: this.apiUrl,
     };
   },
   methods: {
@@ -81,7 +82,7 @@ export default defineComponent({
     },
     getInfo() {
       try {
-        const data = fetch("http://localhost:5000/api/section")
+        const data = fetch(this.apiUrl + "section")
           .then((res) => res.json())
           .then((data) => {
             this.secciones = data;
