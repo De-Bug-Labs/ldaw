@@ -4,10 +4,10 @@
       ><img src="../public/img/roof.svg" />
       <p>GAAP</p></router-link
     >
-    <a class="toggle" @click="movile = !movile"
+    <a class="toggle" @click="mobile = !mobile"
       ><i class="large material-icons">dehaze</i></a
     >
-    <ul :class="{ active1: movile }">
+    <ul :class="{ active1: mobile }">
       <li>
         <router-link to="/about"
           >Nosotros <img src="../public/img/g.svg"
@@ -40,14 +40,14 @@
       </li>
     </ul>
   </div>
-  <router-view @admin="regular = false" @click="movile = !movile" />
+  <router-view @admin="regular = false" @click="mobile = false" />
 </template>
 
 <script lang="ts">
 export default {
   data() {
     return {
-      movile: false,
+      mobile: false,
       regular: true,
     };
   },
