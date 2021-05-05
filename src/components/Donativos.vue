@@ -146,16 +146,17 @@ export default defineComponent({
 @media screen and (max-width: 900px) {
   .basic-grid {
     flex-direction: column;
-    height: 100vh;
+    height: auto;
     .cardInfo {
       flex-direction: row;
       width: 100%;
-      height: 80%;
+      height: auto;
+      margin-top: 20px;
       .box1 {
         width: 95%;
         height: 90%;
         .textBox {
-          height: 70%;
+          height: auto;
           justify-content: center;
           h1 {
             font-size: 1.6rem;
@@ -168,14 +169,14 @@ export default defineComponent({
           }
         }
         .imgBox {
-          height: 30%;
+          height: 200px;
         }
       }
     }
     .cardBtns {
       flex-direction: row;
       width: 100%;
-      height: 20%;
+      height: 200px;
     }
   }
 }
