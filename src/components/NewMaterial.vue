@@ -5,8 +5,8 @@
       @close="confirmed = false"
       @modificar="submitForm()"
     />
-    <h1>Editar</h1>
-    <h3>Ingresa la informacióna a modificar.</h3>
+    <h1>Crear</h1>
+    <h3>Ingresa la informacióna del material a crear.</h3>
 
     <div class="section">
       <div class="miniCont">
@@ -65,6 +65,7 @@ export default defineComponent({
       linkInv: false,
       confirmed: false,
       enviar: false,
+      id: this,
       material: {
         title: "",
         link: "",
@@ -85,12 +86,8 @@ export default defineComponent({
       }
     },
     checkLink() {
-      if (this.link.length > 0) {
-        if (this.link.length <= 5 || this.link.length > 200) {
-          this.linkInv = true;
-        } else {
-          this.linkInv = false;
-        }
+      if (this.link.length <= 5 || this.link.length > 200) {
+        this.linkInv = true;
       } else {
         this.linkInv = false;
       }
@@ -101,34 +98,19 @@ export default defineComponent({
       this.confirmed = false;
       if (!this.nomInv && !this.linkInv) {
         this.confirmed = true;
-        this.material.title = this.nombre;
-        this.material.link = this.link;
       } else {
         this.confirmed = false;
       }
     },
     submitForm() {
+      this.material.title = this.nombre;
+      this.material.link = this.link;
       this.confirmed = false;
-      this.addUser(this.elementoId);
+      this.addUser();
     },
-    getInfo() {
-      try {
-        const data = fetch(
-          "http://localhost:5000/api/material/" + this.elementoId //agregar variable de entorno para ruta
-        )
-          .then((res) => res.json())
-          .then((data) => {
-            this.material = data;
-            this.nombre = this.material.title;
-            this.link = this.material.link;
-          });
-      } catch (error) {
-        console.log(error);
-      }
-    },
-    addUser(id: any): void {
-      fetch("http://localhost:5000/api/material/" + id, {
-        method: "PUT",
+    addUser(): void {
+      fetch("http://localhost:5000/api/material", {
+        method: "POST", // or 'PUT'
         headers: {
           "Content-Type": "application/json",
         },
@@ -145,9 +127,6 @@ export default defineComponent({
           this.$emit("error");
         });
     },
-  },
-  mounted() {
-    this.getInfo();
   },
 });
 </script>

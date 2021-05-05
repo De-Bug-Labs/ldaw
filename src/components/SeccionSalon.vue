@@ -228,7 +228,7 @@ export default defineComponent({
         margin-left: 2%;
         margin-right: 2%;
         margin-top: 2%;
-        background-color: #ededed;
+        background-color: #fcdb88;
         border-radius: 15px;
         transition: 0.2s ease-in-out;
         cursor: pointer;
