@@ -29,15 +29,16 @@
     background-attachment: fixed;
     overflow: hidden;
     background-position: bottom;
+    display: flex;
     width: 100vw;
 
     h1 {
       text-align: center;
       position: absolute;
-      top: 50%;
+      top: 60%;
       left: 50%;
       font-family: "Open Sans", sans-serif;
-      font-size: 6rem;
+      font-size: 5.5rem;
       transform: translate(-50%, -50%);
       color: rgb(255, 255, 255);
     }
@@ -52,8 +53,27 @@
       background-position: top;
 
       h1 {
+        font-size: 4rem;
+        left: 50%;
+        top: 75%;
+        transform: translate(-50%, -50%);
+      }
+    }
+  }
+}
+
+@media (max-width: 900px) {
+  .home {
+    .parallax {
+      height: 100vh;
+      background-size: cover;
+      background-position: top;
+      justify-content: center;
+      align-items: center;
+      display: flex;
+      h1 {
         font-size: 3rem;
-        left: 45%;
+        left: 50%;
         top: 75%;
       }
     }
