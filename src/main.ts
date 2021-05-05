@@ -7,7 +7,7 @@ import store from "./store";
 const app = createApp(App);
 
 app.config.globalProperties.apiUrl =
-  <string>process.env.VUE_APP_API_URL || "loacalhost:5000/";
+  <string>process.env.VUE_APP_API_URL || "http://loacalhost:5000/";
 console.log(process.env.VUE_APP_API_URL);
 console.log(app.config.globalProperties.apiUrl);
 
