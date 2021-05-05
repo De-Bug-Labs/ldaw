@@ -44,7 +44,7 @@
           type="text"
           id="name"
           name="name"
-          placeholder="Mariana Sandoval Arrieta"
+          placeholder="Ingresa tu nombre aqui"
           maxlength="64"
         />
         <p :class="{ on: nomInv }">Asegurate de ingresar un nombre válido</p>
@@ -73,7 +73,7 @@
           type="tel"
           id="phone"
           name="phone"
-          placeholder="4421234560"
+          placeholder="10 digitos"
           maxlength="10"
         />
         <p :class="{ on: telInv }">Ingresa un número válido de 10 dígitos</p>

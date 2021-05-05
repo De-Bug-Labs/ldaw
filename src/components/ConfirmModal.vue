@@ -2,10 +2,10 @@
   <div class="box1" @click="$emit('close')">
     <div class="modal" @click.stop>
       <div class="title">
-        <h1>¿Seguro que deseas modificar este elemento?</h1>
+        <h1>¿Seguro que deseas realizar esta accion?</h1>
       </div>
       <div class="buttons">
-        <p class="confirmar" @click="$emit('modificar')">Modificar</p>
+        <p class="confirmar" @click="$emit('modificar')">Confirmar</p>
         <p class="cancelar" @click="$emit('close')">Cancelar</p>
       </div>
     </div>
@@ -16,7 +16,7 @@
 import { defineComponent } from "vue";
 
 export default defineComponent({
-  name: "ModalDel",
+  name: "ConfirmModal",
 });
 </script>
 
@@ -30,7 +30,6 @@ export default defineComponent({
   align-items: center;
   justify-content: center;
   font-family: "Signika", sans-serif;
-  background-color: rgba(0, 0, 0, 0.5);
 
   .modal {
     background-color: white;
@@ -40,7 +39,7 @@ export default defineComponent({
     flex-direction: column;
     border-radius: 10px;
     align-items: center;
-    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+    box-shadow: 0 40px 100px rgba(0, 0, 0, 0.6), 0 10px 10px rgba(0, 0, 0, 0.4);
     .title {
       width: 100%;
       height: 15%;
