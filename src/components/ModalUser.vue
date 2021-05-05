@@ -30,6 +30,7 @@ export default defineComponent({
     correo: String,
     apellido: String,
     contrasena: String,
+    apiUrl: String,
   },
   data() {
     return {
@@ -39,13 +40,14 @@ export default defineComponent({
         email: this.correo,
         password: this.contrasena,
         roleId: ["2483c39a-a349-4e2b-affe-858e304d2eb4"],
+        apiUrl: this.apiUrl,
       },
     };
   },
 
   methods: {
     addUser(): void {
-      fetch("http://localhost:5000/api/user", {
+      fetch(this.apiUrl + "user", {
         method: "POST", // or 'PUT'
         headers: {
           "Content-Type": "application/json",
