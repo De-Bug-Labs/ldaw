@@ -90,7 +90,7 @@ export default defineComponent({
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ userId: elim }),
+        body: JSON.stringify({ id: elim }),
       })
         .then((response) => response.json())
         .then((data) => {

@@ -19,7 +19,6 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import axios, { AxiosInstance, AxiosResponse } from "axios";
 
 export default defineComponent({
   name: "ModalUser",

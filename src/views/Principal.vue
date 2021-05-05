@@ -24,6 +24,9 @@
         <div class="elemento" @click="vMaterial()">
           <a>Material didactico</a>
         </div>
+        <div class="elemento" @click="vMaterial()">
+          <a>Cerrar Sesion <i class="large material-icons">logout</i></a>
+        </div>
       </div>
     </div>
     <div class="content">
@@ -101,12 +104,20 @@ export default defineComponent({
         height: 70px;
         cursor: pointer;
         transition: 0.2s ease-out;
+
         a {
           font-size: 1.8rem;
           font-family: "Signika", sans-serif;
           color: white;
           font-weight: bold;
           margin-left: 20px;
+          justify-content: center;
+          align-items: center;
+          display: flex;
+          i {
+            margin-left: 20px;
+            font-weight: bold;
+          }
         }
         &:hover {
           background-color: white;

@@ -6,6 +6,7 @@ import TitleCard from "@/components/TitleCard.vue";
 import About from "@/views/About.vue";
 import Salon from "@/views/Salon.vue";
 import Material from "@/views/Material.vue";
+import SeccionSalon from "@/components/SeccionSalon.vue";
 
 describe("HelloWorld.vue", () => {
   it("muestra propiedad de mensaje correcta", () => {
@@ -264,6 +265,36 @@ describe("Salon.vue", () => {
       props: { mensaje },
     });
     expect(wrapper.text()).toMatch(mensaje);
+  });
+});
+
+describe("Salon.vue", () => {
+  it("muestra query correcto en paginacion", () => {
+    const wrapper = shallowMount(SeccionSalon);
+    wrapper.setData({ page: 1 });
+    wrapper.setData({ completeQuery: false });
+    wrapper.vm.getPages();
+    expect(wrapper.vm.completeQuery).toBe(true);
+  });
+});
+
+describe("Salon.vue", () => {
+  it("muestra query correcto en busqueda elementos de seccion de salon", () => {
+    const wrapper = shallowMount(SeccionSalon);
+    wrapper.setData({ page: 3 });
+    wrapper.setData({ completeQuery: false });
+    wrapper.vm.getColaboradores();
+    expect(wrapper.vm.completeQuery).toBe(true);
+  });
+});
+
+describe("Salon.vue", () => {
+  it("muestra query correcto en busqueda detalles de miembro de salon", () => {
+    const wrapper = shallowMount(SeccionSalon);
+    wrapper.setData({ page: 3 });
+    wrapper.setData({ completeQuery: false });
+    wrapper.vm.getDetalles();
+    expect(wrapper.vm.completeQuery).toBe(true);
   });
 });
 
