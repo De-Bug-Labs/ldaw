@@ -23,7 +23,7 @@ export default defineComponent({
   methods: {
     getInfo() {
       try {
-        const data = fetch(this.apiUrl + "information/1")
+        const data = fetch(this.apiUrl + "information")
           .then((res) => res.json())
           .then((data) => {
             this.information = data;
