@@ -16,6 +16,7 @@ export default defineComponent({
     return {
       information: Object,
       completed: false,
+      apiUrl: this.apiUrl,
     };
   },
 

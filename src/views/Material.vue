@@ -54,6 +54,7 @@ export default defineComponent({
       totalPages: 0,
       totalMaterial: 0,
       secondRow: true,
+      apiUrl: this.apiUrl,
     };
   },
   methods: {

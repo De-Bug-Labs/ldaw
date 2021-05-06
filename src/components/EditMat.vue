@@ -69,6 +69,7 @@ export default defineComponent({
         title: "",
         link: "",
       },
+      apiUrl: this.apiUrl,
     };
   },
   methods: {

@@ -73,6 +73,7 @@ export default defineComponent({
       viewing: false,
       idColaborador: "",
       informacion: Object,
+      apiUrl: this.apiUrl,
     };
   },
   methods: {
