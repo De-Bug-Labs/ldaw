@@ -112,6 +112,7 @@ export default defineComponent({
       crear: false,
       nombre: "",
       tituloMaterial: "",
+      apiUrl: this.apiUrl,
       exito: false,
       error: false,
     };

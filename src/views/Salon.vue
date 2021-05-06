@@ -54,6 +54,7 @@ export default defineComponent({
       seccion: "",
       seccionTitulo: "",
       completeQuery: false,
+      apiUrl: this.apiUrl,
     };
   },
   methods: {

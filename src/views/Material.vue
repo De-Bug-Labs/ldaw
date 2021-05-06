@@ -54,13 +54,14 @@ export default defineComponent({
       totalPages: 0,
       totalMaterial: 0,
       secondRow: true,
+      apiUrl: this.apiUrl,
     };
   },
   methods: {
     getInfo() {
       try {
         const data = fetch(
-          this.apiUrl + "material?page=" + this.page + "&pageSize=8" //agregar variable de entorno para ruta
+          this.apiUrl + "material?page=" + this.page + "&pageSize=8"
         )
           .then((res) => res.json())
           .then((data) => {
