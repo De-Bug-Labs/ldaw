@@ -60,7 +60,7 @@ export default defineComponent({
     getInfo() {
       try {
         const data = fetch(
-          "http://localhost:5000/api/material?page=" + this.page + "&pageSize=8" //agregar variable de entorno para ruta
+          this.apiUrl + "api/material?page=" + this.page + "&pageSize=8" //agregar variable de entorno para ruta
         )
           .then((res) => res.json())
           .then((data) => {
@@ -73,9 +73,7 @@ export default defineComponent({
     },
     getPages() {
       try {
-        const data = fetch(
-          "http://localhost:5000/api/material/pages?page=0&pageSize=8"
-        )
+        const data = fetch(this.apiUrl + "api/material/pages?page=0&pageSize=8")
           .then((res) => res.json())
           .then((data) => {
             this.pages = data;

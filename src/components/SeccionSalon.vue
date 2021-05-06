@@ -79,9 +79,7 @@ export default defineComponent({
     getPages() {
       try {
         const data = fetch(
-          "http://localhost:5000/api/sectioncount/" +
-            this.idSeccion +
-            "?pageSize=8"
+          this.apiUrl + "api/sectioncount/" + this.idSeccion + "?pageSize=8"
         )
           .then((res) => res.json())
           .then((data) => {
@@ -96,7 +94,8 @@ export default defineComponent({
     getColaboradores() {
       try {
         const data = fetch(
-          "http://localhost:5000/api/section/" +
+          this.apiUrl +
+            "api/section/" +
             this.idSeccion +
             "?pageSize=8&page=" +
             this.page
@@ -113,7 +112,7 @@ export default defineComponent({
     getDetalles() {
       try {
         const data = fetch(
-          "http://localhost:5000/api/collaborator/" + this.idColaborador
+          this.apiUrl + "api/collaborator/" + this.idColaborador
         )
           .then((res) => res.json())
           .then((data) => {

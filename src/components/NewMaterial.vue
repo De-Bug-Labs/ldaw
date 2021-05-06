@@ -109,7 +109,7 @@ export default defineComponent({
       this.addUser();
     },
     addUser(): void {
-      fetch("http://localhost:5000/api/material", {
+      fetch(this.apiUrl + "api/material", {
         method: "POST", // or 'PUT'
         headers: {
           "Content-Type": "application/json",
