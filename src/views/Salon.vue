@@ -81,7 +81,7 @@ export default defineComponent({
     },
     getInfo() {
       try {
-        const data = fetch(this.apiUrl + "api/section")
+        const data = fetch(this.apiUrl + "section")
           .then((res) => res.json())
           .then((data) => {
             this.secciones = data;

@@ -114,7 +114,7 @@ export default defineComponent({
     getInfo() {
       try {
         const data = fetch(
-          this.apiUrl + "api/material/" + this.elementoId //agregar variable de entorno para ruta
+          this.apiUrl + "material/" + this.elementoId //agregar variable de entorno para ruta
         )
           .then((res) => res.json())
           .then((data) => {
@@ -127,7 +127,7 @@ export default defineComponent({
       }
     },
     addUser(id: any): void {
-      fetch(this.apiUrl + "api/material/" + id, {
+      fetch(this.apiUrl + "material/" + id, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
