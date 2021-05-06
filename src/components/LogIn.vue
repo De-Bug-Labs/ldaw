@@ -5,6 +5,7 @@
       <div class="mini">
         <label for="uname" class="form-label">Usuario</label>
         <input
+          v-model="email"
           type="text"
           id="uname"
           name="uname"
@@ -14,10 +15,15 @@
       </div>
       <div class="mini">
         <label for="pwd">Contraseña</label>
-        <input type="password" id="pwd" name="pwd" />
+        <input v-model="password" type="password" id="pwd" name="pwd" />
       </div>
 
-      <input type="submit" name="submit" value="INGRESAR" />
+      <input
+        type="button"
+        name="submit"
+        value="INGRESAR"
+        v-on:click="login()"
+      />
     </form>
   </div>
 </template>
@@ -27,6 +33,38 @@ import { defineComponent } from "vue";
 
 export default defineComponent({
   name: "LogIn",
+  data() {
+    return {
+      email: "",
+      password: "",
+      apiUrl: this.apiUrl,
+    };
+  },
+  methods: {
+    login() {
+      try {
+        const user = {
+          email: this.email,
+          password: this.password,
+        };
+        console.log(this.apiUrl);
+        const data = fetch(this.apiUrl + "login", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(user),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+          })
+          .then(() => (window.location.href = "material"));
+      } catch (error) {
+        console.log(error);
+      }
+    },
+  },
 });
 </script>
 
@@ -76,7 +114,7 @@ export default defineComponent({
       }
     }
 
-    input[type="submit"] {
+    input[type="button"] {
       margin-top: 15%;
       cursor: pointer;
       width: 195px;
