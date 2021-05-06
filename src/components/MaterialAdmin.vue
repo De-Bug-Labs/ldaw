@@ -121,7 +121,7 @@ export default defineComponent({
     getInfo() {
       try {
         const data = fetch(
-          this.apiUrl + "material?page=" + this.page + "&pageSize=5" //agregar variable de entorno para ruta
+          this.apiUrl + "material?page=" + this.page + "&pageSize=5"
         )
           .then((res) => res.json())
           .then((data) => {
