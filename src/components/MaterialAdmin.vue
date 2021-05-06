@@ -115,7 +115,6 @@ export default defineComponent({
       apiUrl: this.apiUrl,
       exito: false,
       error: false,
-      apiUrl: this.apiUrl,
     };
   },
   methods: {
