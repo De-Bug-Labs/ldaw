@@ -4,10 +4,10 @@
       ><img src="../public/img/roof.svg" />
       <p>GAAP</p></router-link
     >
-    <a class="toggle" @click="movile = !movile"
+    <a class="toggle" @click="mobile = !mobile"
       ><i class="large material-icons">dehaze</i></a
     >
-    <ul :class="{ active1: movile }">
+    <ul :class="{ active1: mobile }">
       <li>
         <router-link to="/about"
           >Nosotros <img src="../public/img/g.svg"
@@ -40,14 +40,14 @@
       </li>
     </ul>
   </div>
-  <router-view @admin="regular = false" />
+  <router-view @admin="regular = false" @click="mobile = false" />
 </template>
 
 <script lang="ts">
 export default {
   data() {
     return {
-      movile: false,
+      mobile: false,
       regular: true,
     };
   },
@@ -58,9 +58,7 @@ export default {
 @import url("https://fonts.googleapis.com/css2?family=Signika:ital,wght@0,200;0,300;0,400;0,600;0,700;1,200;1,300;1,400;1,600&display=swap");
 @import url("https://fonts.googleapis.com/icon?family=Material+Icons");
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,200;0,300;0,400;0,600;0,700;1,200;1,300;1,400;1,600&display=swap");
-html {
-  height: 100% !important;
-}
+
 body::-webkit-scrollbar {
   display: none;
 }
@@ -71,15 +69,9 @@ body {
   display: flex;
   flex-direction: column;
   line-height: 1.6;
-  #app {
-    margin-top: 100px;
-    left: 0px;
-    overflow: hidden;
-    height: 100% !important;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-  }
+}
+#app {
+  margin-top: 100px;
 }
 
 .nav {

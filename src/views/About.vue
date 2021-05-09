@@ -16,13 +16,14 @@ export default defineComponent({
     return {
       information: Object,
       completed: false,
+      apiUrl: this.apiUrl,
     };
   },
 
   methods: {
     getInfo() {
       try {
-        const data = fetch("http://localhost:5000/api/information")
+        const data = fetch(this.apiUrl + "information")
           .then((res) => res.json())
           .then((data) => {
             this.information = data;
