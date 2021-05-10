@@ -37,7 +37,7 @@ export default defineComponent({
         lastName: this.apellido,
         email: this.correo,
         password: this.contrasena,
-        roleId: ["2483c39a-a349-4e2b-affe-858e304d2eb4"],
+        roleId: ["4290c4d8-e3a3-4495-a326-7cbc5b9f1a9b"],
         apiUrl: this.apiUrl,
       },
     };
@@ -45,7 +45,7 @@ export default defineComponent({
 
   methods: {
     addUser(): void {
-      fetch(this.apiUrl + "user", {
+      fetch("http://localhost:5000/api/user", {
         method: "POST", // or 'PUT'
         headers: {
           "Content-Type": "application/json",

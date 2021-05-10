@@ -59,6 +59,9 @@
         <p :class="{ on: corInv }">
           Asegúrate de ingresar un correo válido ejemplo@correo.com
         </p>
+        <p :class="{ on: correoExiste }">
+          Esta dirección de correo electrónico ya está registrada.
+        </p>
       </div>
       <div class="miniCont">
         <label for="password" class="form-label">Contraseña</label>
@@ -73,6 +76,23 @@
         />
         <p :class="{ on: passInv }">
           Asegúrate de ingresar una contraseña segura
+        </p>
+      </div>
+      <div class="miniCont">
+        <label for="passConfirm" class="form-label"
+          >Confirma la contraseña</label
+        >
+        <input
+          @click="passMis = false"
+          :class="{ passMis }"
+          v-model="passConfirm"
+          type="password"
+          id="passConfirm"
+          name="passConfirm"
+          placeholder="Reingresa la contraseña"
+        />
+        <p :class="{ on: passMis }">
+          Las contraseñas no coinciden. Vuelve a intentarlo.
         </p>
       </div>
     </div>
@@ -97,12 +117,16 @@ export default defineComponent({
       apellido: "",
       correo: "",
       contrasena: "",
+      passConfirm: "",
       nomInv: false,
       corInv: false,
       apelInv: false,
       passInv: false,
+      passMis: false,
       confirmed: false,
       enviar: false,
+      correoExiste: false,
+      completeQuery: false,
     };
   },
   methods: {
@@ -145,6 +169,28 @@ export default defineComponent({
       } else {
         this.passInv = false;
       }
+      if (this.passConfirm == this.contrasena) {
+        this.passMis = false;
+      } else {
+        this.passMis = true;
+      }
+    },
+
+    async checkEmailExists() {
+      try {
+        await fetch(
+          "http://localhost:5000/api/user/" + this.correo //agregar variable de entorno para ruta
+        )
+          .then((res) => {
+            return res.json();
+          })
+          .then((data) => {
+            this.correoExiste = data;
+          });
+      } catch (error) {
+        console.log(error);
+      }
+      this.completeQuery = true;
     },
 
     validateForm() {
@@ -152,8 +198,16 @@ export default defineComponent({
       this.checkCorreo();
       this.checkApellido();
       this.checkPassword();
+      this.checkEmailExists();
       this.confirmed = false;
-      if (!this.nomInv && !this.corInv && !this.apelInv && !this.passInv) {
+      if (
+        !this.nomInv &&
+        !this.corInv &&
+        !this.apelInv &&
+        !this.passInv &&
+        !this.passMis &&
+        !this.correoExiste
+      ) {
         this.confirmed = true;
       } else {
         this.confirmed = false;
