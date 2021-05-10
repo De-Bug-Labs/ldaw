@@ -191,15 +191,6 @@ export default defineComponent({
         console.log(error);
       }
       this.completeQuery = true;
-    },
-
-    validateForm() {
-      this.checkNombre();
-      this.checkCorreo();
-      this.checkApellido();
-      this.checkPassword();
-      this.checkEmailExists();
-      this.confirmed = false;
       if (
         !this.nomInv &&
         !this.corInv &&
@@ -212,6 +203,14 @@ export default defineComponent({
       } else {
         this.confirmed = false;
       }
+    },
+
+    validateForm() {
+      this.checkEmailExists();
+      this.checkNombre();
+      this.checkCorreo();
+      this.checkApellido();
+      this.checkPassword();
     },
     submitForm() {
       console.log("posted");

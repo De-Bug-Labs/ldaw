@@ -24,9 +24,9 @@
         <div class="elemento" @click="vMaterial()">
           <a>Material didactico</a>
         </div>
-        <div class="elemento" @click="vMaterial()">
+        <!--         <div class="elemento" @click="vMaterial()">
           <a>Cerrar Sesion <i class="large material-icons">logout</i></a>
-        </div>
+        </div> -->
       </div>
     </div>
     <div class="content">
