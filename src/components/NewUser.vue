@@ -4,7 +4,8 @@
       v-if="confirmed"
       @close="confirmed = false"
       @enviar="submitForm"
-      @done="$emit('done')"
+      @doneSuccess="terminarSuccess"
+      @doneFail="terminarFail"
       :nombre="nombre"
       :apellido="apellido"
       :correo="correo"
@@ -127,6 +128,8 @@ export default defineComponent({
       enviar: false,
       correoExiste: false,
       completeQuery: false,
+      exito: false,
+      error: false,
     };
   },
   methods: {
@@ -215,6 +218,14 @@ export default defineComponent({
     submitForm() {
       console.log("posted");
       this.$router.push("/");
+    },
+    terminarSuccess() {
+      this.$emit("regresar");
+      this.$emit("exito");
+    },
+    terminarFail() {
+      this.$emit("regresar");
+      this.$emit("error");
     },
   },
 });

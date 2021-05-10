@@ -1,5 +1,11 @@
 <template>
-  <NewUser v-if="crear" :elementoId="idMaterial" @regresar="crear = false" />
+  <NewUser
+    v-if="crear"
+    :elementoId="idMaterial"
+    @regresar="(crear = false), recargar"
+    @exito="exito = true"
+    @error="error = true"
+  />
   <div class="box" v-if="!crear">
     <ModalEliminar
       v-if="eliminar"
@@ -7,6 +13,8 @@
       :titulo="tituloModal"
       @borrar="deleteUser(idUser), (idUser = '')"
     />
+    <ExitoModal v-if="exito" @close="(exito = false), recargar()" />
+    <ErrorModal v-if="error" @close="error = false" />
     <div class="titulo">
       <h1 v-if="!crear">Administradores</h1>
       <button class="agregarUsuario" v-if="!crear" @click="crearUsuario()">
@@ -36,12 +44,16 @@
 import { defineComponent } from "vue";
 import ModalEliminar from "@/components/ModalDel.vue";
 import NewUser from "@/components/NewUser.vue";
+import ExitoModal from "@/components/ExitoModal.vue";
+import ErrorModal from "@/components/ErrorModal.vue";
 
 export default defineComponent({
   name: "MaterialAdmin",
   components: {
     ModalEliminar,
     NewUser,
+    ExitoModal,
+    ErrorModal,
   },
   data() {
     return {
@@ -54,6 +66,8 @@ export default defineComponent({
       name: "",
       lastName: "",
       tituloModal: "",
+      exito: false,
+      error: false,
     };
   },
   methods: {
@@ -102,6 +116,10 @@ export default defineComponent({
           console.error("Error:", error);
         });
       this.completeQuery = true;
+    },
+
+    recargar() {
+      this.getUsers();
     },
   },
 

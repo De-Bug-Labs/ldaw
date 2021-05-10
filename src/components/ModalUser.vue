@@ -1,5 +1,5 @@
 <template>
-  <div class="box" @click="$emit('close')">
+  <div class="box">
     <div class="modal" @click.stop>
       <div class="title">
         <h1>Verifica que tus datos sean correctos</h1>
@@ -55,10 +55,12 @@ export default defineComponent({
         .then((response) => response.json())
         .then((data) => {
           console.log("Success:", data);
-          this.$emit("done");
+          this.$emit("close");
+          this.$emit("doneSuccess");
         })
         .catch((error) => {
           console.error("Error:", error);
+          this.$emit("doneFail");
         });
     },
   },
