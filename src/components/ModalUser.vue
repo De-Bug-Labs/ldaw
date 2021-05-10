@@ -1,5 +1,5 @@
 <template>
-  <div class="box" @click="$emit('close')">
+  <div class="box">
     <div class="modal" @click.stop>
       <div class="title">
         <h1>Verifica que tus datos sean correctos</h1>
@@ -8,7 +8,6 @@
         <h2>NOMBRE: {{ nombre }}</h2>
         <h2>APELLIDO: {{ apellido }}</h2>
         <h2>CORREO: {{ correo }}</h2>
-        <h2>CONTASEÑA: {{ contrasena }}</h2>
       </div>
       <div class="buttons">
         <p class="confirmar" @click="addUser()">Confirmar</p>
@@ -20,7 +19,6 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import axios, { AxiosInstance, AxiosResponse } from "axios";
 
 export default defineComponent({
   name: "ModalUser",
@@ -39,7 +37,7 @@ export default defineComponent({
         lastName: this.apellido,
         email: this.correo,
         password: this.contrasena,
-        roleId: ["2483c39a-a349-4e2b-affe-858e304d2eb4"],
+        roleId: ["4290c4d8-e3a3-4495-a326-7cbc5b9f1a9b"],
         apiUrl: this.apiUrl,
       },
     };
@@ -47,7 +45,7 @@ export default defineComponent({
 
   methods: {
     addUser(): void {
-      fetch(this.apiUrl + "user", {
+      fetch("http://localhost:5000/api/user", {
         method: "POST", // or 'PUT'
         headers: {
           "Content-Type": "application/json",
@@ -57,10 +55,12 @@ export default defineComponent({
         .then((response) => response.json())
         .then((data) => {
           console.log("Success:", data);
-          this.$emit("done");
+          this.$emit("close");
+          this.$emit("doneSuccess");
         })
         .catch((error) => {
           console.error("Error:", error);
+          this.$emit("doneFail");
         });
     },
   },
@@ -69,7 +69,7 @@ export default defineComponent({
 
 <style scoped lang="scss">
 .box {
-  width: 100% !important;
+  width: calc(100% - 300px);
   height: 100% !important;
   position: fixed;
   z-index: 100;
@@ -77,6 +77,7 @@ export default defineComponent({
   align-items: center;
   justify-content: center;
   font-family: "Signika", sans-serif;
+  background-color: rgba(0, 0, 0, 0.5);
 
   .modal {
     background-color: white;
