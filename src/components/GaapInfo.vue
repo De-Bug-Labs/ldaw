@@ -93,9 +93,9 @@ export default defineComponent({
       background: url("../assets/banner1.jpg");
       background-size: cover;
       background-position: center;
-      border-radius: 0px 15px 15px 0px !important;
+      border-radius: 0px 15px 15px 0px;
       img {
-        border-radius: 15px 0px 0px 15px;
+        border-radius: 0px 0px 0px px;
         height: 200px;
         width: 100%;
         display: none;

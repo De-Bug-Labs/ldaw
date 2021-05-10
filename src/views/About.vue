@@ -1,5 +1,5 @@
 <template>
-  <GaapInfo v-bind:information="information" />
+  <GaapInfo :information="information[0]" />
 </template>
 
 <script lang="ts">
@@ -14,7 +14,7 @@ export default defineComponent({
 
   data() {
     return {
-      information: Object,
+      information: [{ team: "", instalation: "", mision: "" }],
       completed: false,
       apiUrl: this.apiUrl,
     };
