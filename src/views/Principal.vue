@@ -24,13 +24,13 @@
         <div class="elemento" @click="vMaterial()">
           <a>Material didactico</a>
         </div>
-        <div class="elemento" @click="vMaterial()">
+        <!--         <div class="elemento" @click="vMaterial()">
           <a>Cerrar Sesion <i class="large material-icons">logout</i></a>
-        </div>
+        </div> -->
       </div>
     </div>
     <div class="content">
-      <NewUser v-if="viewingUser" @done="viewingUser = false" />
+      <AllUsers v-if="viewingUsers" @done="viewingUsers = false" />
       <Material v-if="viewingMaterial" />
     </div>
   </div>
@@ -38,13 +38,13 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import NewUser from "@/components/NewUser.vue";
+import AllUsers from "@/components/AllUsers.vue";
 import Material from "@/components/MaterialAdmin.vue";
 
 export default defineComponent({
   name: "Help",
   components: {
-    NewUser,
+    AllUsers,
     Material,
   },
   mounted() {
@@ -52,18 +52,18 @@ export default defineComponent({
   },
   data() {
     return {
-      viewingUser: false,
+      viewingUsers: false,
       viewingMaterial: false,
     };
   },
   methods: {
     vMaterial() {
       this.viewingMaterial = true;
-      this.viewingUser = false;
+      this.viewingUsers = false;
     },
     vUsuarios() {
       this.viewingMaterial = false;
-      this.viewingUser = true;
+      this.viewingUsers = true;
     },
   },
 });

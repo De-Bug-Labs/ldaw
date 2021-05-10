@@ -285,7 +285,6 @@ export default defineComponent({
     display: flex;
     flex-direction: column;
     align-items: center;
-
     table {
       border-collapse: collapse;
       margin-left: 50px;
