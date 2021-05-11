@@ -78,7 +78,7 @@ export default defineComponent({
     justify-content: center;
     align-items: center;
     height: 100%;
-    width: 50%;
+    width: 60%;
 
     .box1 {
       width: 80%;
@@ -137,7 +137,7 @@ export default defineComponent({
     justify-content: center;
     align-items: center;
     height: 100%;
-    width: 50%;
+    width: 40%;
     form {
       display: flex;
       flex-direction: column;
