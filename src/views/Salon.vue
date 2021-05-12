@@ -15,19 +15,19 @@
     <div class="row" v-if="main">
       <div class="column">
         <div class="card" @click="irEmpresarios()">
-          <img src="@/assets/manager.svg" alt="#" />
+          <img src="@/assets/Salon/manager.svg" alt="#" />
           <h1>Empresarios</h1>
         </div>
       </div>
       <div class="column">
         <div class="card" @click="irProfesionales()">
-          <img src="@/assets/doctor.svg" alt="#" />
+          <img src="@/assets/Salon/doctor.svg" alt="#" />
           <h1>Profesionales</h1>
         </div>
       </div>
       <div class="column">
         <div class="card" @click="irEstudiantes()">
-          <img src="@/assets/student.svg" alt="#" />
+          <img src="@/assets/Salon/student.svg" alt="#" />
           <h1>Estudiantes</h1>
         </div>
       </div>
