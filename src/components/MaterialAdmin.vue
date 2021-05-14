@@ -23,19 +23,6 @@
       @regresar="(crear = false), (idMaterial = ''), recargar"
     />
     <div class="listBox" v-if="!editar && !crear">
-      <div class="search">
-        <a @click="materiales.sort(sortByName('title', nombre))"
-          ><i class="large material-icons">search</i></a
-        >
-        <input
-          v-model="nombre"
-          type="text"
-          id="name"
-          name="name"
-          placeholder="Escribe el titulo a buscar"
-          maxlength="64"
-        />
-      </div>
       <table>
         <tr>
           <th></th>
@@ -289,7 +276,7 @@ export default defineComponent({
       border-collapse: collapse;
       margin-left: 50px;
       margin-right: 50px;
-      margin-top: 20px;
+      margin-top: 40px;
       margin-bottom: 40px;
       tr {
         border-bottom: 1px solid rgb(0, 0, 0);
@@ -298,18 +285,22 @@ export default defineComponent({
         padding: 4px;
         text-align: left;
         font-family: "Signika", sans-serif;
-        font-size: 1.5rem;
+        font-size: 25px;
         p.eliminar {
           font-size: 14px;
           color: red;
           text-transform: uppercase;
           cursor: pointer;
+          margin-left: 5px;
+          margin-right: 5px;
         }
         p.editar {
           font-size: 14px;
           color: #007df0;
           text-transform: uppercase;
           cursor: pointer;
+          margin-left: 5px;
+          margin-right: 5px;
         }
         border-right: 1px solid rgb(0, 0, 0);
       }
@@ -318,6 +309,7 @@ export default defineComponent({
         text-align: left;
         font-family: "Open Sans", sans-serif;
         border-right: 1px solid rgb(0, 0, 0);
+        font-size: 20px;
       }
     }
     .buttons {
@@ -326,7 +318,7 @@ export default defineComponent({
       justify-content: center;
       align-items: center;
       position: relative;
-      margin-bottom: 10px;
+      margin-bottom: 30px;
       width: 400px;
       height: 40px;
       font-family: "Open Sans", sans-serif;

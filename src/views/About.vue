@@ -1,5 +1,5 @@
 <template>
-  <GaapInfo :information="information[0]" />
+  <GaapInfo :information="information" />
 </template>
 
 <script lang="ts">
@@ -14,7 +14,7 @@ export default defineComponent({
 
   data() {
     return {
-      information: [{ team: "", instalation: "", mision: "" }],
+      information: { team: "", instalation: "", mision: "" },
       completed: false,
       apiUrl: this.apiUrl,
     };

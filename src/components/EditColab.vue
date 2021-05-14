@@ -32,7 +32,7 @@
           type="text"
           id="descripcion"
           name="descripcion"
-          placeholder="Escribe el Link aquí"
+          placeholder="Escribe la descripcion aqui"
           maxlength="200"
         />
         <p :class="{ on: descInv }">
@@ -48,10 +48,26 @@
           type="text"
           id="descripcion"
           name="descripcion"
-          placeholder="Escribe el Link aquí"
+          placeholder="Escribe la institucion aqui"
           maxlength="200"
         />
         <p :class="{ on: instInv }">
+          Asegúrate de ingresar una institucion valida
+        </p>
+      </div>
+      <div class="miniCont">
+        <label for="institucion" class="form-label">Link a Imagen</label>
+        <input
+          @click="linkInv = false"
+          :class="{ linkInv }"
+          v-model="link"
+          type="text"
+          id="descripcion"
+          name="descripcion"
+          placeholder="Escribe el Link aquí"
+          maxlength="200"
+        />
+        <p :class="{ on: linkInv }">
           Asegúrate de ingresar una institucion valida
         </p>
       </div>
@@ -80,15 +96,18 @@ export default defineComponent({
       nombre: "",
       descripcion: "",
       institucion: "",
+      link: "",
       nomInv: false,
       descInv: false,
       instInv: false,
+      linkInv: false,
       confirmed: false,
       enviar: false,
       colaborador: {
         name: "",
         description: "",
         institution: "",
+        srcimg: "",
       },
       apiUrl: this.apiUrl,
     };
@@ -129,16 +148,25 @@ export default defineComponent({
         this.descInv = false;
       }
     },
+    checkLink() {
+      if (this.link.length <= 5 || this.link.length > 200) {
+        this.linkInv = true;
+      } else {
+        this.linkInv = false;
+      }
+    },
     validateForm() {
       this.checkNombre();
       this.checkDesc();
       this.checkInst();
+      this.checkLink();
       this.confirmed = false;
-      if (!this.nomInv && !this.descInv && !this.instInv) {
+      if (!this.nomInv && !this.descInv && !this.instInv && !this.linkInv) {
         this.confirmed = true;
         this.colaborador.name = this.nombre;
         this.colaborador.description = this.descripcion;
         this.colaborador.institution = this.institucion;
+        this.colaborador.srcimg = this.link;
       } else {
         this.confirmed = false;
       }
@@ -158,6 +186,7 @@ export default defineComponent({
             this.nombre = this.colaborador.name;
             this.descripcion = this.colaborador.description;
             this.institucion = this.colaborador.institution;
+            this.link = this.colaborador.srcimg;
           });
       } catch (error) {
         console.log(error);
@@ -278,7 +307,8 @@ export default defineComponent({
 
   input.nomInv,
   input.descInv,
-  input.instInv {
+  input.instInv,
+  input.linkInv {
     border-bottom: 2px solid rgb(255, 0, 0);
   }
 
@@ -335,7 +365,7 @@ export default defineComponent({
     border: 4px solid black;
   }
   button {
-    margin-top: 10%;
+    margin-top: 40px;
     margin-right: auto;
     margin-left: 10%;
     border-bottom: none;

@@ -4,10 +4,10 @@
       v-if="confirmed"
       @close="confirmed = false"
       @enviar="submitForm"
-      :nombre="nombre"
+      :nombre="solicitud.name"
       :seccion="tema"
-      :correo="correo"
-      :telefono="telefono"
+      :correo="solicitud.email"
+      :telefono="solicitud.phone"
     />
     <h1>Portal de Ayuda</h1>
     <h3>
@@ -40,7 +40,7 @@
         <input
           @click="nomInv = false"
           :class="{ nomInv }"
-          v-model="nombre"
+          v-model="solicitud.name"
           type="text"
           id="name"
           name="name"
@@ -54,7 +54,7 @@
         <input
           @click="corInv = false"
           :class="{ corInv }"
-          v-model="correo"
+          v-model="solicitud.email"
           type="mail"
           id="mail"
           name="name"
@@ -69,7 +69,7 @@
         <input
           :class="{ telInv }"
           @click="telInv = false"
-          v-model="telefono"
+          v-model="solicitud.phone"
           type="tel"
           id="phone"
           name="phone"
@@ -83,7 +83,7 @@
       <h2>Paso 3: Escribe en qué necesitas ayuda</h2>
       <textarea
         :class="{ menInv }"
-        v-model="mensaje"
+        v-model="solicitud.description"
         @click="menInv = false"
         type="text"
         name="message"
@@ -115,11 +115,14 @@ export default defineComponent({
   },
   data() {
     return {
+      solicitud: {
+        name: "",
+        email: "",
+        phone: "",
+        description: "",
+        departmentId: "",
+      },
       seccion: 0,
-      nombre: "",
-      correo: "",
-      telefono: "",
-      mensaje: "",
       secInv: false,
       nomInv: false,
       corInv: false,
@@ -128,6 +131,9 @@ export default defineComponent({
       confirmed: false,
       enviar: false,
       tema: "",
+      completed: false,
+      departamentos: [],
+      apiUrl: this.apiUrl,
     };
   },
   methods: {
@@ -138,27 +144,32 @@ export default defineComponent({
         this.secInv = false;
         if (this.seccion == 1) {
           this.tema = "Nutricion";
+          this.findID(this.tema);
         }
         if (this.seccion == 2) {
           this.tema = "Medicina";
+          this.findID(this.tema);
         }
         if (this.seccion == 3) {
           this.tema = "Dental";
+          this.findID(this.tema);
         }
         if (this.seccion == 4) {
           this.tema = "Rehabilitacion";
+          this.findID(this.tema);
         }
         if (this.seccion == 5) {
           this.tema = "Tanatologia";
+          this.findID(this.tema);
         }
       }
     },
     checkNombre() {
       var regex = /^[a-zA-Z\s]*$/;
       if (
-        this.nombre.length <= 2 ||
-        this.nombre.length > 64 ||
-        !regex.test(this.nombre)
+        this.solicitud.name.length <= 2 ||
+        this.solicitud.name.length > 64 ||
+        !regex.test(this.solicitud.name)
       ) {
         this.nomInv = true;
       } else {
@@ -167,15 +178,19 @@ export default defineComponent({
     },
     checkCorreo() {
       var regex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-      if (!regex.test(this.correo)) {
-        this.corInv = true;
+      if (this.solicitud.email.length > 0) {
+        if (!regex.test(this.solicitud.email)) {
+          this.corInv = true;
+        } else {
+          this.corInv = false;
+        }
       } else {
         this.corInv = false;
       }
     },
     checkTelefono() {
       var regex = /\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/;
-      if (!regex.test(this.telefono)) {
+      if (!regex.test(this.solicitud.phone)) {
         this.telInv = true;
       } else {
         this.telInv = false;
@@ -184,9 +199,9 @@ export default defineComponent({
     checkMensaje() {
       var regex = /^[-\w\s]+$/;
       if (
-        !regex.test(this.mensaje) ||
-        this.mensaje.length < 5 ||
-        this.mensaje.length > 250
+        !regex.test(this.solicitud.description) ||
+        this.solicitud.description.length < 5 ||
+        this.solicitud.description.length > 250
       ) {
         this.menInv = true;
       } else {
@@ -214,9 +229,44 @@ export default defineComponent({
       }
     },
     submitForm() {
-      console.log("posted");
-      this.$router.push("/");
+      fetch(this.apiUrl + "mail", {
+        method: "POST", // or 'PUT'
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(this.solicitud),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log("Success:", data);
+          this.$router.push("/");
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
     },
+    getInfo() {
+      try {
+        const data = fetch(this.apiUrl + "department")
+          .then((res) => res.json())
+          .then((data) => {
+            this.departamentos = data;
+          });
+      } catch (error) {
+        console.log(error);
+      }
+      this.completed = true;
+    },
+    findID(find: string) {
+      this.departamentos.forEach((element) => {
+        if (element["name"] == find) {
+          this.solicitud.departmentId = element["id"];
+        }
+      });
+    },
+  },
+  mounted() {
+    this.getInfo();
   },
 });
 </script>

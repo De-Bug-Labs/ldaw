@@ -99,7 +99,8 @@ export default defineComponent({
             "section/" +
             this.idSeccion +
             "?pageSize=8&page=" +
-            this.page
+            this.page +
+            "&name="
         )
           .then((res) => res.json())
           .then((data) => {
@@ -228,7 +229,7 @@ export default defineComponent({
         margin-left: 2%;
         margin-right: 2%;
         margin-top: 2%;
-        background-color: #fcdb88;
+        background-color: #8edafd;
         border-radius: 15px;
         transition: 0.2s ease-in-out;
         cursor: pointer;

@@ -1,5 +1,5 @@
 <template>
-  <h1>Salon de la Fama</h1>
+  <h1>Portal de Ayuda</h1>
   <div class="box">
     <ModalEliminar
       v-if="eliminar"
@@ -24,25 +24,15 @@
     />
     <div class="listBox" v-if="!editar && !crear">
       <div class="search">
-        <input
-          v-model="nombre"
-          type="text"
-          id="name"
-          name="name"
-          placeholder="Nombre"
-          maxlength="64"
-        />
         <select v-model="nombreSeccion">
-          <option value="Estudiantes">Estudiantes</option>
-          <option value="Empresarios">Empresarios</option>
-          <option value="Profesionales">Profesionales</option>
+          <option value="Nutricion">Nutricion</option>
+          <option value="Medicina">Medicina</option>
+          <option value="Dental">Dental</option>
+          <option value="Rehabilitacion">Rehabilitacion</option>
+          <option value="Tanatologia">Tanatologia</option>
         </select>
-
         <a @click="cambiarSeccion()"
           >Buscar<i class="large material-icons">search</i></a
-        >
-        <a @click="cambiarSeccion()"
-          >Limpiar<i class="large material-icons">cleaning_services</i></a
         >
       </div>
       <table>
@@ -50,7 +40,7 @@
           <th></th>
           <th></th>
           <th>Nombre</th>
-          <th>Institucion</th>
+          <th>Correo</th>
         </tr>
         <tr v-for="colaborador in colaboradores" :key="colaborador">
           <th>
@@ -99,7 +89,7 @@ import ExitoModal from "@/components/ExitoModal.vue";
 import ErrorModal from "@/components/ErrorModal.vue";
 
 export default defineComponent({
-  name: "SalonAdmin",
+  name: "PortalAdmin",
   components: {
     ModalEliminar,
     EditColab,
@@ -124,7 +114,7 @@ export default defineComponent({
       apiUrl: this.apiUrl,
       exito: false,
       error: false,
-      secciones: [],
+      departamentos: [],
       idSeccion: "",
       nombreSeccion: "Estudiantes",
       totalColaboradores: { sectionPages: 0 },
@@ -201,10 +191,10 @@ export default defineComponent({
     },
     getSecciones() {
       try {
-        const data = fetch(this.apiUrl + "section")
+        const data = fetch(this.apiUrl + "department")
           .then((res) => res.json())
           .then((data) => {
-            this.secciones = data;
+            this.departamentos = data;
             this.findID(this.nombreSeccion);
             this.getPages();
             this.getInfo();
@@ -212,10 +202,9 @@ export default defineComponent({
       } catch (error) {
         console.log(error);
       }
-      this.completeQuery = true;
     },
     findID(find: string) {
-      this.secciones.forEach((element) => {
+      this.departamentos.forEach((element) => {
         if (element["name"] == find) {
           this.idSeccion = element["id"];
         }
