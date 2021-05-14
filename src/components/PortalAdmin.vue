@@ -42,20 +42,17 @@
           <th>Nombre</th>
           <th>Correo</th>
         </tr>
-        <tr v-for="colaborador in colaboradores" :key="colaborador">
+        <tr v-for="member in staff" :key="member">
           <th>
-            <p
-              class="eliminar"
-              @click="borrar(colaborador.id, colaborador.name)"
-            >
+            <p class="eliminar" @click="borrar(member.id, member.name)">
               Eliminar
             </p>
           </th>
           <th>
-            <p class="editar" @click="editarTitulo(colaborador.id)">Editar</p>
+            <p class="editar" @click="editarTitulo(member.id)">Editar</p>
           </th>
-          <td>{{ colaborador.name }}</td>
-          <td>{{ colaborador.institution }}</td>
+          <td>{{ member.name }}</td>
+          <td>{{ member.email }}</td>
         </tr>
       </table>
       <div class="buttons">
@@ -75,7 +72,7 @@
       </div>
     </div>
     <button class="agregar" v-if="!editar && !crear" @click="crear = true">
-      Nuevo Colaborador
+      Agregar Correo
     </button>
   </div>
 </template>
@@ -101,11 +98,10 @@ export default defineComponent({
     return {
       completeQuery: false,
       page: 1,
-      colaboradores: [],
+      staff: [],
+      miembros: [],
       idColaborador: "",
-      pages: { pageCount: 1 },
-      totalPages: 0,
-      material: {},
+      totalPages: 1,
       eliminar: false,
       editar: false,
       crear: false,
@@ -116,40 +112,16 @@ export default defineComponent({
       error: false,
       departamentos: [],
       idSeccion: "",
-      nombreSeccion: "Estudiantes",
-      totalColaboradores: { sectionPages: 0 },
+      nombreSeccion: "Nutricion",
     };
   },
   methods: {
     getInfo() {
       try {
-        const data = fetch(
-          this.apiUrl +
-            "section/" +
-            this.idSeccion +
-            "?pageSize=5&page=" +
-            this.page +
-            "&name=" +
-            this.nombre
-        )
+        const data = fetch(this.apiUrl + "department/" + this.idSeccion)
           .then((res) => res.json())
           .then((data) => {
-            this.colaboradores = data;
-          });
-      } catch (error) {
-        console.log(error);
-      }
-      this.completeQuery = true;
-    },
-    getPages() {
-      try {
-        const data = fetch(
-          this.apiUrl + "sectioncount/" + this.idSeccion + "?pageSize=5"
-        )
-          .then((res) => res.json())
-          .then((data) => {
-            this.totalColaboradores = data;
-            this.totalPages = Math.ceil(this.totalColaboradores.sectionPages);
+            this.staff = data;
           });
       } catch (error) {
         console.log(error);
@@ -157,7 +129,7 @@ export default defineComponent({
       this.completeQuery = true;
     },
     deleteColaborador(elim: string) {
-      fetch(this.apiUrl + "collaborator/" + elim, {
+      fetch(this.apiUrl + "staff/" + elim, {
         method: "DELETE",
       })
         .then((response) => response.json())
@@ -196,7 +168,6 @@ export default defineComponent({
           .then((data) => {
             this.departamentos = data;
             this.findID(this.nombreSeccion);
-            this.getPages();
             this.getInfo();
           });
       } catch (error) {
@@ -207,13 +178,13 @@ export default defineComponent({
       this.departamentos.forEach((element) => {
         if (element["name"] == find) {
           this.idSeccion = element["id"];
+          console.log(this.idSeccion);
         }
       });
     },
     cambiarSeccion() {
       this.findID(this.nombreSeccion);
       this.page = 1;
-      this.getPages();
       this.getInfo();
       this.nombre = "";
     },
