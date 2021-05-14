@@ -1,10 +1,11 @@
 <template>
   <div class="home">
     <div class="parallax">
-      <h1>CENTRO INTEGRAL DE APOYO GERIÁTRICO</h1>
+      <div class="arrow arrow-first"></div>
+      <div class="arrow arrow-second"></div>
     </div>
     <HelloWorld
-      msg="Apoyo y compañia para el adulto mayor"
+      msg="Centro integral de apoyo geriatrico"
       cont="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
     />
   </div>
@@ -28,19 +29,64 @@
     background-repeat: no-repeat;
     background-attachment: fixed;
     overflow: hidden;
-    background-position: bottom;
+    background-position: bottom top;
     display: flex;
     width: 100vw;
+    align-items: center;
 
-    h1 {
-      text-align: center;
+    $ani-speed: 1.5s;
+    $ani-delay: 0.75s;
+
+    .arrow {
+      opacity: 0;
       position: absolute;
-      top: 60%;
+      top: 85%;
       left: 50%;
-      font-family: "Open Sans", sans-serif;
-      font-size: 5.5rem;
-      transform: translate(-50%, -50%);
-      color: rgb(255, 255, 255);
+      transform-origin: 50% 50%;
+      transform: translate3d(-50%, -50%, 0);
+    }
+
+    .arrow-first {
+      animation: arrow-movement $ani-speed ease-in-out infinite;
+    }
+    .arrow-second {
+      animation: arrow-movement $ani-speed $ani-delay ease-in-out infinite;
+    }
+
+    .arrow:before,
+    .arrow:after {
+      background: rgb(190, 190, 190);
+      content: "";
+      display: block;
+      height: 10px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 50px;
+    }
+
+    .arrow:before {
+      transform: rotate(36deg) translateX(-23%);
+      transform-origin: top left;
+    }
+
+    .arrow:after {
+      transform: rotate(-36deg) translateX(23%);
+      transform-origin: top right;
+    }
+
+    // Animation
+    @keyframes arrow-movement {
+      0% {
+        opacity: 0;
+        top: 45%;
+      }
+      70% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 0;
+      }
     }
   }
 }
@@ -52,9 +98,8 @@
       background-size: cover;
       background-position: top;
 
-      h1 {
-        font-size: 4rem;
-        left: 50%;
+      .arrow {
+        left: 45%;
         top: 75%;
         transform: translate(-50%, -50%);
       }
@@ -71,11 +116,6 @@
       justify-content: center;
       align-items: center;
       display: flex;
-      h1 {
-        font-size: 3rem;
-        left: 50%;
-        top: 75%;
-      }
     }
   }
 }

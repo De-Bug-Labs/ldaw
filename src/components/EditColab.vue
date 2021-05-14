@@ -5,12 +5,12 @@
       @close="confirmed = false"
       @modificar="submitForm()"
     />
-    <h1>Crear</h1>
-    <h3>Ingresa la informacióna del material a crear.</h3>
+    <h1>Editar</h1>
+    <h3>Ingresa la informacióna a modificar.</h3>
 
     <div class="section">
       <div class="miniCont">
-        <label for="name" class="form-label">Titulo</label>
+        <label for="name" class="form-label">Nombre</label>
         <input
           @click="nomInv = false"
           :class="{ nomInv }"
@@ -18,24 +18,58 @@
           type="text"
           id="name"
           name="name"
-          placeholder="Escribe el titulo aquí"
+          placeholder="Escribe el nombre aquí"
           maxlength="40"
         />
         <p :class="{ on: nomInv }">Asegúrate de ingresar un titulo válido</p>
       </div>
       <div class="miniCont">
-        <label for="link" class="form-label">Link</label>
+        <label for="descripcion" class="form-label">Descripcion</label>
+        <input
+          @click="descInv = false"
+          :class="{ descInv }"
+          v-model="descripcion"
+          type="text"
+          id="descripcion"
+          name="descripcion"
+          placeholder="Escribe la descripcion aqui"
+          maxlength="200"
+        />
+        <p :class="{ on: descInv }">
+          Asegúrate de ingresar una descripcion valida
+        </p>
+      </div>
+      <div class="miniCont">
+        <label for="institucion" class="form-label">Institucion</label>
+        <input
+          @click="instInv = false"
+          :class="{ instInv }"
+          v-model="institucion"
+          type="text"
+          id="descripcion"
+          name="descripcion"
+          placeholder="Escribe la institucion aqui"
+          maxlength="200"
+        />
+        <p :class="{ on: instInv }">
+          Asegúrate de ingresar una institucion valida
+        </p>
+      </div>
+      <div class="miniCont">
+        <label for="institucion" class="form-label">Link a Imagen</label>
         <input
           @click="linkInv = false"
           :class="{ linkInv }"
           v-model="link"
           type="text"
-          id="link"
-          name="link"
+          id="descripcion"
+          name="descripcion"
           placeholder="Escribe el Link aquí"
-          maxlength="100"
+          maxlength="200"
         />
-        <p :class="{ on: linkInv }">Asegúrate de ingresar un link valido</p>
+        <p :class="{ on: linkInv }">
+          Asegúrate de ingresar una institucion valida
+        </p>
       </div>
     </div>
     <div class="section">
@@ -50,7 +84,7 @@ import { defineComponent } from "vue";
 import ConfirmModal from "@/components/ConfirmModal.vue";
 
 export default defineComponent({
-  name: "NewMaterial",
+  name: "EditColab",
   components: {
     ConfirmModal,
   },
@@ -60,15 +94,20 @@ export default defineComponent({
   data() {
     return {
       nombre: "",
+      descripcion: "",
+      institucion: "",
       link: "",
       nomInv: false,
+      descInv: false,
+      instInv: false,
       linkInv: false,
       confirmed: false,
       enviar: false,
-      id: this,
-      material: {
-        title: "",
-        link: "",
+      colaborador: {
+        name: "",
+        description: "",
+        institution: "",
+        srcimg: "",
       },
       apiUrl: this.apiUrl,
     };
@@ -86,6 +125,29 @@ export default defineComponent({
         this.nomInv = false;
       }
     },
+    checkInst() {
+      var regex = /^[-\w\s]+$/;
+      if (
+        this.institucion.length <= 2 ||
+        this.institucion.length > 40 ||
+        !regex.test(this.institucion)
+      ) {
+        this.instInv = true;
+      } else {
+        this.instInv = false;
+      }
+    },
+    checkDesc() {
+      if (this.descripcion.length > 0) {
+        if (this.descripcion.length <= 5 || this.descripcion.length > 200) {
+          this.descInv = true;
+        } else {
+          this.descInv = false;
+        }
+      } else {
+        this.descInv = false;
+      }
+    },
     checkLink() {
       if (this.link.length <= 5 || this.link.length > 200) {
         this.linkInv = true;
@@ -95,27 +157,48 @@ export default defineComponent({
     },
     validateForm() {
       this.checkNombre();
+      this.checkDesc();
+      this.checkInst();
       this.checkLink();
       this.confirmed = false;
-      if (!this.nomInv && !this.linkInv) {
+      if (!this.nomInv && !this.descInv && !this.instInv && !this.linkInv) {
         this.confirmed = true;
+        this.colaborador.name = this.nombre;
+        this.colaborador.description = this.descripcion;
+        this.colaborador.institution = this.institucion;
+        this.colaborador.srcimg = this.link;
       } else {
         this.confirmed = false;
       }
     },
     submitForm() {
-      this.material.title = this.nombre;
-      this.material.link = this.link;
       this.confirmed = false;
-      this.addUser();
+      this.addUser(this.elementoId);
     },
-    addUser(): void {
-      fetch(this.apiUrl + "material", {
-        method: "POST", // or 'PUT'
+    getInfo() {
+      try {
+        const data = fetch(
+          this.apiUrl + "collaborator/" + this.elementoId //agregar variable de entorno para ruta
+        )
+          .then((res) => res.json())
+          .then((data) => {
+            this.colaborador = data;
+            this.nombre = this.colaborador.name;
+            this.descripcion = this.colaborador.description;
+            this.institucion = this.colaborador.institution;
+            this.link = this.colaborador.srcimg;
+          });
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    addUser(id: any): void {
+      fetch(this.apiUrl + "collaborator/" + id, {
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(this.material),
+        body: JSON.stringify(this.colaborador),
       })
         .then((response) => response.json())
         .then((data) => {
@@ -128,6 +211,10 @@ export default defineComponent({
           this.$emit("error");
         });
     },
+  },
+
+  mounted() {
+    this.getInfo();
   },
 });
 </script>
@@ -219,6 +306,8 @@ export default defineComponent({
   }
 
   input.nomInv,
+  input.descInv,
+  input.instInv,
   input.linkInv {
     border-bottom: 2px solid rgb(255, 0, 0);
   }
@@ -276,7 +365,7 @@ export default defineComponent({
     border: 4px solid black;
   }
   button {
-    margin-top: 10%;
+    margin-top: 40px;
     margin-right: auto;
     margin-left: 10%;
     border-bottom: none;

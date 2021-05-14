@@ -15,10 +15,10 @@
         <div class="elemento">
           <a>Calendario</a>
         </div>
-        <div class="elemento">
+        <div class="elemento" @click="vPortal()">
           <a>Portal de ayuda</a>
         </div>
-        <div class="elemento">
+        <div class="elemento" @click="vSalon()">
           <a>Salon de la Fama</a>
         </div>
         <div class="elemento" @click="vMaterial()">
@@ -32,6 +32,8 @@
     <div class="content">
       <AllUsers v-if="viewingUsers" @done="viewingUsers = false" />
       <Material v-if="viewingMaterial" />
+      <SalonAdmin v-if="viewingSalon" />
+      <PortalAdmin v-if="viewingPortal" />
     </div>
   </div>
 </template>
@@ -40,12 +42,16 @@
 import { defineComponent } from "vue";
 import AllUsers from "@/components/AllUsers.vue";
 import Material from "@/components/MaterialAdmin.vue";
+import SalonAdmin from "@/components/SalonAdmin.vue";
+import PortalAdmin from "@/components/PortalAdmin.vue";
 
 export default defineComponent({
   name: "Help",
   components: {
     AllUsers,
     Material,
+    SalonAdmin,
+    PortalAdmin,
   },
   mounted() {
     this.$emit("admin");
@@ -54,16 +60,34 @@ export default defineComponent({
     return {
       viewingUsers: false,
       viewingMaterial: false,
+      viewingSalon: false,
+      viewingPortal: false,
     };
   },
   methods: {
     vMaterial() {
       this.viewingMaterial = true;
       this.viewingUsers = false;
+      this.viewingSalon = false;
+      this.viewingPortal = false;
     },
     vUsuarios() {
-      this.viewingMaterial = false;
       this.viewingUsers = true;
+      this.viewingMaterial = false;
+      this.viewingSalon = false;
+      this.viewingPortal = false;
+    },
+    vSalon() {
+      this.viewingSalon = true;
+      this.viewingUsers = false;
+      this.viewingMaterial = false;
+      this.viewingPortal = false;
+    },
+    vPortal() {
+      this.viewingPortal = true;
+      this.viewingSalon = false;
+      this.viewingUsers = false;
+      this.viewingMaterial = false;
     },
   },
 });

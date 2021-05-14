@@ -65,7 +65,7 @@ export default defineComponent({
     flex-direction: row;
     -moz-box-shadow: 0 0 5px rgb(134, 134, 134);
     -webkit-box-shadow: 0 0 5px #999;
-    box-shadow: 0 0 5px rgb(134, 134, 134);
+    box-shadow: 0 0 10px rgb(134, 134, 134);
     color: white;
 
     h1 {
@@ -90,9 +90,9 @@ export default defineComponent({
     }
     .imagebox {
       width: 50%;
-      background: url("../assets/banner1.jpg");
+      background: url("../assets/Nosotros/img1nosotros.jpg");
       background-size: cover;
-      background-position: center;
+      background-position: center bottom;
       border-radius: 0px 15px 15px 0px;
       img {
         border-radius: 0px 0px 0px px;
@@ -136,7 +136,7 @@ export default defineComponent({
     }
     .imagebox {
       width: 50%;
-      background: url("../assets/banner1.jpg");
+      background: url("../assets/Nosotros/img2nosotros.jpg");
       background-size: cover;
       background-position: center;
       border-radius: 15px 0px 0px 15px;
@@ -185,7 +185,7 @@ export default defineComponent({
     }
     .imagebox {
       width: 50%;
-      background: url("../assets/banner1.jpg");
+      background: url("../assets/Nosotros/img3nosotros.jpg");
       background-size: cover;
       background-position: center;
       border-radius: 0px 15px 15px 0px;
