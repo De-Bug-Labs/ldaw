@@ -41,15 +41,16 @@ export default defineComponent({
     };
   },
   methods: {
-    login() {
+    async login() {
       try {
         const user = {
           email: this.email,
           password: this.password,
         };
         console.log(this.apiUrl);
-        const data = fetch(this.apiUrl + "login", {
+        await fetch(this.apiUrl + "login", {
           method: "POST",
+          credentials: "include",
           headers: {
             "Content-Type": "application/json",
           },
@@ -58,8 +59,8 @@ export default defineComponent({
           .then((res) => res.json())
           .then((data) => {
             console.log(data);
-          })
-          .then(() => (window.location.href = "material"));
+          });
+        //.then(() => (window.location.href = "material"));
       } catch (error) {
         console.log(error);
       }
