@@ -72,7 +72,7 @@ export default defineComponent({
       secondRow: true,
       viewing: false,
       idColaborador: "",
-      informacion: Object,
+      informacion: [],
       apiUrl: this.apiUrl,
     };
   },
@@ -220,6 +220,7 @@ export default defineComponent({
       width: 100%;
       .cardColab {
         width: 250px;
+        border-radius: 10px;
         height: auto;
         display: flex;
         flex-direction: column;
@@ -234,8 +235,6 @@ export default defineComponent({
         cursor: pointer;
         overflow: hidden;
         color: white;
-        box-shadow: 0 10px 10px rgba(0, 0, 0, 0.25),
-          0 10px 10px rgba(0, 0, 0, 0.22);
         img {
           height: 250px;
           width: 100%;
@@ -250,6 +249,8 @@ export default defineComponent({
           margin-block-end: 0.8em;
         }
         &:hover {
+          box-shadow: 0 10px 10px rgba(0, 0, 0, 0.25),
+            0 10px 10px rgba(0, 0, 0, 0.22);
           img {
             transform: scale(1.1);
           }
