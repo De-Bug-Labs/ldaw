@@ -9,14 +9,15 @@
     />
     <ExitoModal v-if="exito" @close="(exito = false), recargar()" />
     <ErrorModal v-if="error" @close="error = false" />
-    <EditColab
+    <EditPortal
       v-if="editar"
       :elementoId="idColaborador"
+      :seccionId="idSeccion"
       @exito="exito = true"
       @error="error = true"
       @regresar="(editar = false), (idColaborador = '')"
     />
-    <NewColab
+    <NewStaff
       v-if="crear"
       @exito="exito = true"
       @error="error = true"
@@ -80,8 +81,8 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import ModalEliminar from "@/components/ModalDel.vue";
-import EditColab from "@/components/EditColab.vue";
-import NewColab from "@/components/NewColab.vue";
+import EditPortal from "@/components/EditPortal.vue";
+import NewStaff from "@/components/NewStaff.vue";
 import ExitoModal from "@/components/ExitoModal.vue";
 import ErrorModal from "@/components/ErrorModal.vue";
 
@@ -89,8 +90,8 @@ export default defineComponent({
   name: "PortalAdmin",
   components: {
     ModalEliminar,
-    EditColab,
-    NewColab,
+    EditPortal,
+    NewStaff,
     ExitoModal,
     ErrorModal,
   },
@@ -178,7 +179,6 @@ export default defineComponent({
       this.departamentos.forEach((element) => {
         if (element["name"] == find) {
           this.idSeccion = element["id"];
-          console.log(this.idSeccion);
         }
       });
     },
@@ -289,6 +289,7 @@ export default defineComponent({
       background-color: #f1f1f1;
       font-family: "Open Sans", sans-serif;
       font-size: 15px;
+      width: 150px;
       option {
         font-family: "Open Sans", sans-serif;
       }

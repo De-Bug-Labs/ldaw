@@ -35,7 +35,7 @@ export default defineComponent({
 <style scoped lang="scss">
 .box1 {
   width: calc(100% - 300px);
-  height: 100%;
+  height: calc(100% + 300px);
   position: fixed;
   z-index: 100;
   display: flex;
