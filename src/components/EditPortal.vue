@@ -5,18 +5,10 @@
       @close="confirmed = false"
       @modificar="submitForm()"
     />
-    <h1>Crear</h1>
-    <h3>Ingresa la informacióna del Colaborador a crear.</h3>
+    <h1>Editar</h1>
+    <h3>Ingresa la informacióna a modificar.</h3>
 
     <div class="section">
-      <div class="miniCont">
-        <select v-model="nombreSeccion">
-          <option value="Estudiantes">Estudiantes</option>
-          <option value="Empresarios">Empresarios</option>
-          <option value="Profesionales">Profesionales</option>
-        </select>
-      </div>
-
       <div class="miniCont">
         <label for="name" class="form-label">Nombre</label>
         <input
@@ -32,50 +24,19 @@
         <p :class="{ on: nomInv }">Asegúrate de ingresar un nombre válido</p>
       </div>
       <div class="miniCont">
-        <label for="descripcion" class="form-label">Descripcion</label>
+        <label for="mail" class="form-label">Correo Electrónico</label>
         <input
-          @click="descInv = false"
-          :class="{ descInv }"
-          v-model="descripcion"
-          type="text"
-          id="descripcion"
-          name="descripcion"
-          placeholder="Escribe la descripcion aqui"
-          maxlength="200"
+          @click="corInv = false"
+          :class="{ corInv }"
+          v-model="correo"
+          type="mail"
+          id="mail"
+          name="name"
+          placeholder="ejemplo@correo.com"
         />
-        <p :class="{ on: descInv }">
-          Asegúrate de ingresar una descripcion valida
+        <p :class="{ on: corInv }">
+          Asegurate de ingresar un Correo válido ejemplo@correo.com
         </p>
-      </div>
-      <div class="miniCont">
-        <label for="institucion" class="form-label">Institucion</label>
-        <input
-          @click="instInv = false"
-          :class="{ instInv }"
-          v-model="institucion"
-          type="text"
-          id="descripcion"
-          name="descripcion"
-          placeholder="Escribe la institucion aqui"
-          maxlength="200"
-        />
-        <p :class="{ on: instInv }">
-          Asegúrate de ingresar una institucion valida
-        </p>
-      </div>
-      <div class="miniCont">
-        <label for="link" class="form-label">Link a Imagen</label>
-        <input
-          @click="linkInv = false"
-          :class="{ linkInv }"
-          v-model="link"
-          type="text"
-          id="descripcion"
-          name="descripcion"
-          placeholder="Escribe el Link aquí"
-          maxlength="200"
-        />
-        <p :class="{ on: linkInv }">Asegúrate de ingresar un link valido</p>
       </div>
     </div>
     <div class="section">
@@ -90,35 +51,27 @@ import { defineComponent } from "vue";
 import ConfirmModal from "@/components/ConfirmModal.vue";
 
 export default defineComponent({
-  name: "NewColab",
+  name: "EditPortal",
   components: {
     ConfirmModal,
   },
   props: {
     elementoId: String,
+    seccionId: String,
   },
   data() {
     return {
       nombre: "",
-      descripcion: "",
-      institucion: "",
-      link: "",
+      correo: "",
       nomInv: false,
-      descInv: false,
-      instInv: false,
-      linkInv: false,
+      corInv: false,
       confirmed: false,
       enviar: false,
-      colaborador: {
+      staff: {
         name: "",
-        description: "",
-        institution: "",
-        srcimg: "",
-        sectionId: "",
+        email: "",
+        departmentId: this.seccionId,
       },
-      secciones: [],
-      idSeccion: "",
-      nombreSeccion: "Estudiantes",
       apiUrl: this.apiUrl,
     };
   },
@@ -135,60 +88,53 @@ export default defineComponent({
         this.nomInv = false;
       }
     },
-    checkInst() {
-      var regex = /^[-\w\s]+$/;
-      if (
-        this.institucion.length <= 2 ||
-        this.institucion.length > 40 ||
-        !regex.test(this.institucion)
-      ) {
-        this.instInv = true;
+    checkCorreo() {
+      var regex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+      if (!regex.test(this.correo)) {
+        this.corInv = true;
       } else {
-        this.instInv = false;
-      }
-    },
-    checkDesc() {
-      if (this.descripcion.length <= 5 || this.descripcion.length > 200) {
-        this.descInv = true;
-      } else {
-        this.descInv = false;
-      }
-    },
-    checkLink() {
-      if (this.link.length <= 5 || this.link.length > 200) {
-        this.linkInv = true;
-      } else {
-        this.linkInv = false;
+        this.corInv = false;
       }
     },
     validateForm() {
       this.checkNombre();
-      this.checkDesc();
-      this.checkInst();
-      this.checkLink();
+      this.checkCorreo();
       this.confirmed = false;
-      if (!this.nomInv && !this.descInv && !this.instInv && !this.linkInv) {
+      if (!this.nomInv && !this.corInv) {
         this.confirmed = true;
-        this.colaborador.name = this.nombre;
-        this.colaborador.description = this.descripcion;
-        this.colaborador.institution = this.institucion;
-        this.colaborador.srcimg = this.link;
-        this.findID(this.nombreSeccion);
-        this.colaborador.sectionId = this.idSeccion;
+        this.staff.name = this.nombre;
+        this.staff.email = this.correo;
+        console.log(this.staff);
       } else {
         this.confirmed = false;
       }
     },
     submitForm() {
-      this.addUser();
+      this.confirmed = false;
+      this.addUser(this.elementoId);
     },
-    addUser(): void {
-      fetch(this.apiUrl + "collaborator", {
+    getInfo() {
+      try {
+        const data = fetch(
+          this.apiUrl + "staff/" + this.elementoId //agregar variable de entorno para ruta
+        )
+          .then((res) => res.json())
+          .then((data) => {
+            this.staff = data;
+            this.nombre = this.staff.name;
+            this.correo = this.staff.email;
+          });
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    addUser(id: any): void {
+      fetch(this.apiUrl + "staff/" + id, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(this.colaborador),
+        body: JSON.stringify(this.staff),
       })
         .then((response) => response.json())
         .then((data) => {
@@ -201,28 +147,10 @@ export default defineComponent({
           this.$emit("error");
         });
     },
-    getSecciones() {
-      try {
-        const data = fetch(this.apiUrl + "section")
-          .then((res) => res.json())
-          .then((data) => {
-            this.secciones = data;
-            this.findID(this.nombreSeccion);
-          });
-      } catch (error) {
-        console.log(error);
-      }
-    },
-    findID(find: string) {
-      this.secciones.forEach((element) => {
-        if (element["name"] == find) {
-          this.idSeccion = element["id"];
-        }
-      });
-    },
   },
+
   mounted() {
-    this.getSecciones();
+    this.getInfo();
   },
 });
 </script>
@@ -255,34 +183,16 @@ export default defineComponent({
       margin-block-start: 0em;
       margin-block-end: 0em;
     }
-    select {
-      cursor: pointer;
-      padding: 10px 0;
-      box-sizing: border-box;
-      box-shadow: none;
-      outline: none;
-      border: none;
-      border-bottom: 2px solid rgb(172, 172, 172);
-      background-color: #f1f1f1;
-      font-family: "Open Sans", sans-serif;
-      font-size: 15px;
-      option {
-        font-family: "Open Sans", sans-serif;
-      }
-    }
   }
 
   h1 {
-    margin-block-start: 0em;
     font-size: 2.5rem;
-    margin-block-end: 0.5em;
   }
 
   h2 {
     font-family: "Open Sans", sans-serif;
     color: #797979;
     font-size: 20px;
-    margin-block-end: 0.5em;
   }
   h3 {
     margin-block-end: 2em;
@@ -391,6 +301,7 @@ export default defineComponent({
     border: 4px solid black;
   }
   button {
+    margin-top: 40px;
     margin-right: auto;
     margin-left: 10%;
     border-bottom: none;

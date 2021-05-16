@@ -95,8 +95,6 @@
   .home {
     .parallax {
       height: 100vh;
-      background-size: cover;
-      background-position: top;
 
       .arrow {
         left: 45%;
@@ -110,12 +108,15 @@
 @media (max-width: 900px) {
   .home {
     .parallax {
-      height: 100vh;
-      background-size: cover;
-      background-position: top;
-      justify-content: center;
-      align-items: center;
-      display: flex;
+      background-size: cover !important;
+      background-position: top !important;
+      justify-content: center !important;
+      align-items: center !important;
+      display: flex !important;
+      .arrow {
+        left: 45%;
+        transform: translate(-50%, -50%);
+      }
     }
   }
 }
