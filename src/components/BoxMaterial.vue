@@ -99,7 +99,7 @@ export default defineComponent({
 }
 @media screen and (max-width: 900px) {
   .container {
-    width: 90%;
+    width: 95%;
     height: 25%;
     margin-left: 0%;
     margin-right: 0%;
@@ -111,7 +111,7 @@ export default defineComponent({
     h3 {
       font-size: 1.3rem;
       margin-block-start: 0.5em;
-      margin-block-end: 0.1em;
+      margin-block-end: 0.5em;
     }
   }
 }
