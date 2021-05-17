@@ -108,9 +108,14 @@
     .parallax {
       background-position: bottom !important;
       background-size: cover !important;
+      background: url("../assets/pm.jpg");
       .arrow {
         left: 45%;
         transform: translate(-50%, -50%);
+      }
+      .arrow:before,
+      .arrow:after {
+        background: rgb(240, 240, 240);
       }
     }
   }

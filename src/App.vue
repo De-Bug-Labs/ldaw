@@ -170,11 +170,11 @@ body {
       li {
         a {
           display: flex;
-          padding: 10px 15px;
-          font-size: 17px;
+          padding: 10px 10px;
+          font-size: 15px;
           img {
-            height: 25px;
-            margin-left: 8px;
+            height: 20px;
+            margin-left: 5px;
           }
         }
       }
