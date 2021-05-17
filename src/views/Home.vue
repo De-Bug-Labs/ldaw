@@ -29,13 +29,13 @@
     background-repeat: no-repeat;
     background-attachment: fixed;
     overflow: hidden;
-    background-position: bottom top;
+    background-position: center top;
     display: flex;
     width: 100vw;
     align-items: center;
 
-    $ani-speed: 1.5s;
-    $ani-delay: 0.75s;
+    $ani-speed: 3s;
+    $ani-delay: 1s;
 
     .arrow {
       opacity: 0;
@@ -94,8 +94,6 @@
 @media (max-width: 1080px) {
   .home {
     .parallax {
-      height: 100vh;
-
       .arrow {
         left: 45%;
         top: 75%;
@@ -108,11 +106,8 @@
 @media (max-width: 900px) {
   .home {
     .parallax {
+      background-position: bottom !important;
       background-size: cover !important;
-      background-position: top !important;
-      justify-content: center !important;
-      align-items: center !important;
-      display: flex !important;
       .arrow {
         left: 45%;
         transform: translate(-50%, -50%);

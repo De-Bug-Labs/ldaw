@@ -219,8 +219,8 @@ export default defineComponent({
       text-align: center;
       p {
         font-size: 1.2rem;
-        padding-left: 1%;
-        padding-right: 1%;
+        padding-left: 5px;
+        padding-right: 5px;
       }
       h1 {
         font-size: 1.7rem;
@@ -241,6 +241,8 @@ export default defineComponent({
       padding-top: 0px;
       p {
         font-size: 1.5rem;
+        padding-left: 5px;
+        padding-right: 5px;
       }
       h1 {
         font-size: 2rem;
@@ -256,8 +258,8 @@ export default defineComponent({
       padding-top: 0;
       p {
         font-size: 1rem;
-        padding-left: 1%;
-        padding-right: 1%;
+        padding-left: 5px;
+        padding-right: 5px;
       }
       h1 {
         font-size: 1.5rem;

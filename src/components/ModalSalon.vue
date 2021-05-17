@@ -2,7 +2,7 @@
   <div class="box">
     <div class="modal" @click.stop>
       <div class="imgBox">
-        <img src="@/assets/portrait.jpg" alt="#" />
+        <img :src="colaborador.srcimg" alt="#" />
       </div>
       <div class="content">
         <h1>{{ colaborador.name }}</h1>
