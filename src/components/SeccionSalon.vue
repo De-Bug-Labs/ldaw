@@ -68,6 +68,7 @@ export default defineComponent({
       colaboradores: [],
       page: 1,
       totalPages: 0,
+      response: { sectionPages: 0, sectionCount: 0 },
       totalColaboradores: 0,
       secondRow: true,
       viewing: false,
@@ -84,8 +85,9 @@ export default defineComponent({
         )
           .then((res) => res.json())
           .then((data) => {
-            this.totalColaboradores = data;
-            this.totalPages = Math.ceil(this.totalColaboradores / 8);
+            this.response = data;
+            this.totalColaboradores = Math.ceil(this.response.sectionCount);
+            this.totalPages = Math.ceil(this.response.sectionPages);
           });
       } catch (error) {
         console.log(error);
@@ -276,7 +278,7 @@ export default defineComponent({
       height: 100%;
       button {
         font-family: "Open Sans", sans-serif;
-        background-color: #2888a8;
+        background-color: #868686;
         border-radius: 2px;
         border: none;
         color: rgb(255, 255, 255);
