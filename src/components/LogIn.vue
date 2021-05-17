@@ -59,8 +59,8 @@ export default defineComponent({
           .then((res) => res.json())
           .then((data) => {
             console.log(data);
-          });
-        //.then(() => (window.location.href = "material"));
+          })
+          .then(() => (window.location.href = "/admin/main"));
       } catch (error) {
         console.log(error);
       }
