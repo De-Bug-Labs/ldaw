@@ -233,7 +233,7 @@ export default defineComponent({
   position: relative;
 
   .section {
-    margin-bottom: 70px;
+    margin-bottom: 50px;
     display: flex;
     flex-direction: column;
     text-align: center;
@@ -365,7 +365,6 @@ export default defineComponent({
     border: 4px solid black;
   }
   button {
-    margin-top: 40px;
     margin-right: auto;
     margin-left: 10%;
     border-bottom: none;

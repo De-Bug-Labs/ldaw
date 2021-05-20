@@ -4,7 +4,7 @@
     <div class="search">
       <div class="mov">
         <div class="mini">
-          <label for="date" class="form-label">Selecciona un dia</label>
+          <label for="date" class="form-label">Filtrar por dia</label>
           <input
             @click="(dmy = true), (my = false), (completeQuery = false)"
             v-model="date"
@@ -14,7 +14,7 @@
           />
         </div>
         <div class="mini">
-          <label for="date" class="form-label">Selecciona un mes</label>
+          <label for="date" class="form-label">Filtrar por mes</label>
           <input
             @click="
               (my = true), (dmy = false), (completeQuery = false), (date = '')
@@ -73,8 +73,8 @@ export default defineComponent({
       enviar: false,
       dmy: true,
       my: false,
-      date: "",
-      dateM: "",
+      date: "", //esta es la fecha por dia mes año
+      dateM: "", // esta es la varible por mes año
       day: "",
       month: "",
       year: "",
@@ -86,15 +86,10 @@ export default defineComponent({
       totalPages: 0,
       apiUrl: this.apiUrl,
       found: false,
-      error: false,
     };
   },
 
   methods: {
-    validateForm() {
-      console.log(this.date);
-    },
-
     getInfo() {
       this.completeQuery = false;
       try {
@@ -103,20 +98,20 @@ export default defineComponent({
             "calendar?page=" +
             this.page +
             "&pageSize=4" +
-            this.day +
-            this.month +
-            this.year
+            this.day + //aqui uso un string vacio para el link de peticion
+            this.month + // por alguna razon hay que agregar cosas como &day=DIA
+            this.year // pero si lo mandas vacio no sirve entonces se usa un string vacio
         )
           .then((res) => res.json())
           .then((data) => {
             this.eventos = data;
             if (!this.eventos.length) {
+              // con esto compruebo si existen eventos en un mes o dia o lo que sea
               this.resetDate();
               this.getInfo();
             }
           });
       } catch (error) {
-        this.error = true;
         console.log(error);
       }
       this.completeQuery = true;
@@ -150,20 +145,24 @@ export default defineComponent({
       let data;
 
       if (this.dmy) {
-        data = this.date.split("-");
+        // esto lo uso para implementar lo de el link de la peticion
+        data = this.date.split("-"); // este if es si se hace click en filtrar por dia
         this.day = "&day=" + data[2];
         this.month = "&month=" + data[1];
         this.year = "&year=" + data[0];
         this.dateM = "";
-        this.found = true;
+        this.page = 1;
+        this.found = true; // esto quita los botones de la paginacion
       }
       if (this.my) {
+        // este if se activa si se hace click en filtrar por mes
         data = this.dateM.split("-");
-        this.month = "&month=" + data[1];
-        this.year = "&year=" + data[0];
-        this.day = "";
+        this.month = "&month=" + data[1]; //esto es un ejemplo de como lleno los valores
+        this.year = "&year=" + data[0]; //de la peticion, si no exixsten los mando vacios
+        this.day = ""; //como este de dia
         this.date = "";
-        this.found = false;
+        this.page = 1;
+        this.found = false; //esto activa los botones de paginacion
       }
       this.getInfo();
       this.getPages();
@@ -177,17 +176,18 @@ export default defineComponent({
       this.year = "&year=" + yyyy;
       this.month = "&month=" + mm;
       this.dateM = "";
-      this.date = yyyy + "-" + mm + "-" + dd;
+      this.date = yyyy + "-" + mm + "-" + dd; //esta es la variable a la que esta ligada el seleccionador por dia
     },
   },
   mounted() {
-    var d = new Date();
+    //usen este mismo mounted en lo de admin deberia de servir igual
+    var d = new Date(); // todo esto y lo que usa var saca la fecha de hoy
     var dd = String(d.getDate()).padStart(2, "0");
     var mm = String(d.getMonth() + 1).padStart(2, "0"); //January is 0!
     var yyyy = d.getFullYear();
     this.year = "&year=" + yyyy;
     this.month = "&month=" + mm;
-    this.date = yyyy + "-" + mm + "-" + dd;
+    this.date = yyyy + "-" + mm + "-" + dd; // lo asigno a la variable de por dia
     this.getPages();
     this.getInfo();
   },
