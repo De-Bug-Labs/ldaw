@@ -233,7 +233,7 @@ export default defineComponent({
       this.idColaborador = id;
     },
     recargar() {
-      this.getInfo();
+      this.getSecciones();
     },
   },
   mounted() {

@@ -241,7 +241,7 @@ export default defineComponent({
   position: relative;
 
   .section {
-    margin-bottom: 70px;
+    margin-bottom: 40px;
     display: flex;
     flex-direction: column;
     text-align: center;

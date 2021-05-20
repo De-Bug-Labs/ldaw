@@ -266,7 +266,7 @@ export default defineComponent({
     justify-content: center;
     position: relative;
     margin-top: 50px;
-    width: 25%;
+    width: 30%;
     height: 50px;
     font-family: "Open Sans", sans-serif;
     .col {
@@ -285,12 +285,28 @@ export default defineComponent({
         text-transform: uppercase;
         font-weight: bold;
         font-size: 18px;
-        height: 100%;
+        height: 50px;
         width: 150px;
         cursor: pointer;
         display: flex;
         align-items: center;
         justify-content: center;
+      }
+    }
+  }
+}
+@media screen and (max-width: 1080px) {
+  .bigCont {
+    height: 100vh;
+    .buttons {
+      width: 35%;
+      margin-top: 5%;
+      .col {
+        button {
+          font-size: 18px;
+          height: 100%;
+          width: 90%;
+        }
       }
     }
   }

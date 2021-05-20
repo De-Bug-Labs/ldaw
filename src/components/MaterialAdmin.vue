@@ -186,7 +186,7 @@ export default defineComponent({
       this.idMaterial = id;
     },
     recargar() {
-      console.log("entro");
+      this.getPages();
       this.getInfo();
     },
   },
