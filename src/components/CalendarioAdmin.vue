@@ -81,6 +81,21 @@
         </tr>
       </table>
     </div>
+    <div class="buttons" v-if="!found">
+      <div class="col" v-if="page > 1">
+        <button @click="lastPage()">
+          <i class="large material-icons">arrow_back</i>Anterior
+        </button>
+      </div>
+      <div class="col">
+        <h3>{{ page }} / {{ totalPages }}</h3>
+      </div>
+      <div class="col" v-if="page < totalPages">
+        <button @click="nextPage()">
+          Siguiente<i class="large material-icons">arrow_forward</i>
+        </button>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -347,6 +362,42 @@ export default defineComponent({
 .titulo {
   margin-bottom: 30px;
   text-align: center;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  margin-bottom: 30px;
+  width: 100vw;
+  height: 40px;
+  font-family: "Open Sans", sans-serif;
+  .col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+    height: 100%;
+    button {
+      font-family: "Open Sans", sans-serif;
+      background-color: #2888a8;
+      border-radius: 2px;
+      border: none;
+      color: rgb(255, 255, 255);
+      text-transform: uppercase;
+      font-weight: bold;
+      font-size: 18px;
+      height: 100%;
+      width: auto;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
 }
 
 button.agregarUsuario {
