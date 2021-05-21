@@ -56,11 +56,37 @@
         />
         <p :class="{ on: linkInv }">Asegúrate de ingresar un link válido</p>
       </div>
+      <div class="miniCont">
+        <label for="name" class="form-label">Lugar del evento</label>
+        <input
+          @click="nomInv = false"
+          :class="{ nomInv }"
+          v-model="lugar"
+          type="text"
+          id="place"
+          name="place"
+          placeholder="Escribe el lugar aquí"
+        />
+        <p :class="{ on: nomInv }">Asegúrate de ingresar un lugar válido</p>
+      </div>
+      <div class="miniCont">
+        <label for="name" class="form-label">Fecha del evento</label>
+        <input
+          @click="(dmy = true), (my = false), (completeQuery = false)"
+          v-model="date"
+          type="date"
+          id="date"
+          name="date"
+        />
+        <p :class="{ on: nomInv }">Asegúrate de ingresar un lugar válido</p>
+      </div>
     </div>
-    <div class="section">
+    <div class="section1">
       <input type="submit" name="submit" value="Enviar" />
     </div>
-    <button @click="$emit('regresar')">Cancelar</button>
+    <div class="section1">
+      <button @click="$emit('regresar')">Cancelar</button>
+    </div>
   </form>
 </template>
 
@@ -166,6 +192,22 @@ export default defineComponent({
 
   .section {
     margin-bottom: 70px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    width: 30%;
+    p {
+      display: none;
+    }
+    p.on {
+      color: rgb(255, 0, 0);
+      display: flex;
+      margin-block-start: 0em;
+      margin-block-end: 0em;
+    }
+  }
+  .section1 {
+    margin-bottom: 20px;
     display: flex;
     flex-direction: column;
     text-align: center;
