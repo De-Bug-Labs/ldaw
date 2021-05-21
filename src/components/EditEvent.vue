@@ -5,8 +5,8 @@
       @close="confirmed = false"
       @modificar="submitForm()"
     />
-    <h1>Crear evento</h1>
-    <h3>Ingresa la información del evento a crear.</h3>
+    <h1>{{ elementoId }}</h1>
+    <h3>Ingresa la información del evento a editar.</h3>
 
     <div class="section">
       <div class="miniCont">
@@ -95,7 +95,7 @@ import { defineComponent } from "vue";
 import ConfirmModal from "@/components/ConfirmModal.vue";
 
 export default defineComponent({
-  name: "NewMaterial",
+  name: "EditMat",
   components: {
     ConfirmModal,
   },
@@ -110,7 +110,6 @@ export default defineComponent({
       linkInv: false,
       confirmed: false,
       enviar: false,
-      id: this,
       material: {
         title: "",
         link: "",
@@ -132,8 +131,12 @@ export default defineComponent({
       }
     },
     checkLink() {
-      if (this.link.length <= 5 || this.link.length > 200) {
-        this.linkInv = true;
+      if (this.link.length > 0) {
+        if (this.link.length <= 5 || this.link.length > 200) {
+          this.linkInv = true;
+        } else {
+          this.linkInv = false;
+        }
       } else {
         this.linkInv = false;
       }
@@ -144,19 +147,34 @@ export default defineComponent({
       this.confirmed = false;
       if (!this.nomInv && !this.linkInv) {
         this.confirmed = true;
+        this.material.title = this.nombre;
+        this.material.link = this.link;
       } else {
         this.confirmed = false;
       }
     },
     submitForm() {
-      this.material.title = this.nombre;
-      this.material.link = this.link;
       this.confirmed = false;
-      this.addUser();
+      this.addUser(this.elementoId);
     },
-    addUser(): void {
-      fetch(this.apiUrl + "material", {
-        method: "POST", // or 'PUT'
+    getInfo() {
+      try {
+        const data = fetch(
+          this.apiUrl + "material/" + this.elementoId //agregar variable de entorno para ruta
+        )
+          .then((res) => res.json())
+          .then((data) => {
+            this.material = data;
+            this.nombre = this.material.title;
+            this.link = this.material.link;
+          });
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    addUser(id: any): void {
+      fetch(this.apiUrl + "material/" + id, {
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
@@ -173,6 +191,9 @@ export default defineComponent({
           this.$emit("error");
         });
     },
+  },
+  mounted() {
+    this.getInfo();
   },
 });
 </script>

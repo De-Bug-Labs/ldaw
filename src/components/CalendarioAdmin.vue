@@ -6,14 +6,21 @@
     @exito="exito = true"
     @error="error = true"
   />
-  <div class="box" v-if="!crear">
-    <ExitoModal v-if="exito" @close="(exito = false), recargar()" />
-    <ErrorModal v-if="error" @close="error = false" />
-    <ModalEliminar
-      v-if="eliminar"
-      @close="(eliminar = false), (material = {})"
-      :titulo="tituloMaterial"
-    />
+  <ExitoModal v-if="exito" @close="(exito = false), recargar()" />
+  <ErrorModal v-if="error" @close="error = false" />
+  <ModalEliminar
+    v-if="eliminar"
+    @close="(eliminar = false), (material = {})"
+    :titulo="tituloMaterial"
+  />
+  <EditEvent
+    v-if="editar"
+    :elementoId="idEvento"
+    @exito="exito = true"
+    @error="error = true"
+    @regresar="(editar = false), (idEvento = '')"
+  />
+  <div class="box" v-if="!editar && !crear">
     <div class="titulo">
       <h1 v-if="!crear">Calendario</h1>
       <button
@@ -59,12 +66,7 @@
       <table>
         <tr>
           <th>
-            <p
-              class="editar"
-              @click="borrar(user.id, user.name, user.lastName)"
-            >
-              Editar
-            </p>
+            <p class="editar" @click="editarEvento(evento.id)">Editar</p>
           </th>
           <th>
             <p
@@ -102,10 +104,12 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import NewEvent from "@/components/NewEvent.vue";
+import EditEvent from "@/components/EditEvent.vue";
 export default defineComponent({
   name: "CalendarioAdmin",
   components: {
     NewEvent,
+    EditEvent,
   },
 
   data() {
@@ -115,6 +119,8 @@ export default defineComponent({
       crear: false,
       exito: false,
       error: false,
+      editar: false,
+      idEvento: "",
       confirmed: false,
       enviar: false,
       dmy: true,
@@ -225,6 +231,10 @@ export default defineComponent({
     },
     crearEvento() {
       console.log("nuevo evento");
+    },
+    editarEvento(id: string) {
+      this.editar = true;
+      this.idEvento = id;
     },
   },
 
