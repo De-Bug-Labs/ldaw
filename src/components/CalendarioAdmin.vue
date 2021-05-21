@@ -27,7 +27,7 @@
     <div class="search">
       <div class="mov">
         <div class="mini">
-          <label for="date" class="form-label">Filtrar por dia</label>
+          <label for="date" class="form-label">Filtrar por día</label>
           <input
             @click="(dmy = true), (my = false), (completeQuery = false)"
             v-model="date"
@@ -53,31 +53,33 @@
         >BUSCAR<i class="large material-icons">search</i></a
       >
     </div>
-  </div>
-  <div class="containerEvento">
-    <div class="event1" v-for="evento in eventos" :key="evento">
-      <div class="textbox">
-        <h1>{{ evento.title }}</h1>
-        <h3>{{ evento.date }}</h3>
-        <h3>{{ evento.address }}</h3>
-        <p>{{ evento.description }}</p>
-      </div>
-      <div class="imagebox"><img :src="evento.srcimg" alt="" /></div>
-    </div>
-  </div>
-  <div class="buttons" v-if="!found">
-    <div class="col" v-if="page > 1">
-      <button @click="lastPage()">
-        <i class="large material-icons">arrow_back</i>Anterior
-      </button>
-    </div>
-    <div class="col">
-      <h3>{{ page }} / {{ totalPages }}</h3>
-    </div>
-    <div class="col" v-if="page < totalPages">
-      <button @click="nextPage()">
-        Siguiente<i class="large material-icons">arrow_forward</i>
-      </button>
+
+    <br />
+    <div class="listBox" v-for="evento in eventos" :key="evento">
+      <table>
+        <tr>
+          <th>
+            <p
+              class="editar"
+              @click="borrar(user.id, user.name, user.lastName)"
+            >
+              Editar
+            </p>
+          </th>
+          <th>
+            <p
+              class="eliminar"
+              @click="borrar(user.id, user.name, user.lastName)"
+            >
+              Eliminar
+            </p>
+          </th>
+          <td class="espacio"></td>
+          <td>{{ evento.title }}</td>
+          <td class="fecha">{{ evento.date }}</td>
+          <td>{{ evento.address }}</td>
+        </tr>
+      </table>
     </div>
   </div>
 </template>
@@ -351,8 +353,8 @@ button.agregarUsuario {
   margin-top: 10 px;
   border-bottom: none;
   cursor: pointer;
-  width: 250px;
-  height: 45px;
+  width: 200px;
+  height: 35px;
   align-self: center;
   font-family: "Open Sans", sans-serif;
   text-transform: uppercase;
@@ -427,7 +429,7 @@ button.agregarUsuario {
 
     table {
       border-collapse: collapse;
-      margin-left: 60px;
+      margin-left: 10px;
       margin-right: 10px;
       margin-top: 0px;
       margin-bottom: 0px;
@@ -443,6 +445,14 @@ button.agregarUsuario {
           text-transform: uppercase;
           cursor: pointer;
         }
+        p.editar {
+          font-size: 14px;
+          color: #007df0;
+          text-transform: uppercase;
+          cursor: pointer;
+          margin-left: 5px;
+          margin-right: 5px;
+        }
         p.crear {
           font-size: 14px;
           color: #007df0;
@@ -452,8 +462,20 @@ button.agregarUsuario {
       }
       td {
         padding: 4px;
-        width: 33%;
-        text-align: left;
+        width: 40%;
+        text-align: center;
+        font-family: "Open Sans", sans-serif;
+      }
+      td.espacio {
+        padding: 4px;
+        width: 3%;
+        text-align: center;
+        font-family: "Open Sans", sans-serif;
+      }
+      td.fecha {
+        padding: 4px;
+        width: 30%;
+        text-align: center;
         font-family: "Open Sans", sans-serif;
       }
     }
