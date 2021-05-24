@@ -60,9 +60,7 @@ export default defineComponent({
   methods: {
     getInfo() {
       try {
-        const data = fetch(
-          this.apiUrl + "material?page=" + this.page + "&pageSize=8"
-        )
+        const data = fetch("/api/material?page=" + this.page + "&pageSize=8")
           .then((res) => res.json())
           .then((data) => {
             this.materiales = data;
@@ -74,7 +72,7 @@ export default defineComponent({
     },
     getPages() {
       try {
-        const data = fetch(this.apiUrl + "material/pages?page=0&pageSize=8")
+        const data = fetch("/api/material/pages?page=0&pageSize=8")
           .then((res) => res.json())
           .then((data) => {
             this.pages = data;
