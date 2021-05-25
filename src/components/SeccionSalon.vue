@@ -16,7 +16,7 @@
           :key="colaborador"
           @click="idElem(colaborador.id)"
         >
-          <img src="@/assets/portrait.jpg" alt="#" />
+          <img :src="colaborador.srcimg" :alt="colaborador.name" />
           <h2>{{ colaborador.name }}</h2>
           <h3>{{ colaborador.institution }}</h3>
         </div>
@@ -28,7 +28,7 @@
           :key="colaborador"
           @click="idElem(colaborador.id)"
         >
-          <img src="@/assets/portrait.jpg" alt="#" />
+          <img :src="colaborador.srcimg" :alt="colaborador.name" />
           <h2>{{ colaborador.name }}</h2>
           <h3>{{ colaborador.institution }}</h3>
         </div>
@@ -68,11 +68,12 @@ export default defineComponent({
       colaboradores: [],
       page: 1,
       totalPages: 0,
+      response: { sectionPages: 0, sectionCount: 0 },
       totalColaboradores: 0,
       secondRow: true,
       viewing: false,
       idColaborador: "",
-      informacion: Object,
+      informacion: [],
       apiUrl: this.apiUrl,
     };
   },
@@ -84,8 +85,9 @@ export default defineComponent({
         )
           .then((res) => res.json())
           .then((data) => {
-            this.totalColaboradores = data;
-            this.totalPages = Math.ceil(this.totalColaboradores / 8);
+            this.response = data;
+            this.totalColaboradores = Math.ceil(this.response.sectionCount);
+            this.totalPages = Math.ceil(this.response.sectionPages);
           });
       } catch (error) {
         console.log(error);
@@ -99,7 +101,8 @@ export default defineComponent({
             "section/" +
             this.idSeccion +
             "?pageSize=8&page=" +
-            this.page
+            this.page +
+            "&name="
         )
           .then((res) => res.json())
           .then((data) => {
@@ -218,7 +221,8 @@ export default defineComponent({
       justify-content: center;
       width: 100%;
       .cardColab {
-        width: 300px;
+        width: 250px;
+        border-radius: 10px;
         height: auto;
         display: flex;
         flex-direction: column;
@@ -228,27 +232,26 @@ export default defineComponent({
         margin-left: 2%;
         margin-right: 2%;
         margin-top: 2%;
-        background-color: #fcdb88;
-        border-radius: 15px;
+        background-color: #d4af27;
         transition: 0.2s ease-in-out;
         cursor: pointer;
         overflow: hidden;
+        color: white;
         img {
-          height: 200px;
+          height: 250px;
           width: 100%;
-          border-radius: 15px 15px 0px 0px;
           transition: 0.2s ease-in-out;
         }
         h2 {
           margin-block-start: 0.5em;
-          margin-block-end: 0.5em;
+          margin-block-end: 0.2em;
         }
         h3 {
-          margin-block-start: 0.5em;
+          margin-block-start: 0.2em;
           margin-block-end: 0.8em;
         }
         &:hover {
-          box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25),
+          box-shadow: 0 10px 10px rgba(0, 0, 0, 0.25),
             0 10px 10px rgba(0, 0, 0, 0.22);
           img {
             transform: scale(1.1);
@@ -263,7 +266,7 @@ export default defineComponent({
     justify-content: center;
     position: relative;
     margin-top: 50px;
-    width: 25%;
+    width: 30%;
     height: 50px;
     font-family: "Open Sans", sans-serif;
     .col {
@@ -275,19 +278,35 @@ export default defineComponent({
       height: 100%;
       button {
         font-family: "Open Sans", sans-serif;
-        background-color: #2888a8;
+        background-color: #868686;
         border-radius: 2px;
         border: none;
         color: rgb(255, 255, 255);
         text-transform: uppercase;
         font-weight: bold;
         font-size: 18px;
-        height: 100%;
+        height: 50px;
         width: 150px;
         cursor: pointer;
         display: flex;
         align-items: center;
         justify-content: center;
+      }
+    }
+  }
+}
+@media screen and (max-width: 1080px) {
+  .bigCont {
+    height: 100vh;
+    .buttons {
+      width: 35%;
+      margin-top: 5%;
+      .col {
+        button {
+          font-size: 18px;
+          height: 100%;
+          width: 90%;
+        }
       }
     }
   }

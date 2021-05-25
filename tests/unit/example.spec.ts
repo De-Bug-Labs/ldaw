@@ -80,11 +80,13 @@ describe("ModalHelp.vue", () => {
   it("validaciones se realizan correctamente", () => {
     const wrapper = shallowMount(HelpForm);
     wrapper.setData({
+      solicitud: {
+        name: "Bananas",
+        email: "test@test.com",
+        phone: "4422046497",
+        description: "Test Mensaje",
+      },
       seccion: 2,
-      nombre: "Bananas",
-      correo: "test@test.com",
-      telefono: "4422046497",
-      mensaje: "Test Mensaje",
     });
     wrapper.vm.validateForm();
     expect(wrapper.vm.confirmed).toBe(true);
@@ -95,11 +97,13 @@ describe("ModalHelp.vue", () => {
   it("se valida que no se realice validacion con valores incorrectos", () => {
     const wrapper = shallowMount(HelpForm);
     wrapper.setData({
+      solicitud: {
+        name: "Bananas",
+        email: "test@test.com",
+        phone: "4422046497",
+        description: "Test Mensaje",
+      },
       seccion: 0,
-      nombre: "Bananas",
-      correo: "test@test.com",
-      telefono: "4422046497",
-      mensaje: "Test Mensaje",
     });
     wrapper.vm.validateForm();
     expect(wrapper.vm.confirmed).toBe(false);
@@ -127,7 +131,7 @@ describe("ModalHelp.vue", () => {
 describe("ModalHelp.vue", () => {
   it("validacion de nombre -error valor vacio", () => {
     const wrapper = shallowMount(HelpForm);
-    wrapper.setData({ nombre: "" });
+    wrapper.setData({ solicitud: { name: "" } });
     wrapper.vm.checkNombre();
     expect(wrapper.vm.nomInv).toBe(true);
   });
@@ -136,7 +140,7 @@ describe("ModalHelp.vue", () => {
 describe("ModalHelp.vue", () => {
   it("validacion de nombre -error longitud incorrecta", () => {
     const wrapper = shallowMount(HelpForm);
-    wrapper.setData({ nombre: "a" });
+    wrapper.setData({ solicitud: { name: "a" } });
     wrapper.vm.checkNombre();
     expect(wrapper.vm.nomInv).toBe(true);
   });
@@ -145,7 +149,7 @@ describe("ModalHelp.vue", () => {
 describe("ModalHelp.vue", () => {
   it("validacion de nombre -error caracteres invalidos", () => {
     const wrapper = shallowMount(HelpForm);
-    wrapper.setData({ nombre: "emilio2" });
+    wrapper.setData({ solicitud: { name: "emilio2" } });
     wrapper.vm.checkNombre();
     expect(wrapper.vm.nomInv).toBe(true);
   });
@@ -154,25 +158,25 @@ describe("ModalHelp.vue", () => {
 describe("ModalHelp.vue", () => {
   it("validacion de nombre -correcto", () => {
     const wrapper = shallowMount(HelpForm);
-    wrapper.setData({ nombre: "Emilio Rivas" });
+    wrapper.setData({ solicitud: { name: "Emilio" } });
     wrapper.vm.checkNombre();
     expect(wrapper.vm.nomInv).toBe(false);
   });
 });
 
 describe("ModalHelp.vue", () => {
-  it("validacion de correo -error vacio", () => {
+  it("validacion de correo vacio", () => {
     const wrapper = shallowMount(HelpForm);
-    wrapper.setData({ correo: "" });
+    wrapper.setData({ solicitud: { email: "" } });
     wrapper.vm.checkCorreo();
-    expect(wrapper.vm.corInv).toBe(true);
+    expect(wrapper.vm.corInv).toBe(false);
   });
 });
 
 describe("ModalHelp.vue", () => {
   it("validacion de correo -error correo invalido", () => {
     const wrapper = shallowMount(HelpForm);
-    wrapper.setData({ correo: "testtestcom" });
+    wrapper.setData({ solicitud: { email: "testtestcom" } });
     wrapper.vm.checkCorreo();
     expect(wrapper.vm.corInv).toBe(true);
   });
@@ -181,7 +185,7 @@ describe("ModalHelp.vue", () => {
 describe("ModalHelp.vue", () => {
   it("validacion de correo -correcto", () => {
     const wrapper = shallowMount(HelpForm);
-    wrapper.setData({ correo: "test@test.com" });
+    wrapper.setData({ solicitud: { email: "test@test.com" } });
     wrapper.vm.checkCorreo();
     expect(wrapper.vm.corInv).toBe(false);
   });
@@ -190,7 +194,7 @@ describe("ModalHelp.vue", () => {
 describe("ModalHelp.vue", () => {
   it("validacion de telefono -error vacio", () => {
     const wrapper = shallowMount(HelpForm);
-    wrapper.setData({ telefono: "" });
+    wrapper.setData({ solicitud: { phone: "" } });
     wrapper.vm.checkTelefono();
     expect(wrapper.vm.telInv).toBe(true);
   });
@@ -199,7 +203,7 @@ describe("ModalHelp.vue", () => {
 describe("ModalHelp.vue", () => {
   it("validacion de telefono -error longitud invalida", () => {
     const wrapper = shallowMount(HelpForm);
-    wrapper.setData({ telefono: "3323" });
+    wrapper.setData({ solicitud: { phone: "2233" } });
     wrapper.vm.checkTelefono();
     expect(wrapper.vm.telInv).toBe(true);
   });
@@ -208,7 +212,7 @@ describe("ModalHelp.vue", () => {
 describe("ModalHelp.vue", () => {
   it("validacion de telefono -correcto", () => {
     const wrapper = shallowMount(HelpForm);
-    wrapper.setData({ telefono: "4422046497" });
+    wrapper.setData({ solicitud: { phone: "4422046497" } });
     wrapper.vm.checkTelefono();
     expect(wrapper.vm.telInv).toBe(false);
   });
@@ -217,7 +221,7 @@ describe("ModalHelp.vue", () => {
 describe("ModalHelp.vue", () => {
   it("validacion de mensaje -error vacio", () => {
     const wrapper = shallowMount(HelpForm);
-    wrapper.setData({ mensaje: "" });
+    wrapper.setData({ solicitud: { description: "" } });
     wrapper.vm.checkMensaje();
     expect(wrapper.vm.menInv).toBe(true);
   });
@@ -226,7 +230,7 @@ describe("ModalHelp.vue", () => {
 describe("ModalHelp.vue", () => {
   it("validacion de mensaje -error longitud invalida", () => {
     const wrapper = shallowMount(HelpForm);
-    wrapper.setData({ mensaje: "a" });
+    wrapper.setData({ solicitud: { description: "a" } });
     wrapper.vm.checkMensaje();
     expect(wrapper.vm.menInv).toBe(true);
   });
@@ -235,7 +239,7 @@ describe("ModalHelp.vue", () => {
 describe("ModalHelp.vue", () => {
   it("validacion de mensaje -correcto", () => {
     const wrapper = shallowMount(HelpForm);
-    wrapper.setData({ mensaje: "mensaje generico aceptable" });
+    wrapper.setData({ solicitud: { description: "ayuda porfis" } });
     wrapper.vm.checkMensaje();
     expect(wrapper.vm.menInv).toBe(false);
   });

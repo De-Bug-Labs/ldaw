@@ -42,6 +42,7 @@ export default defineComponent({
   align-items: center;
   justify-content: center;
   font-family: "Signika", sans-serif;
+  background-color: rgba(0, 0, 0, 0.527);
 
   .modal {
     background-color: white;
@@ -86,7 +87,7 @@ export default defineComponent({
       border-top: 2px solid rgb(214, 214, 214);
       p.confirmar {
         width: 195px;
-        height: 30px;
+        height: 45px;
         align-self: center;
         font-family: "Open Sans", sans-serif;
         text-transform: uppercase;
@@ -126,7 +127,9 @@ export default defineComponent({
 @media screen and (max-width: 900px) {
   .container {
     .modal {
-      width: 80%;
+      width: 90%;
+      height: auto;
+      margin-bottom: 50px;
       .title {
         h1 {
           font-size: 22px;
@@ -135,7 +138,21 @@ export default defineComponent({
       .content {
         width: 100%;
         h2 {
-          font-size: 1.3rem;
+          font-size: 1.2rem;
+        }
+      }
+      .buttons {
+        height: 10%;
+        width: 90%;
+        p.cancelar {
+          width: 150px;
+          height: 45px;
+          font-size: 20px;
+        }
+        p.confirmar {
+          width: 150px;
+          height: 45px;
+          font-size: 20px;
         }
       }
     }

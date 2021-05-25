@@ -5,12 +5,20 @@
       @close="confirmed = false"
       @modificar="submitForm()"
     />
-    <h1>Editar</h1>
-    <h3>Ingresa la informacióna a modificar.</h3>
+    <h1>Crear</h1>
+    <h3>Ingresa la informacióna del Colaborador a crear.</h3>
 
     <div class="section">
       <div class="miniCont">
-        <label for="name" class="form-label">Titulo</label>
+        <select v-model="nombreSeccion">
+          <option value="Estudiantes">Estudiantes</option>
+          <option value="Empresarios">Empresarios</option>
+          <option value="Profesionales">Profesionales</option>
+        </select>
+      </div>
+
+      <div class="miniCont">
+        <label for="name" class="form-label">Nombre</label>
         <input
           @click="nomInv = false"
           :class="{ nomInv }"
@@ -18,22 +26,54 @@
           type="text"
           id="name"
           name="name"
-          placeholder="Escribe el titulo aquí"
+          placeholder="Escribe el nombre aquí"
           maxlength="40"
         />
-        <p :class="{ on: nomInv }">Asegúrate de ingresar un titulo válido</p>
+        <p :class="{ on: nomInv }">Asegúrate de ingresar un nombre válido</p>
       </div>
       <div class="miniCont">
-        <label for="link" class="form-label">Link</label>
+        <label for="descripcion" class="form-label">Descripcion</label>
+        <input
+          @click="descInv = false"
+          :class="{ descInv }"
+          v-model="descripcion"
+          type="text"
+          id="descripcion"
+          name="descripcion"
+          placeholder="Escribe la descripcion aqui"
+          maxlength="200"
+        />
+        <p :class="{ on: descInv }">
+          Asegúrate de ingresar una descripcion valida
+        </p>
+      </div>
+      <div class="miniCont">
+        <label for="institucion" class="form-label">Institucion</label>
+        <input
+          @click="instInv = false"
+          :class="{ instInv }"
+          v-model="institucion"
+          type="text"
+          id="descripcion"
+          name="descripcion"
+          placeholder="Escribe la institucion aqui"
+          maxlength="200"
+        />
+        <p :class="{ on: instInv }">
+          Asegúrate de ingresar una institucion valida
+        </p>
+      </div>
+      <div class="miniCont">
+        <label for="link" class="form-label">Link a Imagen</label>
         <input
           @click="linkInv = false"
           :class="{ linkInv }"
           v-model="link"
           type="text"
-          id="link"
-          name="link"
+          id="descripcion"
+          name="descripcion"
           placeholder="Escribe el Link aquí"
-          maxlength="100"
+          maxlength="200"
         />
         <p :class="{ on: linkInv }">Asegúrate de ingresar un link valido</p>
       </div>
@@ -50,7 +90,7 @@ import { defineComponent } from "vue";
 import ConfirmModal from "@/components/ConfirmModal.vue";
 
 export default defineComponent({
-  name: "EditMat",
+  name: "NewColab",
   components: {
     ConfirmModal,
   },
@@ -60,15 +100,25 @@ export default defineComponent({
   data() {
     return {
       nombre: "",
+      descripcion: "",
+      institucion: "",
       link: "",
       nomInv: false,
+      descInv: false,
+      instInv: false,
       linkInv: false,
       confirmed: false,
       enviar: false,
-      material: {
-        title: "",
-        link: "",
+      colaborador: {
+        name: "",
+        description: "",
+        institution: "",
+        srcimg: "",
+        sectionId: "",
       },
+      secciones: [],
+      idSeccion: "",
+      nombreSeccion: "Estudiantes",
       apiUrl: this.apiUrl,
     };
   },
@@ -85,55 +135,60 @@ export default defineComponent({
         this.nomInv = false;
       }
     },
+    checkInst() {
+      var regex = /^[-\w\s]+$/;
+      if (
+        this.institucion.length <= 2 ||
+        this.institucion.length > 40 ||
+        !regex.test(this.institucion)
+      ) {
+        this.instInv = true;
+      } else {
+        this.instInv = false;
+      }
+    },
+    checkDesc() {
+      if (this.descripcion.length <= 5 || this.descripcion.length > 200) {
+        this.descInv = true;
+      } else {
+        this.descInv = false;
+      }
+    },
     checkLink() {
-      if (this.link.length > 0) {
-        if (this.link.length <= 5 || this.link.length > 200) {
-          this.linkInv = true;
-        } else {
-          this.linkInv = false;
-        }
+      if (this.link.length <= 5 || this.link.length > 200) {
+        this.linkInv = true;
       } else {
         this.linkInv = false;
       }
     },
     validateForm() {
       this.checkNombre();
+      this.checkDesc();
+      this.checkInst();
       this.checkLink();
       this.confirmed = false;
-      if (!this.nomInv && !this.linkInv) {
+      if (!this.nomInv && !this.descInv && !this.instInv && !this.linkInv) {
         this.confirmed = true;
-        this.material.title = this.nombre;
-        this.material.link = this.link;
+        this.colaborador.name = this.nombre;
+        this.colaborador.description = this.descripcion;
+        this.colaborador.institution = this.institucion;
+        this.colaborador.srcimg = this.link;
+        this.findID(this.nombreSeccion);
+        this.colaborador.sectionId = this.idSeccion;
       } else {
         this.confirmed = false;
       }
     },
     submitForm() {
-      this.confirmed = false;
-      this.addUser(this.elementoId);
+      this.addUser();
     },
-    getInfo() {
-      try {
-        const data = fetch(
-          this.apiUrl + "material/" + this.elementoId //agregar variable de entorno para ruta
-        )
-          .then((res) => res.json())
-          .then((data) => {
-            this.material = data;
-            this.nombre = this.material.title;
-            this.link = this.material.link;
-          });
-      } catch (error) {
-        console.log(error);
-      }
-    },
-    addUser(id: any): void {
-      fetch(this.apiUrl + "material/" + id, {
+    addUser(): void {
+      fetch(this.apiUrl + "collaborator", {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(this.material),
+        body: JSON.stringify(this.colaborador),
       })
         .then((response) => response.json())
         .then((data) => {
@@ -146,9 +201,28 @@ export default defineComponent({
           this.$emit("error");
         });
     },
+    getSecciones() {
+      try {
+        const data = fetch(this.apiUrl + "section")
+          .then((res) => res.json())
+          .then((data) => {
+            this.secciones = data;
+            this.findID(this.nombreSeccion);
+          });
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    findID(find: string) {
+      this.secciones.forEach((element) => {
+        if (element["name"] == find) {
+          this.idSeccion = element["id"];
+        }
+      });
+    },
   },
   mounted() {
-    this.getInfo();
+    this.getSecciones();
   },
 });
 </script>
@@ -167,7 +241,7 @@ export default defineComponent({
   position: relative;
 
   .section {
-    margin-bottom: 70px;
+    margin-bottom: 40px;
     display: flex;
     flex-direction: column;
     text-align: center;
@@ -181,16 +255,34 @@ export default defineComponent({
       margin-block-start: 0em;
       margin-block-end: 0em;
     }
+    select {
+      cursor: pointer;
+      padding: 10px 0;
+      box-sizing: border-box;
+      box-shadow: none;
+      outline: none;
+      border: none;
+      border-bottom: 2px solid rgb(172, 172, 172);
+      background-color: #f1f1f1;
+      font-family: "Open Sans", sans-serif;
+      font-size: 15px;
+      option {
+        font-family: "Open Sans", sans-serif;
+      }
+    }
   }
 
   h1 {
+    margin-block-start: 0em;
     font-size: 2.5rem;
+    margin-block-end: 0.5em;
   }
 
   h2 {
     font-family: "Open Sans", sans-serif;
     color: #797979;
     font-size: 20px;
+    margin-block-end: 0.5em;
   }
   h3 {
     margin-block-end: 2em;
@@ -240,6 +332,8 @@ export default defineComponent({
   }
 
   input.nomInv,
+  input.descInv,
+  input.instInv,
   input.linkInv {
     border-bottom: 2px solid rgb(255, 0, 0);
   }
@@ -297,7 +391,6 @@ export default defineComponent({
     border: 4px solid black;
   }
   button {
-    margin-top: 10%;
     margin-right: auto;
     margin-left: 10%;
     border-bottom: none;

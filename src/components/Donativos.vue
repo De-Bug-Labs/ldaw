@@ -9,7 +9,43 @@
         </div>
       </div>
     </div>
-    <div class="cardBtns"></div>
+    <div class="cardBtns">
+      <form
+        action="https://www.sandbox.paypal.com/cgi-bin/webscr"
+        method="post"
+      >
+        <input
+          type="hidden"
+          name="business"
+          value="donations@kcparkfriends.org"
+        />
+
+        <!-- Specify a Donate button. -->
+        <input type="hidden" name="cmd" value="_donations" />
+
+        <!-- Specify details about the contribution -->
+        <input
+          type="hidden"
+          name="item_number"
+          value="Centro de atencion geriatrico"
+        />
+        <input type="hidden" name="item_name" value="GAAP I.A.P" />
+        <input type="hidden" name="currency_code" value="MXN" />
+        <input
+          type="submit"
+          class="mainBtn"
+          border="0"
+          name="submit"
+          value="Donar"
+        />
+        <div class="btn_cont">
+          <img src="@/assets/Donativos/paypal.svg" alt="#" class="inpImg" />
+          <img src="@/assets/Donativos/mastercard.svg" alt="#" class="inpImg" />
+          <img src="@/assets/Donativos/visa.svg" alt="#" class="inpImg" />
+        </div>
+        <p>¡Agradecemos mucho tu apoyo!</p>
+      </form>
+    </div>
   </div>
 </template>
 
@@ -42,7 +78,7 @@ export default defineComponent({
     justify-content: center;
     align-items: center;
     height: 100%;
-    width: 50%;
+    width: 60%;
 
     .box1 {
       width: 80%;
@@ -101,21 +137,49 @@ export default defineComponent({
     justify-content: center;
     align-items: center;
     height: 100%;
-    width: 50%;
-  }
-  .footer {
-    width: 100%;
-    height: 80px;
-    background-color: #8edafd;
-    box-shadow: 0px -5px 11px rgba(0, 0, 0, 0.2);
-    font-family: "Signika", sans-serif;
-    align-items: center;
-    display: flex;
-    font-size: 0.8rem;
-    margin-top: auto !important;
-    position: fixed;
-    h1 {
-      margin-left: 20px;
+    width: 40%;
+    form {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      width: 100%;
+      p {
+        font-family: "Open Sans", sans-serif;
+        font-size: 20px;
+        color: rgb(116, 116, 116);
+      }
+      .mainBtn {
+        height: 70px;
+        width: 200px;
+        background-color: #2888a8;
+        border: none;
+        font-family: "Open Sans", sans-serif;
+        font-size: 35px;
+        font-weight: bolder;
+        color: rgb(255, 255, 255);
+        transition: 0.2s ease-out;
+        border-radius: 10px;
+        padding-right: 10px;
+        padding-left: 10px;
+        &:hover {
+          box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25),
+            0 10px 10px rgba(0, 0, 0, 0.22);
+        }
+      }
+      .btn_cont {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        margin-top: 20px;
+        .inpImg {
+          height: 80px;
+          margin-right: 20px;
+          margin-left: 20px;
+        }
+      }
     }
   }
 }
@@ -146,16 +210,17 @@ export default defineComponent({
 @media screen and (max-width: 900px) {
   .basic-grid {
     flex-direction: column;
-    height: 100vh;
+    height: auto;
     .cardInfo {
       flex-direction: row;
       width: 100%;
-      height: 80%;
+      height: auto;
+      margin-top: 20px;
       .box1 {
         width: 95%;
         height: 90%;
         .textBox {
-          height: 70%;
+          height: auto;
           justify-content: center;
           h1 {
             font-size: 1.6rem;
@@ -168,14 +233,45 @@ export default defineComponent({
           }
         }
         .imgBox {
-          height: 30%;
+          height: 200px;
         }
       }
     }
     .cardBtns {
       flex-direction: row;
       width: 100%;
-      height: 20%;
+      height: 250px;
+      margin-top: 50px;
+      form {
+        .mainBtn {
+          height: 60px;
+          width: 150px;
+          background-color: #2888a8;
+          border: none;
+          font-family: "Open Sans", sans-serif;
+          font-size: 30px;
+          font-weight: bolder;
+          color: rgb(255, 255, 255);
+          transition: 0.2s ease-out;
+          border-radius: 10px;
+          &:hover {
+            box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25),
+              0 10px 10px rgba(0, 0, 0, 0.22);
+          }
+        }
+        .btn_cont {
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+          align-items: center;
+          margin-top: 20px;
+          .inpImg {
+            height: 70px;
+            margin-right: 10px;
+            margin-left: 10px;
+          }
+        }
+      }
     }
   }
 }

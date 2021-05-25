@@ -50,7 +50,7 @@ import { defineComponent } from "vue";
 import ConfirmModal from "@/components/ConfirmModal.vue";
 
 export default defineComponent({
-  name: "EditMat",
+  name: "NewMaterial",
   components: {
     ConfirmModal,
   },
@@ -70,6 +70,7 @@ export default defineComponent({
         title: "",
         link: "",
       },
+      apiUrl: this.apiUrl,
     };
   },
   methods: {
@@ -109,7 +110,7 @@ export default defineComponent({
       this.addUser();
     },
     addUser(): void {
-      fetch("http://localhost:5000/api/material", {
+      fetch(this.apiUrl + "material", {
         method: "POST", // or 'PUT'
         headers: {
           "Content-Type": "application/json",

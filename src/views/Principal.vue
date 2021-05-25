@@ -9,61 +9,117 @@
         <div class="elemento" @click="vUsuarios()">
           <a>Usuarios</a>
         </div>
-        <div class="elemento">
+        <div class="elemento" @click="vDonaciones()">
           <a>Donaciones</a>
         </div>
-        <div class="elemento">
+        <div class="elemento" @click="vCalendario()">
           <a>Calendario</a>
         </div>
-        <div class="elemento">
+        <div class="elemento" @click="vPortal()">
           <a>Portal de ayuda</a>
         </div>
-        <div class="elemento">
+        <div class="elemento" @click="vSalon()">
           <a>Salon de la Fama</a>
         </div>
         <div class="elemento" @click="vMaterial()">
           <a>Material didactico</a>
         </div>
-        <div class="elemento" @click="vMaterial()">
+        <!--         <div class="elemento" @click="vMaterial()">
           <a>Cerrar Sesion <i class="large material-icons">logout</i></a>
-        </div>
+        </div> -->
       </div>
     </div>
     <div class="content">
-      <NewUser v-if="viewingUser" @done="viewingUser = false" />
+      <AllUsers v-if="viewingUsers" @done="viewingUsers = false" />
       <Material v-if="viewingMaterial" />
+      <SalonAdmin v-if="viewingSalon" />
+      <PortalAdmin v-if="viewingPortal" />
+      <CalendarioAdmin v-if="viewingCalendario" />
+      <DonacionesAdmin v-if="viewingDonaciones" />
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import NewUser from "@/components/NewUser.vue";
+import AllUsers from "@/components/AllUsers.vue";
 import Material from "@/components/MaterialAdmin.vue";
+import SalonAdmin from "@/components/SalonAdmin.vue";
+import PortalAdmin from "@/components/PortalAdmin.vue";
+import CalendarioAdmin from "@/components/CalendarioAdmin.vue";
+import DonacionesAdmin from "@/components/DonacionesAdmin.vue";
 
 export default defineComponent({
   name: "Help",
   components: {
-    NewUser,
+    AllUsers,
     Material,
+    SalonAdmin,
+    PortalAdmin,
+    CalendarioAdmin,
+    DonacionesAdmin,
   },
   mounted() {
     this.$emit("admin");
   },
   data() {
     return {
-      viewingUser: false,
+      viewingUsers: false,
       viewingMaterial: false,
+      viewingSalon: false,
+      viewingPortal: false,
+      viewingCalendario: false,
+      viewingDonaciones: false,
     };
   },
   methods: {
     vMaterial() {
       this.viewingMaterial = true;
-      this.viewingUser = false;
+      this.viewingUsers = false;
+      this.viewingSalon = false;
+      this.viewingPortal = false;
+      this.viewingCalendario = false;
+      this.viewingDonaciones = false;
     },
     vUsuarios() {
+      this.viewingUsers = true;
       this.viewingMaterial = false;
-      this.viewingUser = true;
+      this.viewingSalon = false;
+      this.viewingPortal = false;
+      this.viewingCalendario = false;
+      this.viewingDonaciones = false;
+    },
+    vSalon() {
+      this.viewingSalon = true;
+      this.viewingUsers = false;
+      this.viewingMaterial = false;
+      this.viewingPortal = false;
+      this.viewingCalendario = false;
+      this.viewingDonaciones = false;
+    },
+    vPortal() {
+      this.viewingPortal = true;
+      this.viewingSalon = false;
+      this.viewingUsers = false;
+      this.viewingMaterial = false;
+      this.viewingCalendario = false;
+      this.viewingDonaciones = false;
+    },
+    vCalendario() {
+      this.viewingCalendario = true;
+      this.viewingPortal = false;
+      this.viewingSalon = false;
+      this.viewingUsers = false;
+      this.viewingMaterial = false;
+      this.viewingDonaciones = false;
+    },
+    vDonaciones() {
+      this.viewingDonaciones = true;
+      this.viewingCalendario = false;
+      this.viewingPortal = false;
+      this.viewingSalon = false;
+      this.viewingUsers = false;
+      this.viewingMaterial = false;
     },
   },
 });

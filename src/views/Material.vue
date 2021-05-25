@@ -132,7 +132,7 @@ export default defineComponent({
     justify-content: center;
     position: relative;
     margin-top: 50px;
-    width: 25%;
+    width: 30%;
     height: 50px;
     font-family: "Open Sans", sans-serif;
     .col {
@@ -200,7 +200,7 @@ export default defineComponent({
   .bigCont {
     height: 100vh;
     .buttons {
-      width: 30%;
+      width: 35%;
       margin-top: 5%;
       .col {
         button {

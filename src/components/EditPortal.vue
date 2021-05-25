@@ -10,7 +10,7 @@
 
     <div class="section">
       <div class="miniCont">
-        <label for="name" class="form-label">Titulo</label>
+        <label for="name" class="form-label">Nombre</label>
         <input
           @click="nomInv = false"
           :class="{ nomInv }"
@@ -18,24 +18,25 @@
           type="text"
           id="name"
           name="name"
-          placeholder="Escribe el titulo aquí"
+          placeholder="Escribe el nombre aquí"
           maxlength="40"
         />
-        <p :class="{ on: nomInv }">Asegúrate de ingresar un titulo válido</p>
+        <p :class="{ on: nomInv }">Asegúrate de ingresar un nombre válido</p>
       </div>
       <div class="miniCont">
-        <label for="link" class="form-label">Link</label>
+        <label for="mail" class="form-label">Correo Electrónico</label>
         <input
-          @click="linkInv = false"
-          :class="{ linkInv }"
-          v-model="link"
-          type="text"
-          id="link"
-          name="link"
-          placeholder="Escribe el Link aquí"
-          maxlength="100"
+          @click="corInv = false"
+          :class="{ corInv }"
+          v-model="correo"
+          type="mail"
+          id="mail"
+          name="name"
+          placeholder="ejemplo@correo.com"
         />
-        <p :class="{ on: linkInv }">Asegúrate de ingresar un link valido</p>
+        <p :class="{ on: corInv }">
+          Asegurate de ingresar un Correo válido ejemplo@correo.com
+        </p>
       </div>
     </div>
     <div class="section">
@@ -50,24 +51,26 @@ import { defineComponent } from "vue";
 import ConfirmModal from "@/components/ConfirmModal.vue";
 
 export default defineComponent({
-  name: "EditMat",
+  name: "EditPortal",
   components: {
     ConfirmModal,
   },
   props: {
     elementoId: String,
+    seccionId: String,
   },
   data() {
     return {
       nombre: "",
-      link: "",
+      correo: "",
       nomInv: false,
-      linkInv: false,
+      corInv: false,
       confirmed: false,
       enviar: false,
-      material: {
-        title: "",
-        link: "",
+      staff: {
+        name: "",
+        email: "",
+        departmentId: this.seccionId,
       },
       apiUrl: this.apiUrl,
     };
@@ -85,25 +88,23 @@ export default defineComponent({
         this.nomInv = false;
       }
     },
-    checkLink() {
-      if (this.link.length > 0) {
-        if (this.link.length <= 5 || this.link.length > 200) {
-          this.linkInv = true;
-        } else {
-          this.linkInv = false;
-        }
+    checkCorreo() {
+      var regex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+      if (!regex.test(this.correo)) {
+        this.corInv = true;
       } else {
-        this.linkInv = false;
+        this.corInv = false;
       }
     },
     validateForm() {
       this.checkNombre();
-      this.checkLink();
+      this.checkCorreo();
       this.confirmed = false;
-      if (!this.nomInv && !this.linkInv) {
+      if (!this.nomInv && !this.corInv) {
         this.confirmed = true;
-        this.material.title = this.nombre;
-        this.material.link = this.link;
+        this.staff.name = this.nombre;
+        this.staff.email = this.correo;
+        console.log(this.staff);
       } else {
         this.confirmed = false;
       }
@@ -115,25 +116,25 @@ export default defineComponent({
     getInfo() {
       try {
         const data = fetch(
-          this.apiUrl + "material/" + this.elementoId //agregar variable de entorno para ruta
+          this.apiUrl + "staff/" + this.elementoId //agregar variable de entorno para ruta
         )
           .then((res) => res.json())
           .then((data) => {
-            this.material = data;
-            this.nombre = this.material.title;
-            this.link = this.material.link;
+            this.staff = data;
+            this.nombre = this.staff.name;
+            this.correo = this.staff.email;
           });
       } catch (error) {
         console.log(error);
       }
     },
     addUser(id: any): void {
-      fetch(this.apiUrl + "material/" + id, {
+      fetch(this.apiUrl + "staff/" + id, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(this.material),
+        body: JSON.stringify(this.staff),
       })
         .then((response) => response.json())
         .then((data) => {
@@ -147,6 +148,7 @@ export default defineComponent({
         });
     },
   },
+
   mounted() {
     this.getInfo();
   },
@@ -240,6 +242,8 @@ export default defineComponent({
   }
 
   input.nomInv,
+  input.descInv,
+  input.instInv,
   input.linkInv {
     border-bottom: 2px solid rgb(255, 0, 0);
   }
@@ -297,7 +301,7 @@ export default defineComponent({
     border: 4px solid black;
   }
   button {
-    margin-top: 10%;
+    margin-top: 40px;
     margin-right: auto;
     margin-left: 10%;
     border-bottom: none;

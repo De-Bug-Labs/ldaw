@@ -2,7 +2,7 @@
   <div class="box">
     <div class="modal" @click.stop>
       <div class="imgBox">
-        <img src="@/assets/portrait.jpg" alt="#" />
+        <img :src="colaborador.srcimg" alt="#" />
       </div>
       <div class="content">
         <h1>{{ colaborador.name }}</h1>
@@ -35,7 +35,7 @@ export default defineComponent({
   .modal {
     margin-bottom: 50px;
     background-color: #288ba8;
-    width: 80%;
+    width: 60%;
     height: auto;
     display: flex;
     flex-direction: row;
@@ -45,7 +45,7 @@ export default defineComponent({
     box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
     color: white;
     .content {
-      width: 50%;
+      width: 65%;
       height: auto;
       display: flex;
       flex-direction: column;
@@ -89,18 +89,15 @@ export default defineComponent({
       }
     }
     .imgBox {
-      width: 50%;
+      width: 35%;
       height: 100%;
       display: flex;
       flex-direction: column;
-      justify-content: center;
-      align-items: center;
       img {
         height: 450px;
-        margin-top: 10%;
-        margin-bottom: 10%;
         box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25),
           0 10px 10px rgba(0, 0, 0, 0.22);
+        border-radius: 10px 0 0 10px;
       }
     }
   }
@@ -108,7 +105,7 @@ export default defineComponent({
 @media screen and (max-width: 1080px) {
   .box {
     .modal {
-      margin-top: 5%;
+      margin-top: 2%;
       margin-bottom: 5%;
       width: 90%;
       height: auto;
@@ -117,8 +114,6 @@ export default defineComponent({
         height: 100%;
         img {
           height: 400px;
-          margin-top: 10%;
-          margin-bottom: 10%;
         }
       }
     }
