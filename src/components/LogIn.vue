@@ -47,8 +47,7 @@ export default defineComponent({
           email: this.email,
           password: this.password,
         };
-        console.log(this.apiUrl);
-        await fetch(this.apiUrl + "login", {
+        await fetch("/api/login", {
           method: "POST",
           credentials: "include",
           headers: {
@@ -57,12 +56,9 @@ export default defineComponent({
           body: JSON.stringify(user),
         })
           .then((res) => res.json())
-          .then((data) => {
-            console.log(data);
-          });
-        //.then(() => (window.location.href = "material"));
+          .then(() => (window.location.href = "/admin/main"));
       } catch (error) {
-        console.log(error);
+        console.error(error);
       }
     },
   },
