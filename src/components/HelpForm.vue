@@ -229,8 +229,9 @@ export default defineComponent({
       }
     },
     submitForm() {
-      fetch(this.apiUrl + "mail", {
+      fetch("/api/mail", {
         method: "POST", // or 'PUT'
+        credentials: "include",
         headers: {
           "Content-Type": "application/json",
         },

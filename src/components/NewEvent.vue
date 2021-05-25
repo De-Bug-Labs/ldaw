@@ -29,7 +29,7 @@
         >
         <textarea
           @click="nomInv = false"
-          :class="{ nomInv }"
+          :class="{ descripInv }"
           v-model="descripcion"
           type="textarea"
           cols="40"
@@ -38,7 +38,7 @@
           name="description"
           placeholder="Ingresa la descripción del evento"
         />
-        <p :class="{ on: nomInv }">
+        <p :class="{ on: descripInv }">
           Asegúrate de ingresar una descripción válida
         </p>
       </div>
@@ -59,15 +59,15 @@
       <div class="miniCont">
         <label for="name" class="form-label">Lugar del evento</label>
         <input
-          @click="nomInv = false"
-          :class="{ nomInv }"
+          @click="lugarInv = false"
+          :class="{ lugarInv }"
           v-model="lugar"
           type="text"
           id="place"
           name="place"
           placeholder="Escribe el lugar aquí"
         />
-        <p :class="{ on: nomInv }">Asegúrate de ingresar un lugar válido</p>
+        <p :class="{ on: lugarInv }">Asegúrate de ingresar un lugar válido</p>
       </div>
       <div class="miniCont">
         <label for="name" class="form-label">Fecha del evento</label>
@@ -78,7 +78,7 @@
           id="date"
           name="date"
         />
-        <p :class="{ on: nomInv }">Asegúrate de ingresar un lugar válido</p>
+        <p :class="{ on: dateInv }">Asegúrate de ingresar una fecha válida</p>
       </div>
     </div>
     <div class="section1">
@@ -106,16 +106,24 @@ export default defineComponent({
     return {
       nombre: "",
       link: "",
+      descripcion: "",
+      lugar: "",
+      date: "",
       nomInv: false,
       linkInv: false,
+      descripInv: false,
+      lugarInv: false,
+      dateInv: false,
       confirmed: false,
       enviar: false,
       id: this,
-      material: {
+      calendar: {
         title: "",
-        link: "",
+        description: "",
+        date: "",
+        address: "",
+        srcimg: "",
       },
-      apiUrl: this.apiUrl,
     };
   },
   methods: {
@@ -131,6 +139,20 @@ export default defineComponent({
         this.nomInv = false;
       }
     },
+    checkDescrip() {
+      if (this.descripcion.length <= 2) {
+        this.descripInv = true;
+      } else {
+        this.descripInv = false;
+      }
+    },
+    checkLugar() {
+      if (this.lugar.length <= 2) {
+        this.lugarInv = true;
+      } else {
+        this.lugarInv = false;
+      }
+    },
     checkLink() {
       if (this.link.length <= 5 || this.link.length > 200) {
         this.linkInv = true;
@@ -138,29 +160,49 @@ export default defineComponent({
         this.linkInv = false;
       }
     },
+    checkDate() {
+      if (this.date.length <= 2) {
+        this.dateInv = true;
+      } else {
+        this.dateInv = false;
+      }
+    },
     validateForm() {
       this.checkNombre();
       this.checkLink();
+      this.checkDescrip();
+      this.checkLugar();
+      this.checkDate();
       this.confirmed = false;
-      if (!this.nomInv && !this.linkInv) {
+      if (
+        !this.nomInv &&
+        !this.linkInv &&
+        !this.descripInv &&
+        !this.lugarInv &&
+        !this.dateInv
+      ) {
         this.confirmed = true;
       } else {
         this.confirmed = false;
       }
     },
     submitForm() {
-      this.material.title = this.nombre;
-      this.material.link = this.link;
+      this.calendar.title = this.nombre;
+      this.calendar.srcimg = this.link;
+      this.calendar.description = this.descripcion;
+      this.calendar.address = this.lugar;
+      this.calendar.date = this.date;
       this.confirmed = false;
-      this.addUser();
+      this.addEvent();
     },
-    addUser(): void {
-      fetch(this.apiUrl + "material", {
+    addEvent(): void {
+      fetch("/api/calendar", {
         method: "POST", // or 'PUT'
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(this.material),
+        credentials: "include",
+        body: JSON.stringify(this.calendar),
       })
         .then((response) => response.json())
         .then((data) => {
