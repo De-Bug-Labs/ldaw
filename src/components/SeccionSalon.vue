@@ -74,14 +74,14 @@ export default defineComponent({
       viewing: false,
       idColaborador: "",
       informacion: [],
-      apiUrl: this.apiUrl,
     };
   },
   methods: {
     getPages() {
       try {
         const data = fetch(
-          this.apiUrl + "sectioncount/" + this.idSeccion + "?pageSize=8"
+          "/api/sectioncount/" + this.idSeccion + "?pageSize=8",
+          { credentials: "include" }
         )
           .then((res) => res.json())
           .then((data) => {
@@ -97,8 +97,7 @@ export default defineComponent({
     getColaboradores() {
       try {
         const data = fetch(
-          this.apiUrl +
-            "section/" +
+          "/api/section/" +
             this.idSeccion +
             "?pageSize=8&page=" +
             this.page +
@@ -115,7 +114,7 @@ export default defineComponent({
     },
     getDetalles() {
       try {
-        const data = fetch(this.apiUrl + "collaborator/" + this.idColaborador)
+        const data = fetch("/api/collaborator/" + this.idColaborador)
           .then((res) => res.json())
           .then((data) => {
             this.informacion = data;

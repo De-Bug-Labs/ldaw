@@ -16,14 +16,13 @@ export default defineComponent({
     return {
       information: { team: "", instalation: "", mision: "" },
       completed: false,
-      apiUrl: this.apiUrl,
     };
   },
 
   methods: {
     getInfo() {
       try {
-        const data = fetch(this.apiUrl + "information")
+        const data = fetch("/api/information")
           .then((res) => res.json())
           .then((data) => {
             this.information = data;
