@@ -23,7 +23,7 @@
           >Ayuda <img src="../public/img/information.svg"
         /></router-link>
       </li>
-      <li>
+      <li v-if="view.status">
         <router-link to="/donaciones"
           >Apóyanos <img src="../public/img/love.svg"
         /></router-link>
@@ -44,14 +44,35 @@
 </template>
 
 <script lang="ts">
-export default {
+import { defineComponent } from "vue";
+export default defineComponent({
   data() {
     return {
       mobile: false,
       regular: true,
+      view: { id: "", status: false, name: "" },
+      completeQuery: false,
     };
   },
-};
+  methods: {
+    getInfo() {
+      this.completeQuery = false;
+      try {
+        const data = fetch("/api/view", { credentials: "include" })
+          .then((res) => res.json())
+          .then((data) => {
+            this.view = data;
+          });
+      } catch (error) {
+        console.log(error);
+      }
+      this.completeQuery = true;
+    },
+  },
+  mounted() {
+    this.getInfo();
+  },
+});
 </script>
 
 <style lang="scss">

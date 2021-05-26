@@ -121,7 +121,6 @@ export default defineComponent({
       crear: false,
       nombre: "",
       nombreColaborador: "",
-      apiUrl: this.apiUrl,
       exito: false,
       error: false,
       secciones: [],
@@ -134,13 +133,13 @@ export default defineComponent({
     getInfo() {
       try {
         const data = fetch(
-          this.apiUrl +
-            "section/" +
+          "/api/section/" +
             this.idSeccion +
             "?pageSize=5&page=" +
             this.page +
             "&name=" +
-            this.nombre
+            this.nombre,
+          { credentials: "include" }
         )
           .then((res) => res.json())
           .then((data) => {
@@ -154,7 +153,8 @@ export default defineComponent({
     getPages() {
       try {
         const data = fetch(
-          this.apiUrl + "sectioncount/" + this.idSeccion + "?pageSize=5"
+          "/api/sectioncount/" + this.idSeccion + "?pageSize=5",
+          { credentials: "include" }
         )
           .then((res) => res.json())
           .then((data) => {
@@ -167,8 +167,9 @@ export default defineComponent({
       this.completeQuery = true;
     },
     deleteColaborador(elim: string) {
-      fetch(this.apiUrl + "collaborator/" + elim, {
+      fetch("/api/collaborator/" + elim, {
         method: "DELETE",
+        credentials: "include",
       })
         .then((response) => response.json())
         .then((data) => {
@@ -201,7 +202,7 @@ export default defineComponent({
     },
     getSecciones() {
       try {
-        const data = fetch(this.apiUrl + "section")
+        const data = fetch("/api/section", { credentials: "include" })
           .then((res) => res.json())
           .then((data) => {
             this.secciones = data;

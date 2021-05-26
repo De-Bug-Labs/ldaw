@@ -70,7 +70,6 @@ export default defineComponent({
         title: "",
         link: "",
       },
-      apiUrl: this.apiUrl,
     };
   },
   methods: {
@@ -110,8 +109,9 @@ export default defineComponent({
       this.addUser();
     },
     addUser(): void {
-      fetch(this.apiUrl + "material", {
-        method: "POST", // or 'PUT'
+      fetch("/api/material", {
+        method: "POST",
+        credentials: "include",
         headers: {
           "Content-Type": "application/json",
         },

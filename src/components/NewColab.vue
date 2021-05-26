@@ -119,7 +119,6 @@ export default defineComponent({
       secciones: [],
       idSeccion: "",
       nombreSeccion: "Estudiantes",
-      apiUrl: this.apiUrl,
     };
   },
   methods: {
@@ -183,8 +182,9 @@ export default defineComponent({
       this.addUser();
     },
     addUser(): void {
-      fetch(this.apiUrl + "collaborator", {
+      fetch("/api/collaborator", {
         method: "PUT",
+        credentials: "include",
         headers: {
           "Content-Type": "application/json",
         },
@@ -203,7 +203,7 @@ export default defineComponent({
     },
     getSecciones() {
       try {
-        const data = fetch(this.apiUrl + "section")
+        const data = fetch("/api/section", { credentials: "include" })
           .then((res) => res.json())
           .then((data) => {
             this.secciones = data;
