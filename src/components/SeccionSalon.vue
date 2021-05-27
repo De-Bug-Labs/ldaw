@@ -101,7 +101,10 @@ export default defineComponent({
             this.idSeccion +
             "?pageSize=8&page=" +
             this.page +
-            "&name="
+            "&name=",
+          {
+            credentials: "include",
+          }
         )
           .then((res) => res.json())
           .then((data) => {
