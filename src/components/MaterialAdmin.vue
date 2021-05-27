@@ -99,7 +99,6 @@ export default defineComponent({
       crear: false,
       nombre: "",
       tituloMaterial: "",
-      apiUrl: this.apiUrl,
       exito: false,
       error: false,
     };
@@ -107,9 +106,9 @@ export default defineComponent({
   methods: {
     getInfo() {
       try {
-        const data = fetch(
-          this.apiUrl + "material?page=" + this.page + "&pageSize=5"
-        )
+        const data = fetch("/api/material?page=" + this.page + "&pageSize=5", {
+          credentials: "include",
+        })
           .then((res) => res.json())
           .then((data) => {
             this.materiales = data;
@@ -122,7 +121,7 @@ export default defineComponent({
     },
     getPages() {
       try {
-        const data = fetch(this.apiUrl + "material/pages?page=0&pageSize=5")
+        const data = fetch("api/material/pages?page=0&pageSize=5")
           .then((res) => res.json())
           .then((data) => {
             this.pages = data;
@@ -134,8 +133,9 @@ export default defineComponent({
       this.completeQuery = true;
     },
     deleteMaterial(elim: string) {
-      fetch(this.apiUrl + "material/" + elim, {
+      fetch("/api/material/" + elim, {
         method: "DELETE",
+        credentials: "include",
       })
         .then((response) => response.json())
         .then((data) => {
@@ -186,7 +186,7 @@ export default defineComponent({
       this.idMaterial = id;
     },
     recargar() {
-      console.log("entro");
+      this.getPages();
       this.getInfo();
     },
   },

@@ -38,7 +38,6 @@ export default defineComponent({
         email: this.correo,
         password: this.contrasena,
         roleId: ["4290c4d8-e3a3-4495-a326-7cbc5b9f1a9b"],
-        apiUrl: this.apiUrl,
       },
     };
   },

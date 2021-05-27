@@ -68,24 +68,26 @@ export default defineComponent({
       colaboradores: [],
       page: 1,
       totalPages: 0,
+      response: { sectionPages: 0, sectionCount: 0 },
       totalColaboradores: 0,
       secondRow: true,
       viewing: false,
       idColaborador: "",
       informacion: [],
-      apiUrl: this.apiUrl,
     };
   },
   methods: {
     getPages() {
       try {
         const data = fetch(
-          this.apiUrl + "sectioncount/" + this.idSeccion + "?pageSize=8"
+          "/api/sectioncount/" + this.idSeccion + "?pageSize=8",
+          { credentials: "include" }
         )
           .then((res) => res.json())
           .then((data) => {
-            this.totalColaboradores = data;
-            this.totalPages = Math.ceil(this.totalColaboradores / 8);
+            this.response = data;
+            this.totalColaboradores = Math.ceil(this.response.sectionCount);
+            this.totalPages = Math.ceil(this.response.sectionPages);
           });
       } catch (error) {
         console.log(error);
@@ -95,8 +97,7 @@ export default defineComponent({
     getColaboradores() {
       try {
         const data = fetch(
-          this.apiUrl +
-            "section/" +
+          "/api/section/" +
             this.idSeccion +
             "?pageSize=8&page=" +
             this.page +
@@ -113,7 +114,7 @@ export default defineComponent({
     },
     getDetalles() {
       try {
-        const data = fetch(this.apiUrl + "collaborator/" + this.idColaborador)
+        const data = fetch("/api/collaborator/" + this.idColaborador)
           .then((res) => res.json())
           .then((data) => {
             this.informacion = data;
@@ -264,7 +265,7 @@ export default defineComponent({
     justify-content: center;
     position: relative;
     margin-top: 50px;
-    width: 25%;
+    width: 30%;
     height: 50px;
     font-family: "Open Sans", sans-serif;
     .col {
@@ -276,19 +277,35 @@ export default defineComponent({
       height: 100%;
       button {
         font-family: "Open Sans", sans-serif;
-        background-color: #2888a8;
+        background-color: #868686;
         border-radius: 2px;
         border: none;
         color: rgb(255, 255, 255);
         text-transform: uppercase;
         font-weight: bold;
         font-size: 18px;
-        height: 100%;
+        height: 50px;
         width: 150px;
         cursor: pointer;
         display: flex;
         align-items: center;
         justify-content: center;
+      }
+    }
+  }
+}
+@media screen and (max-width: 1080px) {
+  .bigCont {
+    height: 100vh;
+    .buttons {
+      width: 35%;
+      margin-top: 5%;
+      .col {
+        button {
+          font-size: 18px;
+          height: 100%;
+          width: 90%;
+        }
       }
     }
   }

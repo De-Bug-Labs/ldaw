@@ -133,7 +133,6 @@ export default defineComponent({
       tema: "",
       completed: false,
       departamentos: [],
-      apiUrl: this.apiUrl,
     };
   },
   methods: {
@@ -229,8 +228,9 @@ export default defineComponent({
       }
     },
     submitForm() {
-      fetch(this.apiUrl + "mail", {
-        method: "POST", // or 'PUT'
+      fetch("/api/mail", {
+        method: "POST",
+        credentials: "include",
         headers: {
           "Content-Type": "application/json",
         },
@@ -247,7 +247,7 @@ export default defineComponent({
     },
     getInfo() {
       try {
-        const data = fetch(this.apiUrl + "department")
+        const data = fetch("/api/department")
           .then((res) => res.json())
           .then((data) => {
             this.departamentos = data;

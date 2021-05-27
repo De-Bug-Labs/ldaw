@@ -54,7 +54,6 @@ export default defineComponent({
       seccion: "",
       seccionTitulo: "",
       completeQuery: false,
-      apiUrl: this.apiUrl,
     };
   },
   methods: {
@@ -82,7 +81,7 @@ export default defineComponent({
     },
     getInfo() {
       try {
-        const data = fetch(this.apiUrl + "section")
+        const data = fetch("/api/section", { credentials: "include" })
           .then((res) => res.json())
           .then((data) => {
             this.secciones = data;

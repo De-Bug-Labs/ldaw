@@ -109,7 +109,6 @@ export default defineComponent({
         institution: "",
         srcimg: "",
       },
-      apiUrl: this.apiUrl,
     };
   },
   methods: {
@@ -177,9 +176,9 @@ export default defineComponent({
     },
     getInfo() {
       try {
-        const data = fetch(
-          this.apiUrl + "collaborator/" + this.elementoId //agregar variable de entorno para ruta
-        )
+        const data = fetch("/api/collaborator/" + this.elementoId, {
+          credentials: "include",
+        })
           .then((res) => res.json())
           .then((data) => {
             this.colaborador = data;
@@ -193,8 +192,9 @@ export default defineComponent({
       }
     },
     addUser(id: any): void {
-      fetch(this.apiUrl + "collaborator/" + id, {
+      fetch("/api/collaborator/" + id, {
         method: "PUT",
+        credentials: "include",
         headers: {
           "Content-Type": "application/json",
         },
@@ -233,7 +233,7 @@ export default defineComponent({
   position: relative;
 
   .section {
-    margin-bottom: 70px;
+    margin-bottom: 50px;
     display: flex;
     flex-direction: column;
     text-align: center;
@@ -365,7 +365,6 @@ export default defineComponent({
     border: 4px solid black;
   }
   button {
-    margin-top: 40px;
     margin-right: auto;
     margin-left: 10%;
     border-bottom: none;
