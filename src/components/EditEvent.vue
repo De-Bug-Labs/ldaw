@@ -5,8 +5,8 @@
       @close="confirmed = false"
       @modificar="submitForm()"
     />
-    <h1>{{ elementoId }}</h1>
-    <h3>Ingresa la información del evento a editar.</h3>
+    <h1></h1>
+    <h3>Ingresa la nueva información del evento.</h3>
 
     <div class="section">
       <div class="miniCont">
@@ -29,7 +29,7 @@
         >
         <textarea
           @click="nomInv = false"
-          :class="{ nomInv }"
+          :class="{ descripInv }"
           v-model="descripcion"
           type="textarea"
           cols="40"
@@ -38,7 +38,7 @@
           name="description"
           placeholder="Ingresa la descripción del evento"
         />
-        <p :class="{ on: nomInv }">
+        <p :class="{ on: descripInv }">
           Asegúrate de ingresar una descripción válida
         </p>
       </div>
@@ -59,15 +59,15 @@
       <div class="miniCont">
         <label for="name" class="form-label">Lugar del evento</label>
         <input
-          @click="nomInv = false"
-          :class="{ nomInv }"
+          @click="lugarInv = false"
+          :class="{ lugarInv }"
           v-model="lugar"
           type="text"
           id="place"
           name="place"
           placeholder="Escribe el lugar aquí"
         />
-        <p :class="{ on: nomInv }">Asegúrate de ingresar un lugar válido</p>
+        <p :class="{ on: lugarInv }">Asegúrate de ingresar un lugar válido</p>
       </div>
       <div class="miniCont">
         <label for="name" class="form-label">Fecha del evento</label>
@@ -78,7 +78,7 @@
           id="date"
           name="date"
         />
-        <p :class="{ on: nomInv }">Asegúrate de ingresar un lugar válido</p>
+        <p :class="{ on: dateInv }">Asegúrate de ingresar una fecha válida</p>
       </div>
     </div>
     <div class="section1">
@@ -95,7 +95,7 @@ import { defineComponent } from "vue";
 import ConfirmModal from "@/components/ConfirmModal.vue";
 
 export default defineComponent({
-  name: "EditMat",
+  name: "NewMaterial",
   components: {
     ConfirmModal,
   },
@@ -106,15 +106,24 @@ export default defineComponent({
     return {
       nombre: "",
       link: "",
+      descripcion: "",
+      lugar: "",
+      date: "",
       nomInv: false,
       linkInv: false,
+      descripInv: false,
+      lugarInv: false,
+      dateInv: false,
       confirmed: false,
       enviar: false,
-      material: {
+      id: this,
+      calendar: {
         title: "",
-        link: "",
+        description: "",
+        date: "",
+        address: "",
+        srcimg: "",
       },
-      apiUrl: this.apiUrl,
     };
   },
   methods: {
@@ -130,55 +139,86 @@ export default defineComponent({
         this.nomInv = false;
       }
     },
+    checkDescrip() {
+      if (this.descripcion.length <= 2) {
+        this.descripInv = true;
+      } else {
+        this.descripInv = false;
+      }
+    },
+    checkLugar() {
+      if (this.lugar.length <= 2) {
+        this.lugarInv = true;
+      } else {
+        this.lugarInv = false;
+      }
+    },
     checkLink() {
-      if (this.link.length > 0) {
-        if (this.link.length <= 5 || this.link.length > 200) {
-          this.linkInv = true;
-        } else {
-          this.linkInv = false;
-        }
+      if (this.link.length <= 5 || this.link.length > 200) {
+        this.linkInv = true;
       } else {
         this.linkInv = false;
+      }
+    },
+    checkDate() {
+      if (this.date.length <= 2) {
+        this.dateInv = true;
+      } else {
+        this.dateInv = false;
       }
     },
     validateForm() {
       this.checkNombre();
       this.checkLink();
+      this.checkDescrip();
+      this.checkLugar();
+      this.checkDate();
       this.confirmed = false;
-      if (!this.nomInv && !this.linkInv) {
+      if (
+        !this.nomInv &&
+        !this.linkInv &&
+        !this.descripInv &&
+        !this.lugarInv &&
+        !this.dateInv
+      ) {
         this.confirmed = true;
-        this.material.title = this.nombre;
-        this.material.link = this.link;
       } else {
         this.confirmed = false;
       }
     },
     submitForm() {
+      this.calendar.title = this.nombre;
+      this.calendar.srcimg = this.link;
+      this.calendar.description = this.descripcion;
+      this.calendar.address = this.lugar;
+      this.calendar.date = this.date;
       this.confirmed = false;
-      this.addUser(this.elementoId);
+      this.addEvent();
     },
     getInfo() {
       try {
-        const data = fetch(
-          this.apiUrl + "material/" + this.elementoId //agregar variable de entorno para ruta
-        )
+        const data = fetch("/api/material/" + this.elementoId)
           .then((res) => res.json())
           .then((data) => {
-            this.material = data;
-            this.nombre = this.material.title;
-            this.link = this.material.link;
+            this.calendar = data;
+            this.nombre = this.calendar.title;
+            this.link = this.calendar.srcimg;
+            this.descripcion = this.calendar.description;
+            this.lugar = this.calendar.address;
+            this.date = this.calendar.date;
           });
       } catch (error) {
         console.log(error);
       }
     },
-    addUser(id: any): void {
-      fetch(this.apiUrl + "material/" + id, {
-        method: "PUT",
+    addEvent(): void {
+      fetch("/api/calendar", {
+        method: "POST", // or 'PUT'
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(this.material),
+        credentials: "include",
+        body: JSON.stringify(this.calendar),
       })
         .then((response) => response.json())
         .then((data) => {
@@ -194,6 +234,7 @@ export default defineComponent({
   },
   mounted() {
     this.getInfo();
+    console.log(this.elementoId);
   },
 });
 </script>
