@@ -108,7 +108,6 @@ export default defineComponent({
       crear: false,
       nombre: "",
       nombreColaborador: "",
-      apiUrl: this.apiUrl,
       exito: false,
       error: false,
       departamentos: [],
@@ -119,7 +118,9 @@ export default defineComponent({
   methods: {
     getInfo() {
       try {
-        const data = fetch(this.apiUrl + "department/" + this.idSeccion)
+        const data = fetch("/api/department/" + this.idSeccion, {
+          credentials: "include",
+        })
           .then((res) => res.json())
           .then((data) => {
             this.staff = data;
@@ -130,8 +131,9 @@ export default defineComponent({
       this.completeQuery = true;
     },
     deleteColaborador(elim: string) {
-      fetch(this.apiUrl + "staff/" + elim, {
+      fetch("/api/staff/" + elim, {
         method: "DELETE",
+        credentials: "include",
       })
         .then((response) => response.json())
         .then((data) => {
@@ -164,7 +166,7 @@ export default defineComponent({
     },
     getSecciones() {
       try {
-        const data = fetch(this.apiUrl + "department")
+        const data = fetch("/api/department", { credentials: "include" })
           .then((res) => res.json())
           .then((data) => {
             this.departamentos = data;

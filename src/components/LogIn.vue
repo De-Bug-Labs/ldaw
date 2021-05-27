@@ -37,7 +37,6 @@ export default defineComponent({
     return {
       email: "",
       password: "",
-      apiUrl: this.apiUrl,
     };
   },
   methods: {

@@ -69,7 +69,6 @@ export default defineComponent({
         title: "",
         link: "",
       },
-      apiUrl: this.apiUrl,
     };
   },
   methods: {
@@ -114,9 +113,9 @@ export default defineComponent({
     },
     getInfo() {
       try {
-        const data = fetch(
-          this.apiUrl + "material/" + this.elementoId //agregar variable de entorno para ruta
-        )
+        const data = fetch("/api/material/" + this.elementoId, {
+          credentials: "include",
+        })
           .then((res) => res.json())
           .then((data) => {
             this.material = data;
@@ -128,8 +127,9 @@ export default defineComponent({
       }
     },
     addUser(id: any): void {
-      fetch(this.apiUrl + "material/" + id, {
+      fetch("/api/material/" + id, {
         method: "PUT",
+        credentials: "include",
         headers: {
           "Content-Type": "application/json",
         },

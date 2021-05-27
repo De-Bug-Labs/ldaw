@@ -109,7 +109,6 @@ export default defineComponent({
         institution: "",
         srcimg: "",
       },
-      apiUrl: this.apiUrl,
     };
   },
   methods: {

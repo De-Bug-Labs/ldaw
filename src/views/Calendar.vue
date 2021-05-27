@@ -84,7 +84,6 @@ export default defineComponent({
       completeQuery: false,
       page: 1,
       totalPages: 0,
-      apiUrl: this.apiUrl,
       found: false,
     };
   },
@@ -94,13 +93,13 @@ export default defineComponent({
       this.completeQuery = false;
       try {
         const data = fetch(
-          this.apiUrl +
-            "calendar?page=" +
+          "/api/calendar?page=" +
             this.page +
             "&pageSize=4" +
             this.day + //aqui uso un string vacio para el link de peticion
             this.month + // por alguna razon hay que agregar cosas como &day=DIA
-            this.year // pero si lo mandas vacio no sirve entonces se usa un string vacio
+            this.year, // pero si lo mandas vacio no sirve entonces se usa un string vacio
+          { credentials: "include" }
         )
           .then((res) => res.json())
           .then((data) => {
@@ -118,7 +117,7 @@ export default defineComponent({
     },
     getPages() {
       try {
-        const data = fetch(this.apiUrl + "calendar/pages?pageSize=4")
+        const data = fetch("/api/calendar/pages?pageSize=4")
           .then((res) => res.json())
           .then((data) => {
             this.pages = data;
