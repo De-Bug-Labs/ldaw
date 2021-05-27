@@ -82,7 +82,7 @@
       </div>
     </div>
     <div class="section1">
-      <input type="submit" name="submit" value="Enviar" />
+      <input type="submit" name="submit" value="Guardar" />
     </div>
     <div class="section1">
       <button @click="$emit('regresar')">Cancelar</button>
@@ -193,11 +193,11 @@ export default defineComponent({
       this.calendar.address = this.lugar;
       this.calendar.date = this.date;
       this.confirmed = false;
-      this.addEvent();
+      this.editEvent();
     },
     getInfo() {
       try {
-        const data = fetch("/api/material/" + this.elementoId)
+        const data = fetch("/api/calendar/" + this.elementoId)
           .then((res) => res.json())
           .then((data) => {
             this.calendar = data;
@@ -211,9 +211,9 @@ export default defineComponent({
         console.log(error);
       }
     },
-    addEvent(): void {
-      fetch("/api/calendar", {
-        method: "POST", // or 'PUT'
+    editEvent(): void {
+      fetch("/api/calendar/" + this.elementoId, {
+        method: "PUT", // or 'PUT'
         headers: {
           "Content-Type": "application/json",
         },
@@ -234,7 +234,6 @@ export default defineComponent({
   },
   mounted() {
     this.getInfo();
-    console.log(this.elementoId);
   },
 });
 </script>

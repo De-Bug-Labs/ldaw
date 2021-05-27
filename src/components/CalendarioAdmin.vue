@@ -2,7 +2,7 @@
   <NewEvent
     v-if="crear"
     :elementoId="idMaterial"
-    @regresar="(crear = false), recargar"
+    @regresar="(crear = false), recargar()"
     @exito="exito = true"
     @error="error = true"
   />
@@ -18,7 +18,7 @@
     :elementoId="idEvento"
     @exito="exito = true"
     @error="error = true"
-    @regresar="(editar = false), (idEvento = '')"
+    @regresar="(editar = false), (idEvento = ''), recargar()"
   />
   <div class="box" v-if="!editar && !crear">
     <div class="titulo">
@@ -141,6 +141,17 @@ export default defineComponent({
   },
 
   methods: {
+    recargar() {
+      var d = new Date(); // todo esto y lo que usa var saca la fecha de hoy
+      var dd = String(d.getDate()).padStart(2, "0");
+      var mm = String(d.getMonth() + 1).padStart(2, "0"); //January is 0!
+      var yyyy = d.getFullYear();
+      this.year = "&year=" + yyyy;
+      this.month = "&month=" + mm;
+      this.date = yyyy + "-" + mm + "-" + dd; // lo asigno a la variable de por dia
+      this.getPages();
+      this.getInfo();
+    },
     getInfo() {
       this.completeQuery = false;
       try {
