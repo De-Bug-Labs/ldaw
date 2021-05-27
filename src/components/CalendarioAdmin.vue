@@ -10,8 +10,9 @@
   <ErrorModal v-if="error" @close="error = false" />
   <ModalEliminar
     v-if="eliminar"
-    @close="(eliminar = false), (material = {})"
-    :titulo="tituloMaterial"
+    @close="eliminar = false"
+    :titulo="tituloModal"
+    @borrar="deleteEvent(idEvento), (idEvento = '')"
   />
   <EditEvent
     v-if="editar"
@@ -69,10 +70,7 @@
             <p class="editar" @click="editarEvento(evento.id)">Editar</p>
           </th>
           <th>
-            <p
-              class="eliminar"
-              @click="borrar(user.id, user.name, user.lastName)"
-            >
+            <p class="eliminar" @click="borrar(evento.id, evento.title)">
               Eliminar
             </p>
           </th>
@@ -105,11 +103,17 @@
 import { defineComponent } from "vue";
 import NewEvent from "@/components/NewEvent.vue";
 import EditEvent from "@/components/EditEvent.vue";
+import ExitoModal from "@/components/ExitoModal.vue";
+import ErrorModal from "@/components/ErrorModal.vue";
+import ModalEliminar from "@/components/ModalDel.vue";
 export default defineComponent({
   name: "CalendarioAdmin",
   components: {
     NewEvent,
     EditEvent,
+    ExitoModal,
+    ErrorModal,
+    ModalEliminar,
   },
 
   data() {
@@ -135,7 +139,7 @@ export default defineComponent({
       pages: { pageCount: 1, eventsCount: 0 },
       page: 1,
       totalPages: 0,
-      apiUrl: this.apiUrl,
+      tituloModal: "",
       found: false,
     };
   },
@@ -156,8 +160,7 @@ export default defineComponent({
       this.completeQuery = false;
       try {
         const data = fetch(
-          this.apiUrl +
-            "calendar?page=" +
+          "/api/calendar?page=" +
             this.page +
             "&pageSize=4" +
             this.day + //aqui uso un string vacio para el link de peticion
@@ -180,7 +183,7 @@ export default defineComponent({
     },
     getPages() {
       try {
-        const data = fetch(this.apiUrl + "calendar/pages?pageSize=4")
+        const data = fetch("/api/calendar/pages?pageSize=4")
           .then((res) => res.json())
           .then((data) => {
             this.pages = data;
@@ -246,6 +249,30 @@ export default defineComponent({
     editarEvento(id: string) {
       this.editar = true;
       this.idEvento = id;
+    },
+    borrar(id: string, name: string) {
+      this.eliminar = true;
+      this.idEvento = id;
+      this.tituloModal = name;
+    },
+    deleteEvent(elim: string) {
+      fetch("/api/calendar/" + elim, {
+        method: "DELETE", // or 'PUT'
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ id: elim }),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log("Success:", data);
+          this.recargar();
+          this.eliminar = false;
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
+      this.completeQuery = true;
     },
   },
 
