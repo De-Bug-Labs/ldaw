@@ -67,9 +67,7 @@
           placeholder="Escribe el Link aquí"
           maxlength="200"
         />
-        <p :class="{ on: linkInv }">
-          Asegúrate de ingresar una institucion valida
-        </p>
+        <p :class="{ on: linkInv }">Asegúrate de ingresar un link valida</p>
       </div>
     </div>
     <div class="section">
@@ -152,6 +150,9 @@ export default defineComponent({
         this.linkInv = true;
       } else {
         this.linkInv = false;
+        let temp = this.getIdFromUrl(this.link);
+        this.link =
+          "https://drive.google.com/uc?id=" + temp + "&export=download";
       }
     },
     validateForm() {
@@ -210,6 +211,9 @@ export default defineComponent({
           console.error("Error:", error);
           this.$emit("error");
         });
+    },
+    getIdFromUrl(url: string) {
+      return url.match(/[-\w]{25,}/);
     },
   },
 

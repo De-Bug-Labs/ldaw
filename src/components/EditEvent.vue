@@ -158,6 +158,9 @@ export default defineComponent({
         this.linkInv = true;
       } else {
         this.linkInv = false;
+        let temp = this.getIdFromUrl(this.link);
+        this.link =
+          "https://drive.google.com/uc?id=" + temp + "&export=download";
       }
     },
     checkDate() {
@@ -230,6 +233,9 @@ export default defineComponent({
           console.error("Error:", error);
           this.$emit("error");
         });
+    },
+    getIdFromUrl(url: string) {
+      return url.match(/[-\w]{25,}/);
     },
   },
   mounted() {
