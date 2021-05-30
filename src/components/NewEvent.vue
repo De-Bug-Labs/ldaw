@@ -128,49 +128,6 @@ export default defineComponent({
     };
   },
   methods: {
-    // checkNombre() {
-    //   var regex = /^[-\w\s]+$/;
-    //   if (
-    //     this.nombre.length <= 2 ||
-    //     this.nombre.length > 40 ||
-    //     !regex.test(this.nombre)
-    //   ) {
-    //     this.nomInv = true;
-    //   } else {
-    //     this.nomInv = false;
-    //   }
-    // },
-    // checkDescrip() {
-    //   if (this.descripcion.length <= 2) {
-    //     this.descripInv = true;
-    //   } else {
-    //     this.descripInv = false;
-    //   }
-    // },
-    // checkLugar() {
-    //   if (this.lugar.length <= 2) {
-    //     this.lugarInv = true;
-    //   } else {
-    //     this.lugarInv = false;
-    //   }
-    // },
-    // checkLink() {
-    //   if (this.link.length <= 5 || this.link.length > 200) {
-    //     this.linkInv = true;
-    //   } else {
-    //     this.linkInv = false;
-    //     let temp = this.getIdFromUrl(this.link);
-    //     this.link =
-    //       "https://drive.google.com/uc?id=" + temp + "&export=download";
-    //   }
-    // },
-    // checkDate() {
-    //   if (this.date.length <= 2) {
-    //     this.dateInv = true;
-    //   } else {
-    //     this.dateInv = false;
-    //   }
-    // },
     validateForm() {
       this.nomInv = invalid.checkNombre(this.nombre);
       this.descripInv = invalid.checkDescrip(this.descripcion);
