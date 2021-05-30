@@ -80,6 +80,7 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import ConfirmModal from "@/components/ConfirmModal.vue";
+import invalid from "../util/validators";
 
 export default defineComponent({
   name: "EditColab",
@@ -110,56 +111,56 @@ export default defineComponent({
     };
   },
   methods: {
-    checkNombre() {
-      var regex = /^[-\w\s]+$/;
-      if (
-        this.nombre.length <= 2 ||
-        this.nombre.length > 40 ||
-        !regex.test(this.nombre)
-      ) {
-        this.nomInv = true;
-      } else {
-        this.nomInv = false;
-      }
-    },
-    checkInst() {
-      var regex = /^[-\w\s]+$/;
-      if (
-        this.institucion.length <= 2 ||
-        this.institucion.length > 40 ||
-        !regex.test(this.institucion)
-      ) {
-        this.instInv = true;
-      } else {
-        this.instInv = false;
-      }
-    },
-    checkDesc() {
-      if (this.descripcion.length > 0) {
-        if (this.descripcion.length <= 5 || this.descripcion.length > 200) {
-          this.descInv = true;
-        } else {
-          this.descInv = false;
-        }
-      } else {
-        this.descInv = false;
-      }
-    },
-    checkLink() {
-      if (this.link.length <= 5 || this.link.length > 200) {
-        this.linkInv = true;
-      } else {
-        this.linkInv = false;
-        let temp = this.getIdFromUrl(this.link);
-        this.link =
-          "https://drive.google.com/uc?id=" + temp + "&export=download";
-      }
-    },
+    // checkNombre() {
+    //   var regex = /^[-\w\s]+$/;
+    //   if (
+    //     this.nombre.length <= 2 ||
+    //     this.nombre.length > 40 ||
+    //     !regex.test(this.nombre)
+    //   ) {
+    //     this.nomInv = true;
+    //   } else {
+    //     this.nomInv = false;
+    //   }
+    // },
+    // checkInst() {
+    //   var regex = /^[-\w\s]+$/;
+    //   if (
+    //     this.institucion.length <= 2 ||
+    //     this.institucion.length > 40 ||
+    //     !regex.test(this.institucion)
+    //   ) {
+    //     this.instInv = true;
+    //   } else {
+    //     this.instInv = false;
+    //   }
+    // },
+    // checkDesc() {
+    //   if (this.descripcion.length > 0) {
+    //     if (this.descripcion.length <= 5 || this.descripcion.length > 200) {
+    //       this.descInv = true;
+    //     } else {
+    //       this.descInv = false;
+    //     }
+    //   } else {
+    //     this.descInv = false;
+    //   }
+    // },
+    // checkLink() {
+    //   if (this.link.length <= 5 || this.link.length > 200 || this.link.includes("drive.google")) {
+    //     this.linkInv = true;
+    //   } else {
+    //     this.linkInv = false;
+    //     let temp = this.getIdFromUrl(this.link);
+    //     this.link =
+    //       "https://drive.google.com/uc?id=" + temp + "&export=download";
+    //   }
+    // },
     validateForm() {
-      this.checkNombre();
-      this.checkDesc();
-      this.checkInst();
-      this.checkLink();
+      this.nomInv = invalid.checkNombre(this.nombre);
+      this.descInv = invalid.checkDesc(this.descripcion);
+      this.instInv = invalid.checkInst(this.institucion);
+      [this.linkInv, this.link] = invalid.checkLink(this.link);
       this.confirmed = false;
       if (!this.nomInv && !this.descInv && !this.instInv && !this.linkInv) {
         this.confirmed = true;
@@ -211,9 +212,6 @@ export default defineComponent({
           console.error("Error:", error);
           this.$emit("error");
         });
-    },
-    getIdFromUrl(url: string) {
-      return url.match(/[-\w]{25,}/);
     },
   },
 

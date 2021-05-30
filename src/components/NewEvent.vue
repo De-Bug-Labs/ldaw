@@ -93,6 +93,7 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import ConfirmModal from "@/components/ConfirmModal.vue";
+import invalid from "../util/validators";
 
 export default defineComponent({
   name: "NewMaterial",
@@ -127,55 +128,55 @@ export default defineComponent({
     };
   },
   methods: {
-    checkNombre() {
-      var regex = /^[-\w\s]+$/;
-      if (
-        this.nombre.length <= 2 ||
-        this.nombre.length > 40 ||
-        !regex.test(this.nombre)
-      ) {
-        this.nomInv = true;
-      } else {
-        this.nomInv = false;
-      }
-    },
-    checkDescrip() {
-      if (this.descripcion.length <= 2) {
-        this.descripInv = true;
-      } else {
-        this.descripInv = false;
-      }
-    },
-    checkLugar() {
-      if (this.lugar.length <= 2) {
-        this.lugarInv = true;
-      } else {
-        this.lugarInv = false;
-      }
-    },
-    checkLink() {
-      if (this.link.length <= 5 || this.link.length > 200) {
-        this.linkInv = true;
-      } else {
-        this.linkInv = false;
-        let temp = this.getIdFromUrl(this.link);
-        this.link =
-          "https://drive.google.com/uc?id=" + temp + "&export=download";
-      }
-    },
-    checkDate() {
-      if (this.date.length <= 2) {
-        this.dateInv = true;
-      } else {
-        this.dateInv = false;
-      }
-    },
+    // checkNombre() {
+    //   var regex = /^[-\w\s]+$/;
+    //   if (
+    //     this.nombre.length <= 2 ||
+    //     this.nombre.length > 40 ||
+    //     !regex.test(this.nombre)
+    //   ) {
+    //     this.nomInv = true;
+    //   } else {
+    //     this.nomInv = false;
+    //   }
+    // },
+    // checkDescrip() {
+    //   if (this.descripcion.length <= 2) {
+    //     this.descripInv = true;
+    //   } else {
+    //     this.descripInv = false;
+    //   }
+    // },
+    // checkLugar() {
+    //   if (this.lugar.length <= 2) {
+    //     this.lugarInv = true;
+    //   } else {
+    //     this.lugarInv = false;
+    //   }
+    // },
+    // checkLink() {
+    //   if (this.link.length <= 5 || this.link.length > 200) {
+    //     this.linkInv = true;
+    //   } else {
+    //     this.linkInv = false;
+    //     let temp = this.getIdFromUrl(this.link);
+    //     this.link =
+    //       "https://drive.google.com/uc?id=" + temp + "&export=download";
+    //   }
+    // },
+    // checkDate() {
+    //   if (this.date.length <= 2) {
+    //     this.dateInv = true;
+    //   } else {
+    //     this.dateInv = false;
+    //   }
+    // },
     validateForm() {
-      this.checkNombre();
-      this.checkLink();
-      this.checkDescrip();
-      this.checkLugar();
-      this.checkDate();
+      this.nomInv = invalid.checkNombre(this.nombre);
+      this.descripInv = invalid.checkDescrip(this.descripcion);
+      this.lugarInv = invalid.checkLugar(this.lugar);
+      this.dateInv = invalid.checkDate(this.date);
+      [this.linkInv, this.link] = invalid.checkLink(this.link);
       this.confirmed = false;
       if (
         !this.nomInv &&
@@ -217,9 +218,6 @@ export default defineComponent({
           console.error("Error:", error);
           this.$emit("error");
         });
-    },
-    getIdFromUrl(url: string) {
-      return url.match(/[-\w]{25,}/);
     },
   },
 });
