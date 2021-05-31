@@ -33,6 +33,7 @@
     </div>
   </div>
   <div class="container">
+    <h2 v-if="empty">No existen eventos en esta fecha</h2>
     <div class="event1" v-for="evento in eventos" :key="evento">
       <div class="textbox">
         <h1>{{ evento.title }}</h1>
@@ -85,6 +86,7 @@ export default defineComponent({
       page: 1,
       totalPages: 0,
       found: false,
+      empty: false,
     };
   },
 
@@ -104,10 +106,13 @@ export default defineComponent({
           .then((res) => res.json())
           .then((data) => {
             this.eventos = data;
+            this.empty = false;
             if (!this.eventos.length) {
               // con esto compruebo si existen eventos en un mes o dia o lo que sea
               this.resetDate();
-              this.getInfo();
+              this.found = true;
+              this.empty = true;
+              this.eventos = [];
             }
           });
       } catch (error) {
@@ -174,8 +179,10 @@ export default defineComponent({
       this.day = "";
       this.year = "&year=" + yyyy;
       this.month = "&month=" + mm;
-      this.dateM = "";
-      this.date = yyyy + "-" + mm + "-" + dd; //esta es la variable a la que esta ligada el seleccionador por dia
+      this.dateM = yyyy + "-" + mm;
+      this.date = ""; //esta es la variable a la que esta ligada el seleccionador por dia
+      this.my = true;
+      this.dmy = false;
     },
   },
   mounted() {
@@ -312,6 +319,10 @@ export default defineComponent({
     color: #000;
     font-family: "Signika", sans-serif;
     font-size: 4rem;
+  }
+  h2 {
+    color: #000;
+    font-family: "Signika", sans-serif;
   }
 
   .event1 {
