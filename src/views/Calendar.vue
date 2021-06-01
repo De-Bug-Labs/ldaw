@@ -122,7 +122,9 @@ export default defineComponent({
     },
     getPages() {
       try {
-        const data = fetch("/api/calendar/pages?pageSize=4")
+        const data = fetch("/api/calendar/pages?pageSize=4", {
+          credentials: "include",
+        })
           .then((res) => res.json())
           .then((data) => {
             this.pages = data;

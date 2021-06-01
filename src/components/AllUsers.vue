@@ -74,7 +74,10 @@ export default defineComponent({
     getUsers() {
       try {
         const data = fetch(
-          "/api/user" //agregar variable de entorno para ruta
+          "/api/user", //agregar variable de entorno para ruta
+          {
+            credentials: "include",
+          }
         )
           .then((res) => res.json())
           .then((data) => {
@@ -101,6 +104,7 @@ export default defineComponent({
     deleteUser(elim: string) {
       fetch("/api/user", {
         method: "DELETE", // or 'PUT'
+        credentials: "include",
         headers: {
           "Content-Type": "application/json",
         },

@@ -49,6 +49,7 @@ export default defineComponent({
         headers: {
           "Content-Type": "application/json",
         },
+        credentials: "include",
         body: JSON.stringify(this.user),
       })
         .then((response) => response.json())

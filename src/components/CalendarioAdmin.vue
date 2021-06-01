@@ -166,7 +166,10 @@ export default defineComponent({
             "&pageSize=4" +
             this.day + //aqui uso un string vacio para el link de peticion
             this.month + // por alguna razon hay que agregar cosas como &day=DIA
-            this.year // pero si lo mandas vacio no sirve entonces se usa un string vacio
+            this.year, // pero si lo mandas vacio no sirve entonces se usa un string vacio
+          {
+            credentials: "include",
+          }
         )
           .then((res) => res.json())
           .then((data) => {
@@ -187,7 +190,9 @@ export default defineComponent({
     },
     getPages() {
       try {
-        const data = fetch("/api/calendar/pages?pageSize=4")
+        const data = fetch("/api/calendar/pages?pageSize=4", {
+          credentials: "include",
+        })
           .then((res) => res.json())
           .then((data) => {
             this.pages = data;
@@ -267,6 +272,7 @@ export default defineComponent({
         headers: {
           "Content-Type": "application/json",
         },
+        credentials: "include",
         body: JSON.stringify({ id: elim }),
       })
         .then((response) => response.json())
