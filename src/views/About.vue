@@ -22,7 +22,9 @@ export default defineComponent({
   methods: {
     getInfo() {
       try {
-        const data = fetch("/api/information")
+        const data = fetch("/api/information", {
+          credentials: "include",
+        })
           .then((res) => res.json())
           .then((data) => {
             this.information = data;

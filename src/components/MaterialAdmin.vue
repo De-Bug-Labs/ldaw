@@ -121,7 +121,9 @@ export default defineComponent({
     },
     getPages() {
       try {
-        const data = fetch("api/material/pages?page=0&pageSize=5")
+        const data = fetch("api/material/pages?page=0&pageSize=5", {
+          credentials: "include",
+        })
           .then((res) => res.json())
           .then((data) => {
             this.pages = data;

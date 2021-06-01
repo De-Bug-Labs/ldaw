@@ -247,7 +247,9 @@ export default defineComponent({
     },
     getInfo() {
       try {
-        const data = fetch("/api/department")
+        const data = fetch("/api/department", {
+          credentials: "include",
+        })
           .then((res) => res.json())
           .then((data) => {
             this.departamentos = data;

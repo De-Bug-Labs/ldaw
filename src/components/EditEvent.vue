@@ -158,7 +158,9 @@ export default defineComponent({
     },
     getInfo() {
       try {
-        const data = fetch("/api/calendar/" + this.elementoId)
+        const data = fetch("/api/calendar/" + this.elementoId, {
+          credentials: "include",
+        })
           .then((res) => res.json())
           .then((data) => {
             this.calendar = data;

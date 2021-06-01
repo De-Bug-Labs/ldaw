@@ -117,7 +117,9 @@ export default defineComponent({
     },
     getDetalles() {
       try {
-        const data = fetch("/api/collaborator/" + this.idColaborador)
+        const data = fetch("/api/collaborator/" + this.idColaborador, {
+          credentials: "include",
+        })
           .then((res) => res.json())
           .then((data) => {
             this.informacion = data;
