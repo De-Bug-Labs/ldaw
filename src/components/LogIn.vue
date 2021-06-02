@@ -1,7 +1,7 @@
 <template>
   <div class="box">
     <img src="@/assets/password.svg" />
-    <form>
+    <form v-on:submit.prevent="login()">
       <div class="mini">
         <label for="uname" class="form-label">Usuario</label>
         <input
@@ -18,12 +18,7 @@
         <input v-model="password" type="password" id="pwd" name="pwd" />
       </div>
 
-      <input
-        type="button"
-        name="submit"
-        value="INGRESAR"
-        v-on:click="login()"
-      />
+      <input type="submit" name="submit" value="INGRESAR" />
     </form>
   </div>
 </template>
@@ -55,7 +50,7 @@ export default defineComponent({
           body: JSON.stringify(user),
         })
           .then((res) => res.json())
-          .then(() => (window.location.href = "/admin/main"));
+          .then(() => window.location.reload());
       } catch (error) {
         console.error(error);
       }
@@ -110,7 +105,7 @@ export default defineComponent({
       }
     }
 
-    input[type="button"] {
+    input[type="submit"] {
       margin-top: 15%;
       cursor: pointer;
       width: 195px;
