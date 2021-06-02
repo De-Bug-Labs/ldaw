@@ -40,7 +40,11 @@
       </li>
     </ul>
   </div>
-  <router-view @admin="regular = false" @click="mobile = false" />
+  <router-view
+    @admin="regular = false"
+    @click="mobile = false"
+    @volver="regular = true"
+  />
 </template>
 
 <script lang="ts">
