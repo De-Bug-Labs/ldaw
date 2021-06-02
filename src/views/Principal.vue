@@ -6,22 +6,46 @@
         <p>GAAP</p></a
       >
       <div class="navCont">
-        <div class="elemento" @click="vUsuarios()">
+        <div
+          class="elemento"
+          @click="vUsuarios()"
+          v-if="vHasRole('user:create')"
+        >
           <a>Usuarios</a>
         </div>
-        <div class="elemento" @click="vDonaciones()">
+        <div
+          class="elemento"
+          @click="vDonaciones()"
+          v-if="vHasRole('view:modify')"
+        >
           <a>Donaciones</a>
         </div>
-        <div class="elemento" @click="vCalendario()">
+        <div
+          class="elemento"
+          @click="vCalendario()"
+          v-if="vHasRole('calendar:modify')"
+        >
           <a>Calendario</a>
         </div>
-        <div class="elemento" @click="vPortal()">
+        <div
+          class="elemento"
+          @click="vPortal()"
+          v-if="vHasRole('staff:modify')"
+        >
           <a>Portal de ayuda</a>
         </div>
-        <div class="elemento" @click="vSalon()">
+        <div
+          class="elemento"
+          @click="vSalon()"
+          v-if="vHasRole('collaborator:modify')"
+        >
           <a>Salon de la Fama</a>
         </div>
-        <div class="elemento" @click="vMaterial()">
+        <div
+          class="elemento"
+          @click="vMaterial()"
+          v-if="vHasRole('material:modify')"
+        >
           <a>Material didactico</a>
         </div>
         <!--         <div class="elemento" @click="vMaterial()">
@@ -48,6 +72,7 @@ import SalonAdmin from "@/components/SalonAdmin.vue";
 import PortalAdmin from "@/components/PortalAdmin.vue";
 import CalendarioAdmin from "@/components/CalendarioAdmin.vue";
 import DonacionesAdmin from "@/components/DonacionesAdmin.vue";
+import token from "../util/jwtToken";
 
 export default defineComponent({
   name: "Help",
@@ -121,6 +146,9 @@ export default defineComponent({
       this.viewingUsers = false;
       this.viewingMaterial = false;
     },
+    vHasRole(role: string): boolean {
+      return token.hasRole(role);
+    },
   },
 });
 </script>
@@ -129,17 +157,20 @@ export default defineComponent({
 .container {
   position: absolute;
   top: 0;
-  height: 100%;
+  left: 0;
+  bottom: 0;
+  height: 100vw;
   width: 100vw;
   display: flex;
   flex-direction: column;
   align-items: center;
   font-family: "Signika", sans-serif;
   .sideNav {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
-    height: 100vh;
+    bottom: 0;
+    height: 100%;
     background-color: #6b6b6b;
     width: 300px;
     display: flex;

@@ -44,11 +44,12 @@ export default defineComponent({
 
   methods: {
     addUser(): void {
-      fetch("http://localhost:5000/api/user", {
+      fetch("/api/user", {
         method: "POST", // or 'PUT'
         headers: {
           "Content-Type": "application/json",
         },
+        credentials: "include",
         body: JSON.stringify(this.user),
       })
         .then((response) => response.json())

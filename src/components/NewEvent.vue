@@ -5,20 +5,12 @@
       @close="confirmed = false"
       @modificar="submitForm()"
     />
-    <h1>Crear</h1>
-    <h3>Ingresa la informacióna del Colaborador a crear.</h3>
+    <h1>Crear evento</h1>
+    <h3>Ingresa la información del evento a crear.</h3>
 
     <div class="section">
       <div class="miniCont">
-        <select v-model="nombreSeccion">
-          <option value="Estudiantes">Estudiantes</option>
-          <option value="Empresarios">Empresarios</option>
-          <option value="Profesionales">Profesionales</option>
-        </select>
-      </div>
-
-      <div class="miniCont">
-        <label for="name" class="form-label">Nombre</label>
+        <label for="name" class="form-label">Título del evento</label>
         <input
           @click="nomInv = false"
           :class="{ nomInv }"
@@ -26,62 +18,75 @@
           type="text"
           id="name"
           name="name"
-          placeholder="Escribe el nombre aquí"
+          placeholder="Escribe el titulo aquí"
           maxlength="40"
         />
-        <p :class="{ on: nomInv }">Asegúrate de ingresar un nombre válido</p>
+        <p :class="{ on: nomInv }">Asegúrate de ingresar un título válido</p>
       </div>
       <div class="miniCont">
-        <label for="descripcion" class="form-label">Descripcion</label>
-        <input
-          @click="descInv = false"
-          :class="{ descInv }"
+        <label for="description" class="form-label"
+          >Descripción del evento</label
+        >
+        <textarea
+          @click="nomInv = false"
+          :class="{ descripInv }"
           v-model="descripcion"
-          type="text"
-          id="descripcion"
-          name="descripcion"
-          placeholder="Escribe la descripcion aqui"
-          maxlength="200"
+          type="textarea"
+          cols="40"
+          rows="5"
+          id="description"
+          name="description"
+          placeholder="Ingresa la descripción del evento"
         />
-        <p :class="{ on: descInv }">
-          Asegúrate de ingresar una descripcion valida
+        <p :class="{ on: descripInv }">
+          Asegúrate de ingresar una descripción válida
         </p>
       </div>
       <div class="miniCont">
-        <label for="institucion" class="form-label">Institucion</label>
-        <input
-          @click="instInv = false"
-          :class="{ instInv }"
-          v-model="institucion"
-          type="text"
-          id="descripcion"
-          name="descripcion"
-          placeholder="Escribe la institucion aqui"
-          maxlength="200"
-        />
-        <p :class="{ on: instInv }">
-          Asegúrate de ingresar una institucion valida
-        </p>
-      </div>
-      <div class="miniCont">
-        <label for="link" class="form-label">Link a Imagen</label>
+        <label for="link" class="form-label">Link a la imagen</label>
         <input
           @click="linkInv = false"
           :class="{ linkInv }"
           v-model="link"
           type="text"
-          id="descripcion"
-          name="descripcion"
+          id="link"
+          name="link"
           placeholder="Escribe el Link aquí"
-          maxlength="200"
+          maxlength="100"
         />
-        <p :class="{ on: linkInv }">Asegúrate de ingresar un link valido</p>
+        <p :class="{ on: linkInv }">Asegúrate de ingresar un link válido</p>
+      </div>
+      <div class="miniCont">
+        <label for="name" class="form-label">Lugar del evento</label>
+        <input
+          @click="lugarInv = false"
+          :class="{ lugarInv }"
+          v-model="lugar"
+          type="text"
+          id="place"
+          name="place"
+          placeholder="Escribe el lugar aquí"
+        />
+        <p :class="{ on: lugarInv }">Asegúrate de ingresar un lugar válido</p>
+      </div>
+      <div class="miniCont">
+        <label for="name" class="form-label">Fecha del evento</label>
+        <input
+          @click="(dmy = true), (my = false), (completeQuery = false)"
+          v-model="date"
+          type="date"
+          id="date"
+          name="date"
+        />
+        <p :class="{ on: dateInv }">Asegúrate de ingresar una fecha válida</p>
       </div>
     </div>
-    <div class="section">
+    <div class="section1">
       <input type="submit" name="submit" value="Enviar" />
     </div>
-    <button @click="$emit('regresar')">Cancelar</button>
+    <div class="section1">
+      <button @click="$emit('regresar')">Cancelar</button>
+    </div>
   </form>
 </template>
 
@@ -91,7 +96,7 @@ import ConfirmModal from "@/components/ConfirmModal.vue";
 import invalid from "../util/validators";
 
 export default defineComponent({
-  name: "NewColab",
+  name: "NewMaterial",
   components: {
     ConfirmModal,
   },
@@ -101,57 +106,64 @@ export default defineComponent({
   data() {
     return {
       nombre: "",
-      descripcion: "",
-      institucion: "",
       link: "",
+      descripcion: "",
+      lugar: "",
+      date: "",
       nomInv: false,
-      descInv: false,
-      instInv: false,
       linkInv: false,
+      descripInv: false,
+      lugarInv: false,
+      dateInv: false,
       confirmed: false,
       enviar: false,
-      colaborador: {
-        name: "",
+      id: this,
+      calendar: {
+        title: "",
         description: "",
-        institution: "",
+        date: "",
+        address: "",
         srcimg: "",
-        sectionId: "",
       },
-      secciones: [],
-      idSeccion: "",
-      nombreSeccion: "Estudiantes",
     };
   },
   methods: {
     validateForm() {
       this.nomInv = invalid.checkNombre(this.nombre);
-      this.descInv = invalid.checkDesc(this.descripcion);
-      this.instInv = invalid.checkInst(this.institucion);
+      this.descripInv = invalid.checkDescrip(this.descripcion);
+      this.lugarInv = invalid.checkLugar(this.lugar);
+      this.dateInv = invalid.checkDate(this.date);
       [this.linkInv, this.link] = invalid.checkLink(this.link);
       this.confirmed = false;
-      if (!this.nomInv && !this.descInv && !this.instInv && !this.linkInv) {
+      if (
+        !this.nomInv &&
+        !this.linkInv &&
+        !this.descripInv &&
+        !this.lugarInv &&
+        !this.dateInv
+      ) {
         this.confirmed = true;
-        this.colaborador.name = this.nombre;
-        this.colaborador.description = this.descripcion;
-        this.colaborador.institution = this.institucion;
-        this.colaborador.srcimg = this.link;
-        this.findID(this.nombreSeccion);
-        this.colaborador.sectionId = this.idSeccion;
       } else {
         this.confirmed = false;
       }
     },
     submitForm() {
-      this.addUser();
+      this.calendar.title = this.nombre;
+      this.calendar.srcimg = this.link;
+      this.calendar.description = this.descripcion;
+      this.calendar.address = this.lugar;
+      this.calendar.date = this.date;
+      this.confirmed = false;
+      this.addEvent();
     },
-    addUser(): void {
-      fetch("/api/collaborator", {
-        method: "PUT",
-        credentials: "include",
+    addEvent(): void {
+      fetch("/api/calendar", {
+        method: "POST", // or 'PUT'
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(this.colaborador),
+        credentials: "include",
+        body: JSON.stringify(this.calendar),
       })
         .then((response) => response.json())
         .then((data) => {
@@ -164,28 +176,6 @@ export default defineComponent({
           this.$emit("error");
         });
     },
-    getSecciones() {
-      try {
-        const data = fetch("/api/section", { credentials: "include" })
-          .then((res) => res.json())
-          .then((data) => {
-            this.secciones = data;
-            this.findID(this.nombreSeccion);
-          });
-      } catch (error) {
-        console.log(error);
-      }
-    },
-    findID(find: string) {
-      this.secciones.forEach((element) => {
-        if (element["name"] == find) {
-          this.idSeccion = element["id"];
-        }
-      });
-    },
-  },
-  mounted() {
-    this.getSecciones();
   },
 });
 </script>
@@ -204,7 +194,7 @@ export default defineComponent({
   position: relative;
 
   .section {
-    margin-bottom: 40px;
+    margin-bottom: 70px;
     display: flex;
     flex-direction: column;
     text-align: center;
@@ -218,34 +208,32 @@ export default defineComponent({
       margin-block-start: 0em;
       margin-block-end: 0em;
     }
-    select {
-      cursor: pointer;
-      padding: 10px 0;
-      box-sizing: border-box;
-      box-shadow: none;
-      outline: none;
-      border: none;
-      border-bottom: 2px solid rgb(172, 172, 172);
-      background-color: #f1f1f1;
-      font-family: "Open Sans", sans-serif;
-      font-size: 15px;
-      option {
-        font-family: "Open Sans", sans-serif;
-      }
+  }
+  .section1 {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    width: 30%;
+    p {
+      display: none;
+    }
+    p.on {
+      color: rgb(255, 0, 0);
+      display: flex;
+      margin-block-start: 0em;
+      margin-block-end: 0em;
     }
   }
 
   h1 {
-    margin-block-start: 0em;
     font-size: 2.5rem;
-    margin-block-end: 0.5em;
   }
 
   h2 {
     font-family: "Open Sans", sans-serif;
     color: #797979;
     font-size: 20px;
-    margin-block-end: 0.5em;
   }
   h3 {
     margin-block-end: 2em;
@@ -295,8 +283,6 @@ export default defineComponent({
   }
 
   input.nomInv,
-  input.descInv,
-  input.instInv,
   input.linkInv {
     border-bottom: 2px solid rgb(255, 0, 0);
   }
@@ -354,6 +340,7 @@ export default defineComponent({
     border: 4px solid black;
   }
   button {
+    margin-top: 10%;
     margin-right: auto;
     margin-left: 10%;
     border-bottom: none;

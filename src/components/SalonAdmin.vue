@@ -245,7 +245,7 @@ export default defineComponent({
 
 <style scoped lang="scss">
 .box {
-  height: 100%;
+  height: 40%;
   width: 100%;
   display: flex;
   flex-direction: column;

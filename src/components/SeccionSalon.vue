@@ -101,7 +101,10 @@ export default defineComponent({
             this.idSeccion +
             "?pageSize=8&page=" +
             this.page +
-            "&name="
+            "&name=",
+          {
+            credentials: "include",
+          }
         )
           .then((res) => res.json())
           .then((data) => {
@@ -114,7 +117,9 @@ export default defineComponent({
     },
     getDetalles() {
       try {
-        const data = fetch("/api/collaborator/" + this.idColaborador)
+        const data = fetch("/api/collaborator/" + this.idColaborador, {
+          credentials: "include",
+        })
           .then((res) => res.json())
           .then((data) => {
             this.informacion = data;
@@ -239,6 +244,7 @@ export default defineComponent({
         img {
           height: 250px;
           width: 100%;
+          object-fit: cover;
           transition: 0.2s ease-in-out;
         }
         h2 {

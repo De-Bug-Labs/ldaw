@@ -182,7 +182,10 @@ export default defineComponent({
     async checkEmailExists() {
       try {
         await fetch(
-          "http://localhost:5000/api/user/" + this.correo //agregar variable de entorno para ruta
+          "/api/user/" + this.correo, //agregar variable de entorno para ruta
+          {
+            credentials: "include",
+          }
         )
           .then((res) => {
             return res.json();

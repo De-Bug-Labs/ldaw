@@ -121,7 +121,9 @@ export default defineComponent({
     },
     getPages() {
       try {
-        const data = fetch("api/material/pages?page=0&pageSize=5")
+        const data = fetch("api/material/pages?page=0&pageSize=5", {
+          credentials: "include",
+        })
           .then((res) => res.json())
           .then((data) => {
             this.pages = data;
@@ -199,7 +201,7 @@ export default defineComponent({
 
 <style scoped lang="scss">
 .box {
-  height: 100%;
+  height: 40%;
   width: 100%;
   display: flex;
   flex-direction: column;
