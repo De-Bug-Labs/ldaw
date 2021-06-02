@@ -367,6 +367,7 @@ export default defineComponent({
       flex-direction: column;
       width: 35%;
       img {
+        object-fit: cover;
         border-radius: 0px 15px 15px 0px;
         height: 400px;
         width: 100%;

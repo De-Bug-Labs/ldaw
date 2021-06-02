@@ -1,5 +1,5 @@
-import { nextTick } from "@vue/runtime-core";
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
+import token from "@/util/jwtToken";
 import Home from "../views/Home.vue";
 
 const routes: Array<RouteRecordRaw> = [
@@ -51,13 +51,19 @@ const routes: Array<RouteRecordRaw> = [
     },
   },
   {
-    path: "/admin",
-    name: "Admin",
+    path: "/admin/login",
+    name: "AdminLogin",
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/Admin.vue"),
+    beforeEnter: (to, from, next) => {
+      if (token.hasRole("adminPortal:access"))
+        return next({ name: "AdminMain" });
+      else if (token.hasRole("login")) next();
+      else return next({ name: "Home" });
+    },
   },
   {
     path: "/salon",
@@ -87,13 +93,17 @@ const routes: Array<RouteRecordRaw> = [
       import(/* webpackChunkName: "about" */ "../views/Calendar.vue"),
   },
   {
-    path: "/admin/main",
-    name: "Main",
+    path: "/admin",
+    name: "AdminMain",
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/Principal.vue"),
+    beforeEnter: (to, from, next) => {
+      if (token.hasRole("adminPortal:access")) next();
+      else return next({ name: "AdminLogin" });
+    },
   },
 ];
 
