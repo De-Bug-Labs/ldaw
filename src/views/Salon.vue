@@ -10,7 +10,7 @@
       v-if="main"
       :g="true"
       titulo="Salón de la Fama"
-      mensaje="Es un orgullo presentar el Salón de la Fama de GAAP I.A.P donde podrán conocer a las personas que han proporcionado  ayuda a la institución de forma extraordinaria. Siendo merecedoras del mas grande Reconocimiento y Agradecimiento por parte del equipo de GAAP I.A.P."
+      mensaje="Es un orgullo presentar el Salón de la Fama de GAAP I.A.P donde podrán conocer a las personas que han proporcionado ayuda a la institución de forma extraordinaria. Siendo merecedoras del más grande reconocimiento y agradecimiento por parte del equipo GAAP I.A.P."
     />
     <div class="row" v-if="main">
       <div class="column">

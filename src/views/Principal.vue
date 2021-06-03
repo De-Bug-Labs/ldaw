@@ -39,17 +39,17 @@
           @click="vSalon()"
           v-if="vHasRole('collaborator:modify')"
         >
-          <a>Salon de la Fama</a>
+          <a>Salón de la Fama</a>
         </div>
         <div
           class="elemento"
           @click="vMaterial()"
           v-if="vHasRole('material:modify')"
         >
-          <a>Material didactico</a>
+          <a>Material didáctico</a>
         </div>
         <div class="elemento" @click="vLogout()">
-          <a>Cerrar Sesion <i class="large material-icons">logout</i></a>
+          <a>Cerrar Sesión <i class="large material-icons">logout</i></a>
         </div>
       </div>
     </div>

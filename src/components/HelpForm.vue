@@ -61,7 +61,7 @@
           placeholder="ejemplo@correo.com"
         />
         <p :class="{ on: corInv }">
-          Asegurate de ingresar un Correo válido ejemplo@correo.com
+          Asegúrate de ingresar un Correo válido ejemplo@correo.com
         </p>
       </div>
       <div class="miniCont">
