@@ -18,6 +18,10 @@ const token = {
   hasRole(role: string): boolean {
     return this.getToken().permissions.indexOf(role) !== -1;
   },
+
+  deleteToken(): void {
+    document.cookie = "token=; Max-Age=0; path=/";
+  },
 };
 
 export default token;

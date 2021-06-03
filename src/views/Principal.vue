@@ -39,17 +39,17 @@
           @click="vSalon()"
           v-if="vHasRole('collaborator:modify')"
         >
-          <a>Salon de la Fama</a>
+          <a>Salón de la Fama</a>
         </div>
         <div
           class="elemento"
           @click="vMaterial()"
           v-if="vHasRole('material:modify')"
         >
-          <a>Material didactico</a>
+          <a>Material didáctico</a>
         </div>
         <div class="elemento" @click="vLogout()">
-          <a>Cerrar Sesion <i class="large material-icons">logout</i></a>
+          <a>Cerrar Sesión <i class="large material-icons">logout</i></a>
         </div>
       </div>
     </div>
@@ -149,20 +149,11 @@ export default defineComponent({
     vHasRole(role: string): boolean {
       return token.hasRole(role);
     },
-    deleteAllCookies() {
-      const cookies = document.cookie.split(";");
 
-      for (let i = 0; i < cookies.length; i++) {
-        const cookie = cookies[i];
-        const eqPos = cookie.indexOf("=");
-        const name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
-        document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
-      }
-    },
-
-    vLogout() {
-      this.deleteAllCookies();
+    async vLogout() {
+      token.deleteToken();
       window.location.reload();
+      // window.location.href = '/';
     },
   },
 });

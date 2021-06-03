@@ -4,7 +4,7 @@
     <div class="search">
       <div class="mov">
         <div class="mini">
-          <label for="date" class="form-label">Filtrar por dia</label>
+          <label for="date" class="form-label">Filtrar por día</label>
           <input
             @click="(dmy = true), (my = false), (completeQuery = false)"
             v-model="date"

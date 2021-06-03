@@ -61,7 +61,7 @@
           placeholder="ejemplo@correo.com"
         />
         <p :class="{ on: corInv }">
-          Asegurate de ingresar un Correo válido ejemplo@correo.com
+          Asegúrate de ingresar un Correo válido ejemplo@correo.com
         </p>
       </div>
       <div class="miniCont">
@@ -395,6 +395,7 @@ export default defineComponent({
   }
 
   input[type="submit"] {
+    -webkit-appearance: none;
     border-bottom: none;
     cursor: pointer;
     width: 195px;
