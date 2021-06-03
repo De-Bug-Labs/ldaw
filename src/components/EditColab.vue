@@ -21,7 +21,7 @@
           placeholder="Escribe el nombre aquí"
           maxlength="40"
         />
-        <p :class="{ on: nomInv }">Asegúrate de ingresar un titulo válido</p>
+        <p :class="{ on: nomInv }">Asegúrate de ingresar un título válido</p>
       </div>
       <div class="miniCont">
         <label for="descripcion" class="form-label">Descripcion</label>
