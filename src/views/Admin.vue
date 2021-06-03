@@ -1,9 +1,9 @@
 <template>
   <div class="container">
-    <div class="title">
+    <router-link class="title" :to="{ name: 'Home' }" @click="$emit('volver')">
       <img src="@/assets/roof.svg" />
       <h1>GAAP</h1>
-    </div>
+    </router-link>
     <div class="content">
       <LogIn />
     </div>
@@ -39,6 +39,7 @@ export default defineComponent({
   background-color: #2888a8;
 
   .title {
+    text-decoration: none;
     display: flex;
     flex-direction: row;
     height: 15%;

@@ -98,8 +98,8 @@
       <input type="submit" name="submit" value="Enviar" />
     </div>
     <p>
-      *Una vez enviada tu solicitud un asesor designado de GAAP se pondrá en
-      contacto contigo a la brevedad para dar seguimiento.
+      *Una vez enviada tu solicitud un asesor designado de GAAP I.A.P se pondrá
+      en contacto contigo a la brevedad para dar seguimiento.
     </p>
   </form>
 </template>
