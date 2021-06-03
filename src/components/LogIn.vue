@@ -62,7 +62,7 @@ export default defineComponent({
 <style scoped lang="scss">
 .box {
   width: 600px;
-  height: 80%;
+  height: auto;
   border-radius: 15px;
   background-color: #d4d4d4;
   -moz-box-shadow: 0 0 5px rgb(199, 199, 199);
@@ -73,7 +73,7 @@ export default defineComponent({
   flex-direction: column;
   align-items: center;
   img {
-    height: 30%;
+    height: 150px;
   }
   form {
     display: flex;
@@ -106,7 +106,8 @@ export default defineComponent({
     }
 
     input[type="submit"] {
-      margin-top: 15%;
+      margin-top: 5%;
+      margin-bottom: 5%;
       cursor: pointer;
       width: 195px;
       height: 45px;
