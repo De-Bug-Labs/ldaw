@@ -132,6 +132,7 @@ export default defineComponent({
         color: rgb(116, 116, 116);
       }
       .mainBtn {
+        -webkit-appearance: none;
         height: 70px;
         width: 200px;
         background-color: #2888a8;
@@ -225,6 +226,7 @@ export default defineComponent({
       margin-top: 50px;
       form {
         .mainBtn {
+          -webkit-appearance: none;
           height: 60px;
           width: 150px;
           background-color: #2888a8;
