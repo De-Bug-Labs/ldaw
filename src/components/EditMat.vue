@@ -10,7 +10,7 @@
 
     <div class="section">
       <div class="miniCont">
-        <label for="name" class="form-label">Titulo</label>
+        <label for="name" class="form-label">Título</label>
         <input
           @click="nomInv = false"
           :class="{ nomInv }"
@@ -18,7 +18,7 @@
           type="text"
           id="name"
           name="name"
-          placeholder="Escribe el titulo aquí"
+          placeholder="Escribe el título aquí"
           maxlength="40"
         />
         <p :class="{ on: nomInv }">Asegúrate de ingresar un titulo válido</p>
@@ -35,7 +35,7 @@
           placeholder="Escribe el Link aquí"
           maxlength="100"
         />
-        <p :class="{ on: linkInv }">Asegúrate de ingresar un link valido</p>
+        <p :class="{ on: linkInv }">Asegúrate de ingresar un link válido</p>
       </div>
     </div>
     <div class="section">

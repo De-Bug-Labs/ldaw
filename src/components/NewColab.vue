@@ -75,7 +75,7 @@
           placeholder="Escribe el Link aquí"
           maxlength="200"
         />
-        <p :class="{ on: linkInv }">Asegúrate de ingresar un link valido</p>
+        <p :class="{ on: linkInv }">Asegúrate de ingresar un link válido</p>
       </div>
     </div>
     <div class="section">

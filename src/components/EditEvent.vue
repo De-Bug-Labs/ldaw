@@ -18,7 +18,7 @@
           type="text"
           id="name"
           name="name"
-          placeholder="Escribe el titulo aquí"
+          placeholder="Escribe el título aquí"
           maxlength="40"
         />
         <p :class="{ on: nomInv }">Asegúrate de ingresar un título válido</p>
