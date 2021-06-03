@@ -10,27 +10,8 @@
       </div>
     </div>
     <div class="cardBtns">
-      <form
-        action="https://www.sandbox.paypal.com/cgi-bin/webscr"
-        method="post"
-      >
-        <input
-          type="hidden"
-          name="business"
-          value="donations@kcparkfriends.org"
-        />
-
-        <!-- Specify a Donate button. -->
-        <input type="hidden" name="cmd" value="_donations" />
-
-        <!-- Specify details about the contribution -->
-        <input
-          type="hidden"
-          name="item_number"
-          value="Centro de atencion geriatrico"
-        />
-        <input type="hidden" name="item_name" value="GAAP I.A.P" />
-        <input type="hidden" name="currency_code" value="MXN" />
+      <form action="https://www.paypal.com/donate" method="post" target="_top">
+        <input type="hidden" name="hosted_button_id" value="CADPFDZM5989U" />
         <input
           type="submit"
           class="mainBtn"

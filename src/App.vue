@@ -1,9 +1,8 @@
 <template>
   <div class="nav" v-if="regular">
     <router-link to="/" class="logo1"
-      ><img src="../public/img/roof.svg" />
-      <p>GAAP</p></router-link
-    >
+      ><img src="../public/img/logo1.png" />
+    </router-link>
     <a class="toggle" @click="mobile = !mobile"
       ><i class="large material-icons">dehaze</i></a
     >
@@ -40,7 +39,11 @@
       </li>
     </ul>
   </div>
-  <router-view @admin="regular = false" @click="mobile = false" />
+  <router-view
+    @admin="regular = false"
+    @click="mobile = false"
+    @volver="regular = true"
+  />
 </template>
 
 <script lang="ts">
@@ -115,7 +118,7 @@ body {
     display: flex;
     flex-direction: row;
     text-align: center;
-    height: 70px;
+    height: 80px;
     transition: 0.5s;
 
     p {
@@ -129,7 +132,8 @@ body {
     }
 
     img {
-      height: 70px;
+      height: 80px;
+      width: 200px;
       transition: 0.5s;
     }
   }
