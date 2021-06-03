@@ -6,7 +6,7 @@
     <a class="toggle" @click="mobile = !mobile"
       ><i class="large material-icons">dehaze</i></a
     >
-    <ul :class="{ active1: mobile }">
+    <ul :class="{ active1: mobile }" @click="mobile = !mobile">
       <li>
         <router-link to="/about"
           >Nosotros <img src="../public/img/g.svg"
@@ -118,7 +118,7 @@ body {
     display: flex;
     flex-direction: row;
     text-align: center;
-    height: 80px;
+    height: 70px;
     transition: 0.5s;
 
     p {

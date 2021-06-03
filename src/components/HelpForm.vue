@@ -395,6 +395,7 @@ export default defineComponent({
   }
 
   input[type="submit"] {
+    -webkit-appearance: none;
     border-bottom: none;
     cursor: pointer;
     width: 195px;
