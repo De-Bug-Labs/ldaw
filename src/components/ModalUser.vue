@@ -29,6 +29,7 @@ export default defineComponent({
     apellido: String,
     contrasena: String,
     apiUrl: String,
+    roleId: String,
   },
   data() {
     return {
@@ -37,7 +38,7 @@ export default defineComponent({
         lastName: this.apellido,
         email: this.correo,
         password: this.contrasena,
-        roleId: ["4290c4d8-e3a3-4495-a326-7cbc5b9f1a9b"],
+        roleId: [this.roleId],
       },
     };
   },
@@ -54,6 +55,9 @@ export default defineComponent({
       })
         .then((response) => response.json())
         .then((data) => {
+          if (data.errors) {
+            throw Error(data.message);
+          }
           console.log("Success:", data);
           this.$emit("close");
           this.$emit("doneSuccess");
