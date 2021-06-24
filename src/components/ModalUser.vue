@@ -45,7 +45,6 @@ export default defineComponent({
 
   methods: {
     addUser(): void {
-      console.log(this.user);
       fetch("/api/user", {
         method: "POST", // or 'PUT'
         headers: {
