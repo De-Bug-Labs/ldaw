@@ -1,13 +1,12 @@
 <template>
   <div class="nav" v-if="regular">
     <router-link to="/" class="logo1"
-      ><img src="../public/img/roof.svg" />
-      <p>GAAP</p></router-link
-    >
+      ><img src="../public/img/logo1.png" />
+    </router-link>
     <a class="toggle" @click="mobile = !mobile"
       ><i class="large material-icons">dehaze</i></a
     >
-    <ul :class="{ active1: mobile }">
+    <ul :class="{ active1: mobile }" @click="mobile = !mobile">
       <li>
         <router-link to="/about"
           >Nosotros <img src="../public/img/g.svg"
@@ -133,7 +132,8 @@ body {
     }
 
     img {
-      height: 70px;
+      height: 80px;
+      width: 200px;
       transition: 0.5s;
     }
   }

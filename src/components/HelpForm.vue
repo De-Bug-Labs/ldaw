@@ -61,7 +61,7 @@
           placeholder="ejemplo@correo.com"
         />
         <p :class="{ on: corInv }">
-          Asegurate de ingresar un Correo válido ejemplo@correo.com
+          Asegúrate de ingresar un Correo válido ejemplo@correo.com
         </p>
       </div>
       <div class="miniCont">
@@ -98,8 +98,8 @@
       <input type="submit" name="submit" value="Enviar" />
     </div>
     <p>
-      *Una vez enviada tu solicitud un asesor designado de GAAP se pondrá en
-      contacto contigo a la brevedad para dar seguimiento.
+      *Una vez enviada tu solicitud un asesor designado de GAAP I.A.P se pondrá
+      en contacto contigo a la brevedad para dar seguimiento.
     </p>
   </form>
 </template>
@@ -395,6 +395,7 @@ export default defineComponent({
   }
 
   input[type="submit"] {
+    -webkit-appearance: none;
     border-bottom: none;
     cursor: pointer;
     width: 195px;
