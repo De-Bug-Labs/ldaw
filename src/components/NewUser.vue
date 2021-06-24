@@ -10,6 +10,7 @@
       :apellido="apellido"
       :correo="correo"
       :contrasena="contrasena"
+      :roleId="role.id"
     />
     <h1>Registrar nuevo administrador</h1>
     <h3>
@@ -98,6 +99,21 @@
       </div>
     </div>
     <div class="section">
+      <select v-model="role">
+        <option v-for="role in roles" :value="role" :key="role">
+          {{ role.name }}
+        </option>
+      </select>
+    </div>
+    <div class="section" v-if="role.name === 'Super Admin'">
+      <p class="on">
+        <strong
+          ><i class="small material-icons">dangerous</i>Este administrador podrá
+          agregar y eliminar otros administradores</strong
+        >
+      </p>
+    </div>
+    <div class="section">
       <input type="submit" name="submit" value="Enviar" />
     </div>
   </form>
@@ -118,6 +134,7 @@ export default defineComponent({
       apellido: "",
       correo: "",
       contrasena: "",
+      role: {},
       passConfirm: "",
       nomInv: false,
       corInv: false,
@@ -130,7 +147,23 @@ export default defineComponent({
       completeQuery: false,
       exito: false,
       error: false,
+      roles: [],
     };
+  },
+  created() {
+    try {
+      fetch("/api/roles", {
+        credentials: "include",
+      })
+        .then((res) => {
+          return res.json();
+        })
+        .then((data) => {
+          this.roles = data.filter((r: any) => r.name != "guest");
+        });
+    } catch (error) {
+      console.log(error);
+    }
   },
   methods: {
     checkNombre() {
