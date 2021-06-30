@@ -2,7 +2,7 @@
   <div class="container">
     <div class="box1">
       <div class="textbox">
-        <h1>GAAP I.A.P</h1>
+        <h1>Misión</h1>
         <p>{{ information.mision }}</p>
       </div>
       <div class="imagebox"><img src=" " alt="" /></div>
