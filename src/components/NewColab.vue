@@ -32,22 +32,6 @@
         <p :class="{ on: nomInv }">Asegúrate de ingresar un nombre válido</p>
       </div>
       <div class="miniCont">
-        <label for="descripcion" class="form-label">Descripcion</label>
-        <input
-          @click="descInv = false"
-          :class="{ descInv }"
-          v-model="descripcion"
-          type="text"
-          id="descripcion"
-          name="descripcion"
-          placeholder="Escribe la descripcion aqui"
-          maxlength="200"
-        />
-        <p :class="{ on: descInv }">
-          Asegúrate de ingresar una descripcion valida
-        </p>
-      </div>
-      <div class="miniCont">
         <label for="institucion" class="form-label">Institucion</label>
         <input
           @click="instInv = false"
@@ -76,6 +60,24 @@
           maxlength="200"
         />
         <p :class="{ on: linkInv }">Asegúrate de ingresar un link válido</p>
+      </div>
+      <div class="miniCont">
+        <label for="descripcion" class="form-label">Descripcion</label>
+        <textarea
+          @click="descInv = false"
+          :class="{ descInv }"
+          v-model="descripcion"
+          type="textarea"
+          cols="40"
+          rows="1"
+          id="descripcion"
+          name="descripcion"
+          placeholder="Escribe la descripcion aqui"
+          maxlength="200"
+        />
+        <p :class="{ on: descInv }">
+          Asegúrate de ingresar una descripcion valida
+        </p>
       </div>
     </div>
     <div class="section">
