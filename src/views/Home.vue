@@ -5,8 +5,12 @@
       <div class="arrow arrow-second"></div>
     </div>
     <HelloWorld
-      msg="Centro Integral de Apoyo Geriátrico"
-      cont="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+      msg="GAAP Centro Integral de Apoyo Geriátrico,IAP"
+      cont="Somos una estancia de día para el Adulto y Adulto Mayor ofreciendo servicios de ASISTENCIA SOCIAL, mediante el cuidado integral de la persona, buscando  un estado de salud optima y una mejora en la calidad de vida, con una atención de respeto y trato digno.
+      Estamos ubicados en SANTIAGO DEL RIO No. 32 COL. JARDINES DE SANTIAGO, C.P.76148, QUERETARO,QRO.
+      
+
+"
     />
     <div class="aviso">
       <a href="aviso.pdf" download="Aviso de privacidad GAAP I.A.P"
