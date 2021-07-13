@@ -13,9 +13,9 @@
 "
     />
     <div class="aviso">
-      <a href="aviso.pdf" download="Aviso de privacidad GAAP I.A.P"
-        >Descarga nuestro aviso de privacidad</a
-      >
+      <a href="aviso.pdf" download="Aviso de privacidad GAAP I.A.P.pdf">
+        Descarga nuestro aviso de privacidad
+      </a>
     </div>
   </div>
 </template>
