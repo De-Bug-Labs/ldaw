@@ -1,7 +1,7 @@
 <template>
   <Donativos
     mensaje="¿Quieres apoyar para que los adultos mayores sigan teniendo una vida llena de 
-    actividades sociales, culturales, cuidadres médicos, pero sobre todo 
+    actividades sociales, culturales, cuidadores médicos, pero sobre todo 
     sentirse incluido en un grupo dedicado para ellos? Ayúdanos a brindales la oportunidad de pertenecer a GAAP IAP.
     ¡¡¡Tu apoyo económico es muy importante!!!
     ¡¡CONTAMOS CONTIGO!!
