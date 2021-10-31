@@ -2,7 +2,7 @@
   <div class="container">
     <div class="box1">
       <div class="textbox">
-        <h1>Somos</h1>
+        <h1>Misión</h1>
         <p>{{ information.mision }}</p>
       </div>
       <div class="imagebox"><img src=" " alt="" /></div>
@@ -10,13 +10,13 @@
     <div class="box2">
       <div class="imagebox"><img src=" " alt="" /></div>
       <div class="textbox">
-        <h1>Instalaciones</h1>
+        <h1>Visión</h1>
         <p>{{ information.instalation }}</p>
       </div>
     </div>
     <div class="box3">
       <div class="textbox">
-        <h1>Nuestro equipo</h1>
+        <h1>Valores</h1>
         <p>{{ information.team }}</p>
       </div>
       <div class="imagebox"><img src=" " alt="" /></div>
