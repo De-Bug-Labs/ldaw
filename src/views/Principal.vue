@@ -48,6 +48,13 @@
         >
           <a>Material didáctico</a>
         </div>
+        <div
+          class="elemento"
+          @click="vEditar()"
+          v-if="vHasRole('material:modify')"
+        >
+          <a>Pagina Principal</a>
+        </div>
         <div class="elemento" @click="vLogout()">
           <a>Cerrar Sesión <i class="large material-icons">logout</i></a>
         </div>
@@ -60,6 +67,7 @@
       <PortalAdmin v-if="viewingPortal" />
       <CalendarioAdmin v-if="viewingCalendario" />
       <DonacionesAdmin v-if="viewingDonaciones" />
+      <EditPrinc v-if="viewingEditar" />
     </div>
   </div>
 </template>
@@ -72,6 +80,7 @@ import SalonAdmin from "@/components/SalonAdmin.vue";
 import PortalAdmin from "@/components/PortalAdmin.vue";
 import CalendarioAdmin from "@/components/CalendarioAdmin.vue";
 import DonacionesAdmin from "@/components/DonacionesAdmin.vue";
+import EditPrinc from "@/components/EditPrinc.vue";
 import token from "../util/jwtToken";
 
 export default defineComponent({
@@ -83,6 +92,7 @@ export default defineComponent({
     PortalAdmin,
     CalendarioAdmin,
     DonacionesAdmin,
+    EditPrinc,
   },
   mounted() {
     this.$emit("admin");
@@ -95,6 +105,7 @@ export default defineComponent({
       viewingPortal: false,
       viewingCalendario: false,
       viewingDonaciones: false,
+      viewingEditar: false,
     };
   },
   methods: {
@@ -105,6 +116,7 @@ export default defineComponent({
       this.viewingPortal = false;
       this.viewingCalendario = false;
       this.viewingDonaciones = false;
+      this.viewingEditar = false;
     },
     vUsuarios() {
       this.viewingUsers = true;
@@ -113,6 +125,7 @@ export default defineComponent({
       this.viewingPortal = false;
       this.viewingCalendario = false;
       this.viewingDonaciones = false;
+      this.viewingEditar = false;
     },
     vSalon() {
       this.viewingSalon = true;
@@ -121,6 +134,7 @@ export default defineComponent({
       this.viewingPortal = false;
       this.viewingCalendario = false;
       this.viewingDonaciones = false;
+      this.viewingEditar = false;
     },
     vPortal() {
       this.viewingPortal = true;
@@ -129,6 +143,7 @@ export default defineComponent({
       this.viewingMaterial = false;
       this.viewingCalendario = false;
       this.viewingDonaciones = false;
+      this.viewingEditar = false;
     },
     vCalendario() {
       this.viewingCalendario = true;
@@ -137,9 +152,20 @@ export default defineComponent({
       this.viewingUsers = false;
       this.viewingMaterial = false;
       this.viewingDonaciones = false;
+      this.viewingEditar = false;
     },
     vDonaciones() {
       this.viewingDonaciones = true;
+      this.viewingCalendario = false;
+      this.viewingPortal = false;
+      this.viewingSalon = false;
+      this.viewingUsers = false;
+      this.viewingMaterial = false;
+      this.viewingEditar = false;
+    },
+    vEditar() {
+      this.viewingEditar = true;
+      this.viewingDonaciones = false;
       this.viewingCalendario = false;
       this.viewingPortal = false;
       this.viewingSalon = false;
