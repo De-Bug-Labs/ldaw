@@ -6,11 +6,7 @@
     </div>
     <HelloWorld
       msg="GAAP Centro Integral de Apoyo Geriátrico,IAP"
-      cont="Somos una estancia de día para el Adulto y Adulto Mayor ofreciendo servicios de ASISTENCIA SOCIAL, mediante el cuidado integral de la persona, buscando  un estado de salud optima y una mejora en la calidad de vida, con una atención de respeto y trato digno.
-      Estamos ubicados en SANTIAGO DEL RIO No. 32 COL. JARDINES DE SANTIAGO, C.P.76148, QUERETARO,QRO.
-      
-
-"
+      :cont="descripcion"
     />
     <div class="aviso">
       <a href="aviso.pdf" download="Aviso de privacidad GAAP I.A.P.pdf">
@@ -153,6 +149,37 @@ export default defineComponent({
   name: "Home",
   components: {
     HelloWorld,
+  },
+  data() {
+    return {
+      descripcion: "",
+      completeQuery: false,
+      infoMain: {
+        indexText: "",
+        mision: "",
+        instalation: "",
+        team: "",
+      },
+    };
+  },
+  methods: {
+    getInfo() {
+      this.completeQuery = false;
+      try {
+        const data = fetch("/api/information", { credentials: "include" })
+          .then((res) => res.json())
+          .then((data) => {
+            this.infoMain = data;
+            this.descripcion = this.infoMain.indexText;
+          });
+      } catch (error) {
+        console.log(error);
+      }
+      this.completeQuery = true;
+    },
+  },
+  mounted() {
+    this.getInfo();
   },
 });
 </script>
