@@ -18,10 +18,10 @@
       <div class="textbox">
         <h1>Valores</h1>
         <p>
-          1.- Respeto a la intimidad y derechos de cada persona.<br />2.-
-          Dignidad humana como pilar fundamental.<br />3.- Independencia y
-          capacidad de elección.<br />4.- Autonomia en tdos los ámbito para una
-          realización plena.
+          1.- Dignidad humana como pilar fundamental.<br />
+          2.- Respeto a la intimidad y derechos de cada persona.<br />3.-
+          Independencia y capacidad de elección.<br />4.- Autonomia en todos los
+          ámbitos para una realización plena.
         </p>
       </div>
       <div class="imagebox"><img src=" " alt="" /></div>
