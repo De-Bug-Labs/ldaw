@@ -95,12 +95,12 @@ export default defineComponent({
     }
     .imagebox {
       width: 50%;
-      background: url("../assets/Nosotros/img1nosotros.jpg");
+      background: url("../assets/Nosotros/test1.png");
       background-size: cover;
       background-position: center bottom;
       border-radius: 0px 15px 15px 0px;
       img {
-        border-radius: 0px 0px 0px px;
+        border-radius: 0px 0px 0px 0px;
         height: 200px;
         width: 100%;
         display: none;
@@ -190,7 +190,7 @@ export default defineComponent({
     }
     .imagebox {
       width: 50%;
-      background: url("../assets/Nosotros/img3nosotros.jpg");
+      background: url("../assets/Nosotros/test3.png");
       background-size: cover;
       background-position: center;
       border-radius: 0px 15px 15px 0px;
