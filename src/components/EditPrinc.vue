@@ -5,12 +5,14 @@
       @close="confirmed = false"
       @modificar="submitForm()"
     />
+    <ExitoModal v-if="exito" @close="(exito = false), getInfo()" />
+    <ErrorModal v-if="error" @close="error = false" />
     <h1>Editar Pagina Principal</h1>
     <h3>Ingresa el texto del landing page</h3>
 
     <div class="section">
       <div class="miniCont">
-        <label for="description" class="form-label">Texto Principal</label>
+        <label for="indexText" class="form-label">Texto Principal</label>
         <textarea
           @click="nomInv = false"
           :class="{ descripInv }"
@@ -18,8 +20,8 @@
           type="textarea"
           cols="40"
           rows="5"
-          id="description"
-          name="description"
+          id="indexText"
+          name="indexText"
           placeholder="Ingresa el texto a desplegar"
         />
         <p :class="{ on: descripInv }">
@@ -36,12 +38,16 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import ConfirmModal from "@/components/ConfirmModal.vue";
+import ExitoModal from "@/components/ExitoModal.vue";
+import ErrorModal from "@/components/ErrorModal.vue";
 import invalid from "../util/validators";
 
 export default defineComponent({
   name: "EditPrinc",
   components: {
     ConfirmModal,
+    ExitoModal,
+    ErrorModal,
   },
   props: {
     elementoId: String,
@@ -52,13 +58,14 @@ export default defineComponent({
       descripInv: false,
       confirmed: false,
       enviar: false,
-      id: this,
-      calendar: {
-        title: "",
-        description: "",
-        date: "",
-        address: "",
-        srcimg: "",
+      completeQuery: false,
+      exito: false,
+      error: false,
+      infoMain: {
+        indexText: "",
+        mision: "",
+        instalation: "",
+        team: "",
       },
     };
   },
@@ -73,30 +80,46 @@ export default defineComponent({
       }
     },
     submitForm() {
-      this.calendar.description = this.descripcion;
+      this.infoMain.indexText = this.descripcion;
       this.confirmed = false;
-      this.addEvent();
+      this.changeMain();
     },
-    addEvent(): void {
-      fetch("/api/calendar", {
-        method: "POST", // or 'PUT'
+    changeMain(): void {
+      fetch("/api/information", {
+        method: "PUT", // or 'PUT'
         headers: {
           "Content-Type": "application/json",
         },
         credentials: "include",
-        body: JSON.stringify(this.calendar),
+        body: JSON.stringify(this.infoMain),
       })
         .then((response) => response.json())
         .then((data) => {
           console.log("Success:", data);
-          this.$emit("exito");
-          this.$emit("regresar");
+          this.exito = true;
         })
         .catch((error) => {
           console.error("Error:", error);
           this.$emit("error");
         });
     },
+    getInfo() {
+      this.completeQuery = false;
+      try {
+        const data = fetch("/api/information", { credentials: "include" })
+          .then((res) => res.json())
+          .then((data) => {
+            this.infoMain = data;
+            this.descripcion = this.infoMain.indexText;
+          });
+      } catch (error) {
+        console.log(error);
+      }
+      this.completeQuery = true;
+    },
+  },
+  mounted() {
+    this.getInfo();
   },
 });
 </script>
