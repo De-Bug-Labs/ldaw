@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <h1>{{ information?.title }}</h1>
+    <h1 class="container_title">{{ information?.title }}</h1>
     <div class="box1">
       <div class="textbox">
         <h1>Somos</h1>
@@ -78,7 +78,9 @@ export default defineComponent({
   align-items: center;
   margin-bottom: 50px;
   padding-top: 50px;
-
+  &_title {
+    margin: 20px 0;
+  }
   h1 {
     color: #000;
     font-family: "Signika", sans-serif;
@@ -87,19 +89,19 @@ export default defineComponent({
   .box1 {
     width: 60%;
     height: auto;
-    background-color: #399da3;
+    // background-color: #399da3;
     margin-bottom: 50px;
     font-family: "Open Sans", sans-serif;
-    border-radius: 15px;
+    // border-radius: 15px;
     display: flex;
     flex-direction: row;
-    -moz-box-shadow: 0 0 5px rgb(134, 134, 134);
-    -webkit-box-shadow: 0 0 5px #999;
-    box-shadow: 0 0 10px rgb(134, 134, 134);
-    color: white;
+    // -moz-box-shadow: 0 0 5px rgb(134, 134, 134);
+    // -webkit-box-shadow: 0 0 5px #999;
+    // box-shadow: 0 0 10px rgb(134, 134, 134);
+    // color: white;
 
     h1 {
-      color: white;
+      // color: white;
       font-size: 3rem;
     }
 
@@ -123,9 +125,9 @@ export default defineComponent({
       background: url("../assets/Nosotros/img1nosotros.jpg");
       background-size: cover;
       background-position: center bottom;
-      border-radius: 0px 15px 15px 0px;
+      // border-radius: 0px 15px 15px 0px;
       img {
-        border-radius: 0px 0px 0px px;
+        // border-radius: 0px 0px 0px px;
         height: 200px;
         width: 100%;
         display: none;
@@ -136,14 +138,14 @@ export default defineComponent({
   .box2 {
     width: 60%;
     height: auto;
-    background-color: #fcdb88;
+    // background-color: #fcdb88;
     margin-bottom: 50px;
     font-family: "Open Sans", sans-serif;
-    border-radius: 15px;
+    // border-radius: 15px;
     display: flex;
-    -moz-box-shadow: 0 0 5px rgb(134, 134, 134);
-    -webkit-box-shadow: 0 0 5px #999;
-    box-shadow: 0 0 5px rgb(134, 134, 134);
+    // -moz-box-shadow: 0 0 5px rgb(134, 134, 134);
+    // -webkit-box-shadow: 0 0 5px #999;
+    // box-shadow: 0 0 5px rgb(134, 134, 134);
 
     h1 {
       font-size: 3rem;
@@ -169,9 +171,9 @@ export default defineComponent({
       background: url("../assets/AboutUs/Instalaciones2.jpg");
       background-size: cover;
       background-position: center;
-      border-radius: 15px 0px 0px 15px;
+      // border-radius: 15px 0px 0px 15px;
       img {
-        border-radius: 15px 0px 0px 15px;
+        // border-radius: 15px 0px 0px 15px;
         height: 200px;
         width: 100%;
         display: none;
@@ -182,19 +184,19 @@ export default defineComponent({
   .box3 {
     width: 60%;
     height: auto;
-    background-color: #2888a8;
+    // background-color: #2888a8;
     margin-bottom: 50px;
     font-family: "Open Sans", sans-serif;
-    border-radius: 15px;
+    // border-radius: 15px;
     display: flex;
     flex-direction: row;
-    -moz-box-shadow: 0 0 5px rgb(134, 134, 134);
-    -webkit-box-shadow: 0 0 5px #999;
-    box-shadow: 0 0 5px rgb(134, 134, 134);
-    color: white;
+    // -moz-box-shadow: 0 0 5px rgb(134, 134, 134);
+    // -webkit-box-shadow: 0 0 5px #999;
+    // box-shadow: 0 0 5px rgb(134, 134, 134);
+    // color: white;
 
     h1 {
-      color: white;
+      // color: white;
       font-size: 3rem;
     }
 
@@ -218,9 +220,9 @@ export default defineComponent({
       background: url("../assets/AboutUs/ActividadesRecreativas.png");
       background-size: cover;
       background-position: center;
-      border-radius: 0px 15px 15px 0px;
+      // border-radius: 0px 15px 15px 0px;
       img {
-        border-radius: 0px 15px 15px 0px;
+        // border-radius: 0px 15px 15px 0px;
         height: 200px;
         width: 100%;
         display: none;
@@ -231,14 +233,14 @@ export default defineComponent({
   .box4 {
     width: 60%;
     height: auto;
-    background-color: #fcdb88;
+    // background-color: #fcdb88;
     margin-bottom: 50px;
     font-family: "Open Sans", sans-serif;
-    border-radius: 15px;
+    // border-radius: 15px;
     display: flex;
-    -moz-box-shadow: 0 0 5px rgb(134, 134, 134);
-    -webkit-box-shadow: 0 0 5px #999;
-    box-shadow: 0 0 5px rgb(134, 134, 134);
+    // -moz-box-shadow: 0 0 5px rgb(134, 134, 134);
+    // -webkit-box-shadow: 0 0 5px #999;
+    // box-shadow: 0 0 5px rgb(134, 134, 134);
 
     h1 {
       font-size: 3rem;
@@ -264,9 +266,9 @@ export default defineComponent({
       background: url("../assets/AboutUs/Covis19.jpg");
       background-size: cover;
       background-position: center;
-      border-radius: 15px 0px 0px 15px;
+      // border-radius: 15px 0px 0px 15px;
       img {
-        border-radius: 15px 0px 0px 15px;
+        // border-radius: 15px 0px 0px 15px;
         height: 200px;
         width: 100%;
         display: none;
@@ -289,10 +291,10 @@ export default defineComponent({
       .imagebox {
         width: 100%;
         height: 50%;
-        border-radius: 0px 0px 15px 15px;
+        // border-radius: 0px 0px 15px 15px;
         img {
           width: 100%;
-          border-radius: 0px 0px 15px 15px;
+          // border-radius: 0px 0px 15px 15px;
           display: flex;
         }
       }
@@ -320,10 +322,10 @@ export default defineComponent({
       .imagebox {
         width: 100%;
         height: 50%;
-        border-radius: 15px 15px 0px 0px;
+        // border-radius: 15px 15px 0px 0px;
         img {
           width: 100%;
-          border-radius: 15px 15px 0px 0px;
+          // border-radius: 15px 15px 0px 0px;
           display: flex;
         }
       }
@@ -351,10 +353,10 @@ export default defineComponent({
       .imagebox {
         width: 100%;
         height: 50%;
-        border-radius: 0px 0px 15px 15px;
+        // border-radius: 0px 0px 15px 15px;
         img {
           width: 100%;
-          border-radius: 0px 0px 15px 15px;
+          // border-radius: 0px 0px 15px 15px;
           display: flex;
         }
       }
