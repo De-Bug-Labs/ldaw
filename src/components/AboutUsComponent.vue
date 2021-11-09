@@ -3,7 +3,7 @@
     <h1 class="container_title">{{ information?.title }}</h1>
     <div class="box1">
       <div class="textbox">
-        <h1>Somos</h1>
+        <h2>Somos</h2>
         <p>{{ information?.somos1 }}</p>
         <p>{{ information?.somos2 }}</p>
       </div>
@@ -12,13 +12,13 @@
     <div class="box2">
       <div class="imagebox"><img src=" " alt="" /></div>
       <div class="textbox">
-        <h1>{{ information?.instalacionesTitle }}</h1>
+        <h2>{{ information?.instalacionesTitle }}</h2>
         <p>{{ information.instalacionesContent }}</p>
       </div>
     </div>
     <div class="box3">
       <div class="textbox">
-        <h1>{{ information?.equiposTitle }}</h1>
+        <h2>{{ information?.equiposTitle }}</h2>
         <p>{{ information?.equiposContent }}</p>
         <ul>
           <li v-for="item in information?.equiposProfecionistas" :key="item">
@@ -43,7 +43,7 @@
     <div class="box4">
       <div class="imagebox"><img src=" " alt="" /></div>
       <div class="textbox">
-        <h1>{{ information?.covisTitle }}</h1>
+        <h2>{{ information?.covisTitle }}</h2>
         <p>{{ information?.covisContent }}</p>
         <br />
         <p>¡Llamanos!</p>
@@ -71,15 +71,17 @@ export default defineComponent({
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,200;0,300;0,400;0,600;0,700;1,200;1,300;1,400;1,600&display=swap");
 
 .container {
+  background-color: #ffbe6d;
   display: flex;
   width: 100vw;
   height: calc(100% + 600px);
   flex-direction: column;
   align-items: center;
-  margin-bottom: 50px;
-  padding-top: 50px;
+  // margin-bottom: 50px;
+  // margin-top: 50px;
   &_title {
-    margin: 20px 0;
+    margin: 40px 0;
+    font-size: 3rem;
   }
   h1 {
     color: #000;
@@ -234,7 +236,7 @@ export default defineComponent({
     width: 60%;
     height: auto;
     // background-color: #fcdb88;
-    margin-bottom: 50px;
+    margin-bottom: 100px;
     font-family: "Open Sans", sans-serif;
     // border-radius: 15px;
     display: flex;
