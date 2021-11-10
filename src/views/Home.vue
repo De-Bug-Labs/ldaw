@@ -1,5 +1,14 @@
 <template>
   <div class="home">
+    <div id="slider">
+      <figure class="el-big">
+        <img src="../assets/Carrusel/parallax.jpg" />
+        <img src="../assets/Carrusel/car1.jpg" />
+        <img src="../assets/Carrusel/car2.jpg" />
+        <img src="../assets/Carrusel/car3.jpg" />
+        <img src="../assets/Carrusel/car4.jpg" />
+      </figure>
+    </div>
     <div class="parallax">
       <div class="arrow arrow-first"></div>
       <div class="arrow arrow-second"></div>
@@ -37,9 +46,54 @@
     font-size: 20px;
     margin-bottom: 20px;
   }
+  #slider {
+    overflow: hidden;
+    height: 90vh;
+    figure {
+      position: relative;
+      width: 500%;
+      margin: 0;
+      left: 0;
+      animation: 30s slider infinite;
+      img {
+        height: 90%;
+        width: 20%;
+        float: left;
+      }
+    }
+    @keyframes slider {
+      0% {
+        left: 0;
+      }
+      15% {
+        left: 0;
+      }
+      20% {
+        left: -100%;
+      }
+      35% {
+        left: -100%;
+      }
+      40% {
+        left: -200%;
+      }
+      55% {
+        left: -200%;
+      }
+      60% {
+        left: -300%;
+      }
+      75% {
+        left: -300%;
+      }
+      90% {
+        left: -400%;
+      }
+    }
+  }
   .parallax {
     background: url("../assets/parallax.jpg");
-    height: 100vh;
+    //height: 100vh; //uncoment for regular parallax
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -124,10 +178,17 @@
       flex-direction: column;
       text-align: center;
     }
+    #slider {
+      display: none !important;
+    }
     .parallax {
       background-position: bottom !important;
       background-size: cover !important;
       background: url("../assets/pm.jpg");
+      height: 100vh;
+      .el-big {
+        display: none !important;
+      }
       .arrow {
         left: 45%;
         transform: translate(-50%, -50%);
