@@ -30,13 +30,13 @@
             {{ item }}
           </li>
         </ul>
-        <p>actividades recreativas</p>
+        <h2>Actividades recreativas</h2>
         <ol>
           <li v-for="item in information?.equiposActividadesRec" :key="item">
             {{ item }}
           </li>
         </ol>
-        <p>Ven y conocenos y nosotros invitamos tu primera clase.</p>
+        <h3>Ven y conocenos y nosotros invitamos tu primera clase.</h3>
       </div>
       <div class="imagebox"><img src=" " alt="" /></div>
     </div>
@@ -81,7 +81,7 @@ export default defineComponent({
   // margin-top: 50px;
   &_title {
     margin: 40px 0;
-    font-size: 3rem;
+    font-size: 3.5rem;
   }
   h1 {
     color: #000;
@@ -104,7 +104,7 @@ export default defineComponent({
 
     h1 {
       // color: white;
-      font-size: 3rem;
+      font-size: 3.1rem;
     }
 
     .textbox {
@@ -117,7 +117,7 @@ export default defineComponent({
       margin-bottom: 5%;
     }
     p {
-      font-size: 20px;
+      font-size: 26px;
       margin-block-start: 0;
       display: flex;
       margin-block-end: 0;
@@ -150,7 +150,7 @@ export default defineComponent({
     // box-shadow: 0 0 5px rgb(134, 134, 134);
 
     h1 {
-      font-size: 3rem;
+      font-size: 3.1rem;
     }
     flex-direction: row;
     .textbox {
@@ -163,7 +163,7 @@ export default defineComponent({
       margin-bottom: 5%;
     }
     p {
-      font-size: 20px;
+      font-size: 26px;
       margin-block-start: 0;
       display: flex;
       margin-block-end: 0;
@@ -199,7 +199,7 @@ export default defineComponent({
 
     h1 {
       // color: white;
-      font-size: 3rem;
+      font-size: 3.1rem;
     }
 
     .textbox {
@@ -212,7 +212,7 @@ export default defineComponent({
       margin-bottom: 5%;
     }
     p {
-      font-size: 20px;
+      font-size: 26px;
       margin-block-start: 0;
       display: flex;
       margin-block-end: 0;
@@ -245,7 +245,7 @@ export default defineComponent({
     // box-shadow: 0 0 5px rgb(134, 134, 134);
 
     h1 {
-      font-size: 3rem;
+      font-size: 3.1rem;
     }
     flex-direction: row;
     .textbox {
@@ -258,7 +258,7 @@ export default defineComponent({
       margin-bottom: 5%;
     }
     p {
-      font-size: 20px;
+      font-size: 26px;
       margin-block-start: 0;
       display: flex;
       margin-block-end: 0;
