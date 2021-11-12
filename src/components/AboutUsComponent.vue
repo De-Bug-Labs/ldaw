@@ -102,7 +102,7 @@ export default defineComponent({
   // margin-top: 50px;
   &_title {
     margin: 40px 0;
-    font-size: 3.5rem;
+    font-size: 4rem;
   }
   h1 {
     color: #000;
@@ -128,7 +128,7 @@ export default defineComponent({
 
     h1 {
       // color: white;
-      font-size: 3.1rem;
+      font-size: 3.4rem;
     }
 
     .textbox {
@@ -141,7 +141,7 @@ export default defineComponent({
       margin-bottom: 5%;
     }
     p {
-      font-size: 26px;
+      font-size: 30px;
       margin-block-start: 0;
       display: flex;
       margin-block-end: 0;
@@ -174,7 +174,7 @@ export default defineComponent({
     // box-shadow: 0 0 5px rgb(134, 134, 134);
 
     h1 {
-      font-size: 3.1rem;
+      font-size: 3.4rem;
     }
     flex-direction: row;
     .textbox {
@@ -187,7 +187,7 @@ export default defineComponent({
       margin-bottom: 5%;
     }
     p {
-      font-size: 26px;
+      font-size: 30px;
       margin-block-start: 0;
       display: flex;
       margin-block-end: 0;
@@ -223,7 +223,7 @@ export default defineComponent({
 
     h1 {
       // color: white;
-      font-size: 3.1rem;
+      font-size: 3.4rem;
     }
 
     .textbox {
@@ -236,7 +236,7 @@ export default defineComponent({
       margin-bottom: 5%;
     }
     p {
-      font-size: 26px;
+      font-size: 30px;
       margin-block-start: 0;
       display: flex;
       margin-block-end: 0;
@@ -269,7 +269,7 @@ export default defineComponent({
     // box-shadow: 0 0 5px rgb(134, 134, 134);
 
     h1 {
-      font-size: 3.1rem;
+      font-size: 3.4rem;
     }
     flex-direction: row;
     .textbox {
@@ -282,7 +282,7 @@ export default defineComponent({
       margin-bottom: 5%;
     }
     p {
-      font-size: 26px;
+      font-size: 30px;
       margin-block-start: 0;
       display: flex;
       margin-block-end: 0;
@@ -317,7 +317,7 @@ export default defineComponent({
 
     h1 {
       // color: white;
-      font-size: 3.1rem;
+      font-size: 3.4rem;
     }
 
     .textbox {
@@ -330,7 +330,7 @@ export default defineComponent({
       margin-bottom: 5%;
     }
     p {
-      font-size: 26px;
+      font-size: 30px;
       margin-block-start: 0;
       display: flex;
       margin-block-end: 0;
@@ -363,7 +363,7 @@ export default defineComponent({
     // box-shadow: 0 0 5px rgb(134, 134, 134);
 
     h1 {
-      font-size: 3.1rem;
+      font-size: 3.4rem;
     }
     flex-direction: row;
     .textbox {
@@ -376,7 +376,7 @@ export default defineComponent({
       margin-bottom: 5%;
     }
     p {
-      font-size: 26px;
+      font-size: 30px;
       margin-block-start: 0;
       display: flex;
       margin-block-end: 0;
@@ -408,7 +408,7 @@ export default defineComponent({
     // box-shadow: 0 0 5px rgb(134, 134, 134);
 
     h1 {
-      font-size: 3.1rem;
+      font-size: 3.4rem;
     }
     flex-direction: row;
     .textbox {
@@ -421,7 +421,7 @@ export default defineComponent({
       margin-bottom: 5%;
     }
     p {
-      font-size: 26px;
+      font-size: 30px;
       margin-block-start: 0;
       display: flex;
       margin-block-end: 0;
