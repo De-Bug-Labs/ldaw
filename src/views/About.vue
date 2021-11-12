@@ -50,7 +50,9 @@ export default defineComponent({
         ],
         covisTitle: "Covid-19",
         covisContent:
-          "En ésta etapa de PANDEMIA COVID 19 hemos diseñado protocolos de seguridad para brindar atención  médica a través de consulta planeada para evitar gran afluencia de personas. Estamos preparados para recibirte con las medidas de seguridad e instalaciones adecuadas.",
+          "En ésta etapa de PANDEMIA COVID 19 hemos diseñado protocolos de seguridad para brindar atención  médica a través de consulta planeada para evitar gran afluencia de personas.",
+        covisContent2:
+          "Estamos preparados para recibirte con las medidas de seguridad e instalaciones adecuadas.",
         covisTelefono: "(442) 196-34-36",
         covisCelular: "442-3-17-07-21",
       },
