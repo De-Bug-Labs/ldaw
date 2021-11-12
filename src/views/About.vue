@@ -1,49 +1,63 @@
 <template>
-  <GaapInfo :information="information" />
+  <AboutUsComponent :information="information" />
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import GaapInfo from "@/components/GaapInfo.vue"; // @ is an alias to /src
+import AboutUsComponent from "@/components/AboutUsComponent.vue";
 
 export default defineComponent({
   name: "About",
   components: {
-    GaapInfo,
+    AboutUsComponent,
   },
 
   data() {
     return {
       information: {
-        team: "Contamos con un equipo de profesionistas integrado por Médicos Generales, en Rehabilitación, Terapia Física, Odontología, Nutriología, Tanatología. Además contamos con talleres de baile, tejido, terapia de la memoria, manejo de celulares entre otros.",
-        instalation:
-          "Contamos con áreas de atención para personas de la tercera edad a través del servicio de Medicina General, Atención Dental, Nutrición, Tanatología, Rehabilitación y Terapia Física. De igual manera se cuenta con Talleres de Baile, Tejido, Taller Manejo de celulares, Terapia de la Memoria.",
-        mision:
-          "Brindar a nuestros beneficiarios adultos y adultos mayores un servicio integral humano, personalizado y de calidad, con una metodología activa, buscando la incorporación y participación del adulto mayor con sus familiares, fortaleciendo su integración y el reconocimiento de lo invaluable de su persona.",
+        title: "¿Quiénes somos?",
+        somos1: "GAAP CENTRO INTEGRAL DE APOYO GERIATRICO, IAP",
+        somos2:
+          "Estancia de día para el Adulto y Adulto Mayor  con servicios de ASISTENCIA SOCIAL, mediante el cuidado integral de la salud, con una  atención de respeto y trato digno. Otorgando una mejor calidad de vida para el mantenimiento de sus habilidades en un ambiente amable y acogedor",
+        instalacionesTitle: "Instalaciones",
+        instalacionesContent:
+          "Contamos con áreas de atención para personas de la tercera edad,  nuestra prioridad es brindar un espacio seguro y confortable como consultorio de Medicina General, Dental, Nutrición, Rehabilitación y terapia física. Áreas comunes para actividades física y recreativas.",
+        equiposTitle: "Nuestro equipo y servicio",
+        equiposContent: "Contamos con un equipo de profesionistas como:",
+        equiposProfecionistas: [
+          "Médicos Generales",
+          "Odontólogo",
+          "Medico en Rehabilitación",
+          "Terapeuta Físico",
+          "Nutrióloga",
+          "Tanatología",
+        ],
+        equiposServicios: [
+          "Consulta de medicina general",
+          "Consulta Dental",
+          "Consulta de Rehabilitación",
+          "Fisioterapia",
+          "Consulta de Nutrición",
+          "Consulta de Tanatología",
+        ],
+        equiposActividadesRec: [
+          "Taller de baile",
+          "Taller de terapia de la memoria",
+          "Taller de tejido",
+          "Taller manejo de celulares",
+          "Podología",
+          "Club de lectura",
+        ],
+        covisTitle: "Covid-19",
+        covisContent:
+          "En ésta etapa de PANDEMIA COVID 19 hemos diseñado protocolos de seguridad para brindar atención  médica a través de consulta planeada para evitar gran afluencia de personas.",
+        covisContent2:
+          "Estamos preparados para recibirte con las medidas de seguridad e instalaciones adecuadas.",
+        covisTelefono: "(442) 196-34-36",
+        covisCelular: "442-3-17-07-21",
       },
       completed: false,
     };
-  },
-
-  methods: {
-    getInfo() {
-      try {
-        const data = fetch("/api/information", {
-          credentials: "include",
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            this.information = data;
-          });
-      } catch (error) {
-        console.log(error);
-      }
-      this.completed = true;
-    },
-  },
-
-  mounted() {
-    this.getInfo();
   },
 });
 </script>
