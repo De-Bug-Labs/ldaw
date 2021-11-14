@@ -101,6 +101,7 @@ export default defineComponent({
   // margin-bottom: 50px;
   // margin-top: 50px;
   &_title {
+    text-align: center;
     margin: 40px 0;
     font-size: 4rem;
   }
@@ -115,20 +116,14 @@ export default defineComponent({
   .box1 {
     width: 60%;
     height: auto;
-    // background-color: #399da3;
     margin-bottom: 50px;
     font-family: "Open Sans", sans-serif;
-    // border-radius: 15px;
     display: flex;
     flex-direction: row;
-    // -moz-box-shadow: 0 0 5px rgb(134, 134, 134);
-    // -webkit-box-shadow: 0 0 5px #999;
-    // box-shadow: 0 0 10px rgb(134, 134, 134);
-    // color: white;
 
-    h1 {
+    h2 {
       // color: white;
-      font-size: 3.4rem;
+      font-size: 3rem;
     }
 
     .textbox {
@@ -173,8 +168,9 @@ export default defineComponent({
     // -webkit-box-shadow: 0 0 5px #999;
     // box-shadow: 0 0 5px rgb(134, 134, 134);
 
-    h1 {
-      font-size: 3.4rem;
+    h2 {
+      // color: white;
+      font-size: 3rem;
     }
     flex-direction: row;
     .textbox {
@@ -221,9 +217,9 @@ export default defineComponent({
     // box-shadow: 0 0 5px rgb(134, 134, 134);
     // color: white;
 
-    h1 {
+    h2 {
       // color: white;
-      font-size: 3.4rem;
+      font-size: 2rem;
     }
 
     .textbox {
@@ -268,8 +264,8 @@ export default defineComponent({
     // -webkit-box-shadow: 0 0 5px #999;
     // box-shadow: 0 0 5px rgb(134, 134, 134);
 
-    h1 {
-      font-size: 3.4rem;
+    h2 {
+      font-size: 2rem;
     }
     flex-direction: row;
     .textbox {
@@ -315,9 +311,8 @@ export default defineComponent({
     // box-shadow: 0 0 5px rgb(134, 134, 134);
     // color: white;
 
-    h1 {
-      // color: white;
-      font-size: 3.4rem;
+    h2 {
+      font-size: 2rem;
     }
 
     .textbox {
@@ -362,8 +357,8 @@ export default defineComponent({
     // -webkit-box-shadow: 0 0 5px #999;
     // box-shadow: 0 0 5px rgb(134, 134, 134);
 
-    h1 {
-      font-size: 3.4rem;
+    h2 {
+      font-size: 2.5rem;
     }
     flex-direction: row;
     .textbox {
@@ -407,8 +402,8 @@ export default defineComponent({
     // -webkit-box-shadow: 0 0 5px #999;
     // box-shadow: 0 0 5px rgb(134, 134, 134);
 
-    h1 {
-      font-size: 3.4rem;
+    h2 {
+      font-size: 2.5rem;
     }
     flex-direction: row;
     .textbox {
@@ -464,7 +459,7 @@ export default defineComponent({
         }
       }
       p {
-        font-size: 17px;
+        font-size: 20px;
         padding-left: 5px;
         padding-right: 5px;
       }
@@ -473,7 +468,9 @@ export default defineComponent({
         margin-block-end: 0.5em;
       }
     }
-    .box2 {
+    .box2,
+    .box4,
+    .box3-even {
       flex-direction: column;
       height: auto;
       width: 90%;
@@ -495,7 +492,7 @@ export default defineComponent({
         }
       }
       p {
-        font-size: 17px;
+        font-size: 20px;
         padding-left: 5px;
         padding-right: 5px;
       }
@@ -504,7 +501,9 @@ export default defineComponent({
         margin-block-end: 0.5em;
       }
     }
-    .box3 {
+    .box3,
+    .box5,
+    .box3-odd {
       flex-direction: column;
       height: auto;
       width: 90%;
@@ -526,7 +525,7 @@ export default defineComponent({
         }
       }
       p {
-        font-size: 17px;
+        font-size: 20px;
         padding-left: 5px;
         padding-right: 5px;
       }
