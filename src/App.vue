@@ -109,7 +109,7 @@ body {
   left: 0;
   width: 100%;
   height: 100px;
-  padding: 10px 50px;
+  padding: 10px 40px;
   box-sizing: border-box;
   transition: 0.5s;
   background-color: #8edafd;
@@ -127,7 +127,7 @@ body {
     transition: 0.5s;
 
     p {
-      margin-left: 10px;
+      margin-left: 5px;
       margin-bottom: 0px;
       margin-top: 10px;
       color: #000;
@@ -154,17 +154,17 @@ body {
       list-style: none;
       a {
         position: relative;
-        padding: 5px 20px;
+        padding: 5px 15px;
         margin: 20px 0;
         color: black;
         text-decoration: none;
-        font-size: 18px;
+        font-size: 15px;
         font-family: "Open Sans", sans-serif;
         font-weight: 700 !important;
         display: flex;
 
         img {
-          height: 28px;
+          height: 25px;
           transition: 0.5s;
           margin-left: 10px;
         }
@@ -194,9 +194,7 @@ body {
   .nav {
     padding: 0 0;
     width: 100vw;
-
     ul {
-      width: 75%;
       li {
         a {
           display: flex;
@@ -216,7 +214,7 @@ body {
   }
 }
 
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 1030px) {
   .footer {
     h1 {
       margin-left: 20px;
