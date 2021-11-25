@@ -3,7 +3,6 @@ import HelloWorld from "@/components/HelloWorld.vue";
 import ModalHelp from "@/components/ModalHelp.vue";
 import HelpForm from "@/components/HelpForm.vue";
 import TitleCard from "@/components/TitleCard.vue";
-import About from "@/views/About.vue";
 import Salon from "@/views/Salon.vue";
 import Material from "@/views/Material.vue";
 import SeccionSalon from "@/components/SeccionSalon.vue";
@@ -28,14 +27,6 @@ describe("HelloWorld.vue", () => {
   });
 });
 
-describe("About.vue", () => {
-  it("muestra query correcto", () => {
-    const wrapper = shallowMount(About);
-    wrapper.vm.getInfo();
-    expect(wrapper.vm.completed).toBe(true);
-  });
-});
-
 describe("ModalHelp.vue", () => {
   it("modal despliega valor de seccion correcto", () => {
     const seccion = "Text content";
@@ -55,6 +46,8 @@ describe("ModalHelp.vue", () => {
     expect(wrapper.text()).toMatch(nombre);
   });
 });
+
+//estos si sirven
 
 describe("ModalHelp.vue", () => {
   it("modal despliega valor de correo correcto", () => {
@@ -118,7 +111,6 @@ describe("ModalHelp.vue", () => {
     expect(wrapper.vm.secInv).toBe(true);
   });
 });
-
 describe("ModalHelp.vue", () => {
   it("validacion de seccion -correcto", () => {
     const wrapper = shallowMount(HelpForm);
@@ -250,7 +242,7 @@ describe("Salon.vue", () => {
     const wrapper = shallowMount(Salon);
     expect(wrapper.vm.mounted).toBe(true);
   });
-});
+}); //here
 
 describe("Salon.vue", () => {
   it("Tarjeta de salon de la fama cargada correctamente", () => {

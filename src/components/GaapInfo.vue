@@ -2,7 +2,7 @@
   <div class="container">
     <div class="box1">
       <div class="textbox">
-        <h1>Somos</h1>
+        <h1>Misión</h1>
         <p>{{ information.mision }}</p>
       </div>
       <div class="imagebox"><img src=" " alt="" /></div>
@@ -10,14 +10,19 @@
     <div class="box2">
       <div class="imagebox"><img src=" " alt="" /></div>
       <div class="textbox">
-        <h1>Instalaciones</h1>
-        <p>{{ information.instalation }}</p>
+        <h1>Visión</h1>
+        <p>{{ information.vision }}</p>
       </div>
     </div>
     <div class="box3">
       <div class="textbox">
-        <h1>Nuestro equipo</h1>
-        <p>{{ information.team }}</p>
+        <h1>Valores</h1>
+        <p>
+          1.- Dignidad humana como pilar fundamental.<br />
+          2.- Respeto a la intimidad y derechos de cada persona.<br />3.-
+          Independencia y capacidad de elección.<br />4.- Autonomia en todos los
+          ámbitos para una realización plena.
+        </p>
       </div>
       <div class="imagebox"><img src=" " alt="" /></div>
     </div>
@@ -90,12 +95,12 @@ export default defineComponent({
     }
     .imagebox {
       width: 50%;
-      background: url("../assets/Nosotros/img1nosotros.jpg");
+      background: url("../assets/Nosotros/test1.png");
       background-size: cover;
       background-position: center bottom;
       border-radius: 0px 15px 15px 0px;
       img {
-        border-radius: 0px 0px 0px px;
+        border-radius: 0px 0px 0px 0px;
         height: 200px;
         width: 100%;
         display: none;
@@ -185,7 +190,7 @@ export default defineComponent({
     }
     .imagebox {
       width: 50%;
-      background: url("../assets/Nosotros/img3nosotros.jpg");
+      background: url("../assets/Nosotros/test3.png");
       background-size: cover;
       background-position: center;
       border-radius: 0px 15px 15px 0px;

@@ -8,6 +8,11 @@
     >
     <ul :class="{ active1: mobile }" @click="mobile = !mobile">
       <li>
+        <router-link to="/somos"
+          >Somos <img src="../public/img/teamwork.png"
+        /></router-link>
+      </li>
+      <li>
         <router-link to="/about"
           >Nosotros <img src="../public/img/g.svg"
         /></router-link>

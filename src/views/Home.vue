@@ -1,16 +1,21 @@
 <template>
   <div class="home">
+    <div id="slider">
+      <figure class="el-big">
+        <img src="../assets/Carrusel/parallax.jpg" />
+        <img src="../assets/Carrusel/car1.jpg" />
+        <img src="../assets/Carrusel/car2.jpg" />
+        <img src="../assets/Carrusel/car3.jpg" />
+        <img src="../assets/Carrusel/car4.jpg" />
+      </figure>
+    </div>
     <div class="parallax">
       <div class="arrow arrow-first"></div>
       <div class="arrow arrow-second"></div>
     </div>
     <HelloWorld
       msg="GAAP Centro Integral de Apoyo Geriátrico,IAP"
-      cont="Somos una estancia de día para el Adulto y Adulto Mayor ofreciendo servicios de ASISTENCIA SOCIAL, mediante el cuidado integral de la persona, buscando  un estado de salud optima y una mejora en la calidad de vida, con una atención de respeto y trato digno.
-      Estamos ubicados en SANTIAGO DEL RIO No. 32 COL. JARDINES DE SANTIAGO, C.P.76148, QUERETARO,QRO.
-      
-
-"
+      :cont="descripcion"
     />
     <div class="aviso">
       <a href="aviso.pdf" download="Aviso de privacidad GAAP I.A.P.pdf">
@@ -41,9 +46,54 @@
     font-size: 20px;
     margin-bottom: 20px;
   }
+  #slider {
+    overflow: hidden;
+    height: 90vh;
+    figure {
+      position: relative;
+      width: 500%;
+      margin: 0;
+      left: 0;
+      animation: 30s slider infinite;
+      img {
+        height: 90%;
+        width: 20%;
+        float: left;
+      }
+    }
+    @keyframes slider {
+      0% {
+        left: 0;
+      }
+      15% {
+        left: 0;
+      }
+      20% {
+        left: -100%;
+      }
+      35% {
+        left: -100%;
+      }
+      40% {
+        left: -200%;
+      }
+      55% {
+        left: -200%;
+      }
+      60% {
+        left: -300%;
+      }
+      75% {
+        left: -300%;
+      }
+      90% {
+        left: -400%;
+      }
+    }
+  }
   .parallax {
     background: url("../assets/parallax.jpg");
-    height: 100vh;
+    //height: 100vh; //uncoment for regular parallax
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -128,10 +178,17 @@
       flex-direction: column;
       text-align: center;
     }
+    #slider {
+      display: none !important;
+    }
     .parallax {
       background-position: bottom !important;
       background-size: cover !important;
       background: url("../assets/pm.jpg");
+      height: 100vh;
+      .el-big {
+        display: none !important;
+      }
       .arrow {
         left: 45%;
         transform: translate(-50%, -50%);
@@ -153,6 +210,37 @@ export default defineComponent({
   name: "Home",
   components: {
     HelloWorld,
+  },
+  data() {
+    return {
+      descripcion: "",
+      completeQuery: false,
+      infoMain: {
+        indexText: "",
+        mision: "",
+        instalation: "",
+        team: "",
+      },
+    };
+  },
+  methods: {
+    getInfo() {
+      this.completeQuery = false;
+      try {
+        const data = fetch("/api/information", { credentials: "include" })
+          .then((res) => res.json())
+          .then((data) => {
+            this.infoMain = data;
+            this.descripcion = this.infoMain.indexText;
+          });
+      } catch (error) {
+        console.log(error);
+      }
+      this.completeQuery = true;
+    },
+  },
+  mounted() {
+    this.getInfo();
   },
 });
 </script>
